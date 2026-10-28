@@ -96,7 +96,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/digiforce-platform/portal-template-default.git"
+    "url": "git+https://github.com/phoacb/portal-template-default.git"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0",
