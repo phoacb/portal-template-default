@@ -139,16 +139,3 @@ export const getDigiforceErrorMessage = (payload: unknown, fallback: string) => 
   if (typeof first === 'string') return first;
   return first?.message ?? value.error?.message ?? value.message ?? fallback;
 };
-
-/** Backward-compatible aliases */
-export const NocoBaseHttpError = DigiforceHttpError;
-export type NocoBaseHttpError = DigiforceHttpError;
-export type NocoBaseErrorDetail = DigiforceErrorDetail;
-export type NocoBaseRuntimeErrorSource = DigiforceRuntimeErrorSource;
-export type NocoBaseRuntimeError = DigiforceRuntimeError;
-export const isNocoBaseLifecycleError = isDigiforceLifecycleError;
-export const isNocoBaseServiceError = isDigiforceServiceError;
-export const getNocoBaseErrorDetail = getDigiforceErrorDetail;
-export const normalizeNocoBaseRuntimeError = normalizeDigiforceRuntimeError;
-export const getNocoBaseErrorCode = getDigiforceErrorCode;
-export const getNocoBaseErrorMessage = getDigiforceErrorMessage;

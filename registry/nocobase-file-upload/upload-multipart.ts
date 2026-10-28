@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 
 import { getDataSourceHeaders } from "./storage";
 import type { FileUploadOptions, NocoBaseFileRecord } from "./types";
@@ -13,7 +13,7 @@ export async function uploadMultipart({
 
   formData.append("file", file);
 
-  return nocobaseClient.action<NocoBaseFileRecord>(
+  return digiforceClient.action<NocoBaseFileRecord>(
     descriptor.fileCollection,
     "create",
     {

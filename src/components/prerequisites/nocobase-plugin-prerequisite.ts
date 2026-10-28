@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 
 export type NocoBasePluginLane = "client" | "client-v2";
 
@@ -129,7 +129,7 @@ export function evaluateNocoBasePluginRequirements(
 }
 
 function enabledPluginCacheKey(lane: NocoBasePluginLane) {
-  return [nocobaseClient.getApiUrl(), nocobaseClient.getAppName(), lane].join(
+  return [digiforceClient.getApiUrl(), digiforceClient.getAppName(), lane].join(
     "\u0000",
   );
 }
@@ -150,7 +150,7 @@ async function loadEnabledNocoBasePlugins(
   }
 
   const action = lane === "client-v2" ? "listEnabledV2" : "listEnabled";
-  const request = nocobaseClient
+  const request = digiforceClient
     .action<unknown>("pm", action, { method: "GET" })
     .then(normalizeEnabledNocoBasePlugins)
     .then((plugins) => {
@@ -177,8 +177,8 @@ async function loadEnabledNocoBasePlugins(
 
 function pluginProbeCacheKey(probe: NocoBasePluginProbe) {
   return [
-    nocobaseClient.getApiUrl(),
-    nocobaseClient.getAppName(),
+    digiforceClient.getApiUrl(),
+    digiforceClient.getAppName(),
     probe.resource,
     probe.action,
     JSON.stringify(probe.query ?? {}),
@@ -206,7 +206,7 @@ async function loadPluginProbe(
 
   const request = (async () => {
     try {
-      await nocobaseClient.action<unknown>(probe.resource, probe.action, {
+      await digiforceClient.action<unknown>(probe.resource, probe.action, {
         method: "GET",
         query: probe.query,
       });

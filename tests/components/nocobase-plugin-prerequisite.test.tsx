@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const action = vi.hoisted(() => vi.fn());
 
 vi.mock("@digiforce/portal-sdk/client", () => ({
-  nocobaseClient: {
+  digiforceClient: {
     action,
     getApiUrl: () => "http://localhost:14001/api",
     getAppName: () => "main",

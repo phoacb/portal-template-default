@@ -1,4 +1,4 @@
-import { nocobaseClient, type NocoBaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient, type DigiforceClient } from "@digiforce/portal-sdk/client";
 import type {
   AIChatMessage,
   AIConversation,
@@ -199,7 +199,7 @@ const toHistoryMessage = (
 };
 
 export class NocoBaseAIService implements AIService {
-  constructor(private readonly client: NocoBaseClient = nocobaseClient) {}
+  constructor(private readonly client: DigiforceClient = digiforceClient) {}
 
   async listEmployees() {
     const employees = await this.client.action<AIEmployee[]>(

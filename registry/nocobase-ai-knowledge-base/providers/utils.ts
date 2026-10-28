@@ -1,4 +1,4 @@
-import type { NocoBaseHttpError } from "@digiforce/portal-sdk/client";
+import type { DigiforceHttpError } from "@digiforce/portal-sdk/client";
 
 export type PagedResult<T> = { rows: T[]; count: number; page: number; pageSize: number };
 
@@ -11,7 +11,7 @@ export type KnowledgeBaseError = {
 };
 
 type UnknownRecord = Record<string, unknown>;
-type NocoBaseHttpErrorLike = Pick<NocoBaseHttpError, "message" | "status" | "payload">;
+type NocoBaseHttpErrorLike = Pick<DigiforceHttpError, "message" | "status" | "payload">;
 type NormalizedRuntimeError = { message: string; status?: number };
 
 const isRecord = (value: unknown): value is UnknownRecord =>
@@ -70,7 +70,7 @@ const errorDetail = (value: unknown): UnknownRecord | undefined => {
 };
 
 const isNocoBaseHttpError = (value: unknown): value is NocoBaseHttpErrorLike => {
-  if (!(value instanceof Error) || value.name !== "NocoBaseHttpError") return false;
+  if (!(value instanceof Error) || value.name !== "DigiforceHttpError") return false;
   const candidate = value as unknown as Partial<NocoBaseHttpErrorLike>;
   return typeof candidate.status === "number";
 };
@@ -78,7 +78,7 @@ const isNocoBaseHttpError = (value: unknown): value is NocoBaseHttpErrorLike => 
 const numberValue = (value: unknown) => (typeof value === "number" ? value : undefined);
 const messageValue = (value: unknown) => (typeof value === "string" ? value : undefined);
 
-const normalizeNocoBaseRuntimeError = (error: unknown): NormalizedRuntimeError => {
+const normalizeDigiforceRuntimeError = (error: unknown): NormalizedRuntimeError => {
   if (isNocoBaseHttpError(error)) {
     const detail = errorDetail(error.payload);
     return {
@@ -103,7 +103,7 @@ export function normalizeKnowledgeBaseError(
   error: unknown,
   fallback = "Knowledge base request failed.",
 ): KnowledgeBaseError {
-  const normalized = normalizeNocoBaseRuntimeError(error);
+  const normalized = normalizeDigiforceRuntimeError(error);
   const message =
     normalized.message && normalized.message !== "NocoBase request failed" ? normalized.message : fallback;
 

@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import type {
   MailAccount,
   MailIdentity,
@@ -54,7 +54,7 @@ export const mailApi = {
 
     const action = params.scope === "personal" ? "listPerson" : "list";
 
-    return nocobaseClient
+    return digiforceClient
       .action<unknown>("mailMessages", action, {
         query: {
           page: params.page ?? 1,
@@ -72,7 +72,7 @@ export const mailApi = {
   },
 
   getMessage(id: number | string): Promise<MailMessage> {
-    return nocobaseClient.action<MailMessage>("mailMessages", "get", {
+    return digiforceClient.action<MailMessage>("mailMessages", "get", {
       query: { filterByTk: id, appends: "children,labels,note" },
     });
   },
@@ -81,38 +81,38 @@ export const mailApi = {
     ids: (number | string)[],
     moveToTrash = true
   ): Promise<unknown> {
-    return nocobaseClient.action("mailMessages", "trash", {
+    return digiforceClient.action("mailMessages", "trash", {
       body: { filterByTk: ids, moveToTrash },
     });
   },
 
   destroyMessages(ids: (number | string)[]): Promise<unknown> {
-    return nocobaseClient.action("mailMessages", "destroy", {
+    return digiforceClient.action("mailMessages", "destroy", {
       query: { filterByTk: ids },
     });
   },
 
   cancelScheduled(id: number | string): Promise<unknown> {
-    return nocobaseClient.action("mailMessages", "cancelTimelySend", {
+    return digiforceClient.action("mailMessages", "cancelTimelySend", {
       query: { id },
     });
   },
 
   setRead(mailIds: string[], isRead: boolean): Promise<unknown> {
-    return nocobaseClient.action("mail", "messageSetReaded", {
+    return digiforceClient.action("mail", "messageSetReaded", {
       body: { mailIds, isRead },
     });
   },
 
   send(payload: MailSendPayload): Promise<unknown> {
-    return nocobaseClient.action("mail", "messageSend", { body: payload });
+    return digiforceClient.action("mail", "messageSend", { body: payload });
   },
 
   massSend(
     payload: MailSendPayload,
     settings: MailMassSendSettings = {}
   ): Promise<unknown> {
-    return nocobaseClient.action("mailMassMessages", "send", {
+    return digiforceClient.action("mailMassMessages", "send", {
       body: {
         data: payload,
         mailSendSetting: settings,
@@ -129,7 +129,7 @@ export const mailApi = {
     let count = 0;
 
     do {
-      const payload = await nocobaseClient.action<unknown>(
+      const payload = await digiforceClient.action<unknown>(
         "mailMassMessages",
         "list",
         {
@@ -154,13 +154,13 @@ export const mailApi = {
   },
 
   cancelMassMessage(id: number | string): Promise<unknown> {
-    return nocobaseClient.action("mailMassMessages", "cancel", {
+    return digiforceClient.action("mailMassMessages", "cancel", {
       body: { id },
     });
   },
 
   resendMassMessage(id: number | string): Promise<unknown> {
-    return nocobaseClient.action("mailMassMessages", "resend", {
+    return digiforceClient.action("mailMassMessages", "resend", {
       body: { id },
     });
   },
@@ -168,7 +168,7 @@ export const mailApi = {
   uploadAttachment(file: File): Promise<MailUploadedAttachment> {
     const formData = new FormData();
     formData.append("file", file);
-    return nocobaseClient
+    return digiforceClient
       .action<MailUploadedAttachment>("mail", "messageAttachmentUpload", {
         body: formData,
       })
@@ -182,17 +182,17 @@ export const mailApi = {
   },
 
   saveDraft(payload: MailSendPayload): Promise<{ id: number }> {
-    return nocobaseClient.action<{ id: number }>("mail", "messageSavingDraft", {
+    return digiforceClient.action<{ id: number }>("mail", "messageSavingDraft", {
       body: payload,
     });
   },
 
   sync(emails: string[]): Promise<unknown> {
-    return nocobaseClient.action("mail", "messagesSync", { body: { emails } });
+    return digiforceClient.action("mail", "messagesSync", { body: { emails } });
   },
 
   unreadCount(): Promise<number> {
-    return nocobaseClient
+    return digiforceClient
       .action<unknown>("mail", "messageUnreadCount")
       .then((value) => {
         if (typeof value === "number") return value;
@@ -205,7 +205,7 @@ export const mailApi = {
   },
 
   getAccounts(): Promise<MailAccount[]> {
-    return nocobaseClient.action<MailAccount[]>("mail", "getMailAccounts");
+    return digiforceClient.action<MailAccount[]>("mail", "getMailAccounts");
   },
 
   findDraft(values: {
@@ -213,7 +213,7 @@ export const mailApi = {
     identityEmail: string;
     to: string[];
   }): Promise<MailMessage | undefined> {
-    return nocobaseClient
+    return digiforceClient
       .action<MailMessage | undefined>("mailMessages", "get", {
         query: {
           filter: JSON.stringify({
@@ -232,7 +232,7 @@ export const mailApi = {
     type: "google" | "microsoft",
     options: { email?: string; reauthorize?: boolean } = {}
   ): Promise<string> {
-    return nocobaseClient
+    return digiforceClient
       .action<{ url?: string }>("mail", "oauth2url", {
         query: { type, ...options },
       })
@@ -240,19 +240,19 @@ export const mailApi = {
   },
 
   deleteAccount(email: string): Promise<unknown> {
-    return nocobaseClient.action("mail", "deleteMailAccount", {
+    return digiforceClient.action("mail", "deleteMailAccount", {
       body: { email },
     });
   },
 
   resyncAccount(email: string): Promise<unknown> {
-    return nocobaseClient.action("mail", "messagesResync", {
+    return digiforceClient.action("mail", "messagesResync", {
       body: { email },
     });
   },
 
   syncAliases(email: string): Promise<MailIdentity[]> {
-    return nocobaseClient
+    return digiforceClient
       .action<MailIdentity[]>("mail", "accountIdentitiesSync", {
         body: { email },
       })
@@ -260,7 +260,7 @@ export const mailApi = {
   },
 
   getUsers(): Promise<MailUserRecord[]> {
-    return nocobaseClient
+    return digiforceClient
       .action<MailUserRecord[]>("users", "list", {
         query: { pageSize: 100 },
       })
@@ -270,7 +270,7 @@ export const mailApi = {
   getLabels(userId?: number | string): Promise<MailLabel[]> {
     const filter =
       userId !== undefined ? { createdBy: { id: userId } } : undefined;
-    return nocobaseClient
+    return digiforceClient
       .action<MailLabel[]>("mailMessageLabels", "list", {
         query: {
           paginate: false,
@@ -285,7 +285,7 @@ export const mailApi = {
     color: string;
     description?: string;
   }): Promise<MailLabel> {
-    return nocobaseClient.action<MailLabel>("mailMessageLabels", "create", {
+    return digiforceClient.action<MailLabel>("mailMessageLabels", "create", {
       body: values,
     });
   },
@@ -294,20 +294,20 @@ export const mailApi = {
     id: number | string,
     values: { label: string; color: string; description?: string }
   ): Promise<MailLabel> {
-    return nocobaseClient.action<MailLabel>("mailMessageLabels", "update", {
+    return digiforceClient.action<MailLabel>("mailMessageLabels", "update", {
       query: { filterByTk: id },
       body: values,
     });
   },
 
   deleteLabel(id: number | string): Promise<unknown> {
-    return nocobaseClient.action("mailMessageLabels", "destroy", {
+    return digiforceClient.action("mailMessageLabels", "destroy", {
       query: { filterByTk: id },
     });
   },
 
   getTemplates(): Promise<MailTemplate[]> {
-    return nocobaseClient
+    return digiforceClient
       .action<MailTemplate[]>("mailTemplates", "list", {
         query: { paginate: false, sort: "createdAt" },
       })
@@ -318,7 +318,7 @@ export const mailApi = {
     name: string;
     content: string;
   }): Promise<MailTemplate> {
-    return nocobaseClient.action<MailTemplate>("mailTemplates", "create", {
+    return digiforceClient.action<MailTemplate>("mailTemplates", "create", {
       body: values,
     });
   },
@@ -327,14 +327,14 @@ export const mailApi = {
     id: number | string,
     values: { name: string; content: string }
   ): Promise<MailTemplate> {
-    return nocobaseClient.action<MailTemplate>("mailTemplates", "update", {
+    return digiforceClient.action<MailTemplate>("mailTemplates", "update", {
       query: { filterByTk: id },
       body: values,
     });
   },
 
   deleteTemplate(id: number | string): Promise<unknown> {
-    return nocobaseClient.action("mailTemplates", "destroy", {
+    return digiforceClient.action("mailTemplates", "destroy", {
       query: { filterByTk: id },
     });
   },
@@ -343,7 +343,7 @@ export const mailApi = {
     id: number | string,
     values: Partial<MailAccount>
   ): Promise<MailAccount> {
-    return nocobaseClient.action<MailAccount>("mailAccounts", "update", {
+    return digiforceClient.action<MailAccount>("mailAccounts", "update", {
       query: { filterByTk: id },
       body: values,
     });
@@ -353,28 +353,28 @@ export const mailApi = {
     messageId: number | string,
     labelIds: number[]
   ): Promise<unknown> {
-    return nocobaseClient.action("mailMessages", "update", {
+    return digiforceClient.action("mailMessages", "update", {
       query: { filterByTk: messageId },
       body: { labels: labelIds },
     });
   },
 
   setTodo(messageId: number | string, isTodo: boolean): Promise<unknown> {
-    return nocobaseClient.action("mailMessages", "update", {
+    return digiforceClient.action("mailMessages", "update", {
       query: { filterByTk: messageId },
       body: { isTodo },
     });
   },
 
   setBoxType(messageId: number | string, boxType: string): Promise<unknown> {
-    return nocobaseClient.action("mailMessages", "update", {
+    return digiforceClient.action("mailMessages", "update", {
       query: { filterByTk: messageId },
       body: { boxType },
     });
   },
 
   createNote(messageId: number | string, note: string): Promise<MailNote> {
-    return nocobaseClient.action<MailNote>("mailMessageNotes", "create", {
+    return digiforceClient.action<MailNote>("mailMessageNotes", "create", {
       body: { mailMessageId: messageId, note },
     });
   },
@@ -384,14 +384,14 @@ export const mailApi = {
     messageId: number | string,
     note: string
   ): Promise<MailNote> {
-    return nocobaseClient.action<MailNote>("mailMessageNotes", "update", {
+    return digiforceClient.action<MailNote>("mailMessageNotes", "update", {
       query: { filterByTk: noteId },
       body: { mailMessageId: messageId, note },
     });
   },
 
   attachmentUrl(messageId: number | string, attachmentId: string): string {
-    return nocobaseClient
+    return digiforceClient
       .buildUrl("mail:messageAttachmentGet", {
         id: messageId,
         attachmentId,
@@ -400,7 +400,7 @@ export const mailApi = {
   },
 
   inlineImageUrl(messageId: number | string, contentId: string): string {
-    return nocobaseClient
+    return digiforceClient
       .buildUrl("mail:messageContentPreview", { messageId, contentId })
       .toString();
   },
@@ -410,7 +410,7 @@ export const mailApi = {
     contentId: string
   ): Promise<Blob> {
     const response = await fetch(this.inlineImageUrl(messageId, contentId), {
-      headers: nocobaseClient.getHeaders({
+      headers: digiforceClient.getHeaders({
         withAclMeta: false,
         headers: { Accept: "image/*" },
       }),

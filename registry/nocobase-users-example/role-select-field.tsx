@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import type { useTranslate } from "@refinedev/core";
 import type { UseFormReturn } from "react-hook-form";
 
@@ -76,7 +76,7 @@ async function loadRoleOptions({
     });
   }
 
-  const payload = await nocobaseClient.action<unknown>("roles", "list", {
+  const payload = await digiforceClient.action<unknown>("roles", "list", {
     query: {
       page,
       pageSize,

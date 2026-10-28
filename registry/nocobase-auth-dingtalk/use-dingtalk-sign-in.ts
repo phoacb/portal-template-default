@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import type { Authenticator } from "@digiforce/portal-sdk/auth";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { resolvePortalUrl } from "@digiforce/portal-sdk/runtime";
 
 type DingtalkAuthUrlResponse = {
@@ -35,7 +35,7 @@ export function useDingtalkSignIn(authenticator: Authenticator) {
       const redirect = resolvePortalUrl(
         searchParams.get("to") || searchParams.get("redirect") || "/"
       );
-      const result = await nocobaseClient.action<DingtalkAuthUrlResponse>(
+      const result = await digiforceClient.action<DingtalkAuthUrlResponse>(
         "dingtalk",
         "getAuthUrl",
         {
@@ -51,7 +51,7 @@ export function useDingtalkSignIn(authenticator: Authenticator) {
           "NocoBase did not return a DingTalk authorization URL."
         );
       }
-      window.location.replace(nocobaseClient.resolveUrl(result.url));
+      window.location.replace(digiforceClient.resolveUrl(result.url));
     } catch (cause) {
       setError(
         cause instanceof Error

@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import {
   type LocaleSystemSettings,
   applyDocumentLocale,
@@ -33,7 +33,7 @@ async function requestServerResources(
   namespaces: string[],
   requestedLocale?: string
 ) {
-  const payload = await nocobaseClient.action<ServerLanguagePayload>(
+  const payload = await digiforceClient.action<ServerLanguagePayload>(
     "app",
     "getLang",
     {
@@ -74,7 +74,7 @@ async function ensureServerResourceNamespaces(namespaces: string[]) {
   if (missing.length) {
     const request = requestServerResources(
       missing,
-      nocobaseClient.getStoredLocale() ?? getCurrentLocale()
+      digiforceClient.getStoredLocale() ?? getCurrentLocale()
     ).then(() => undefined);
     for (const namespace of missing) {
       namespaceLoadPromises.set(namespace, request);
@@ -121,7 +121,7 @@ export function loadServerLocaleResources(settings?: LocaleSystemSettings) {
   if (serverResourcesPromise) return serverResourcesPromise;
 
   bootstrapStarted = true;
-  const requestedLocale = nocobaseClient.getStoredLocale();
+  const requestedLocale = digiforceClient.getStoredLocale();
   const initialNamespaces = [...serverResourceNamespaces];
   const configuredLocales = Array.isArray(settings?.enabledLanguages)
     ? settings.enabledLanguages
@@ -142,7 +142,7 @@ export function loadServerLocaleResources(settings?: LocaleSystemSettings) {
 
       if (serverLocale) {
         registerLocale({ locale: serverLocale, label: serverLocale });
-        nocobaseClient.setLocale(serverLocale);
+        digiforceClient.setLocale(serverLocale);
         await i18n.changeLanguage(serverLocale);
         applyDocumentLocale(serverLocale);
       }

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { NocoBaseClient } from "@digiforce/portal-sdk/client";
+import { DigiforceClient } from "@digiforce/portal-sdk/client";
 import { NocoBaseChatTransport } from "../providers/chat-transport";
 import { StreamCoalescer } from "../providers/stream-coalescer";
 import { SubAgentStreamAccumulator } from "../providers/sub-agent-stream";
@@ -34,7 +34,7 @@ const collectStream = async (stream: ReadableStream) => {
 
 describe("AI streaming", () => {
   it("resolves server assets and coalesces small text chunks", async () => {
-    const client = new NocoBaseClient("http://localhost:13001/api");
+    const client = new DigiforceClient("http://localhost:13001/api");
     expect(client.resolveUrl("/files/main/main/aiFiles/5.png?preview=1")).toBe(
       "http://localhost:13001/files/main/main/aiFiles/5.png?preview=1"
     );

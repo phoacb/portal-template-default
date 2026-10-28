@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import type { Authenticator } from "@digiforce/portal-sdk/auth";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { resolvePortalUrl } from "@digiforce/portal-sdk/runtime";
 
 type WecomAuthUrlResponse = {
@@ -35,7 +35,7 @@ export function useWecomSignIn(authenticator: Authenticator) {
       const redirect = resolvePortalUrl(
         searchParams.get("to") || searchParams.get("redirect") || "/"
       );
-      const result = await nocobaseClient.action<WecomAuthUrlResponse>(
+      const result = await digiforceClient.action<WecomAuthUrlResponse>(
         "wecom",
         "getAuthUrl",
         {
@@ -49,7 +49,7 @@ export function useWecomSignIn(authenticator: Authenticator) {
       if (!result?.url) {
         throw new Error("NocoBase did not return a WeCom authorization URL.");
       }
-      window.location.replace(nocobaseClient.resolveUrl(result.url));
+      window.location.replace(digiforceClient.resolveUrl(result.url));
     } catch (cause) {
       setError(
         cause instanceof Error

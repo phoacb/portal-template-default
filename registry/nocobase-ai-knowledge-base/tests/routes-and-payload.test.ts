@@ -370,7 +370,7 @@ test("document table matches the NocoBase document-list fields and safe action s
   );
   assert.match(
     workspacePage,
-    /fetch\(nocobaseClient\.resolveUrl\(downloadable\.url\), \{[\s\S]*?nocobaseClient\.getHeaders\(\{[\s\S]*?withAclMeta: false[\s\S]*?Accept: "\*\/\*"/,
+    /fetch\(digiforceClient\.resolveUrl\(downloadable\.url\), \{[\s\S]*?digiforceClient\.getHeaders\(\{[\s\S]*?withAclMeta: false[\s\S]*?Accept: "\*\/\*"/,
   );
   assert.doesNotMatch(workspacePage, /credentials: "include"/);
   assert.match(workspacePage, /URL\.createObjectURL\(await response\.blob\(\)\)/);

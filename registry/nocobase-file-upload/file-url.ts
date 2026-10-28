@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 
 import { getDataSourceHeaders } from "./storage";
 import { isNocoBaseManagedFileUrl } from "./file-url-policy";
@@ -10,7 +10,7 @@ type TemporaryUrlResponse = {
 };
 
 function resolveFileUrl(value?: string | null) {
-  return value ? nocobaseClient.resolveUrl(value) : "";
+  return value ? digiforceClient.resolveUrl(value) : "";
 }
 
 function getFileUrlSource(file: NocoBaseFileRecord) {
@@ -20,7 +20,7 @@ function getFileUrlSource(file: NocoBaseFileRecord) {
 export function isNocoBaseFileUrl(value: string) {
   return isNocoBaseManagedFileUrl(
     value,
-    nocobaseClient.getApiUrl(),
+    digiforceClient.getApiUrl(),
     typeof window === "undefined" ? undefined : window.location.href
   );
 }
@@ -94,7 +94,7 @@ export async function createTemporaryFileUrl(
   file: NocoBaseFileRecord,
   descriptor: FileFieldDescriptor
 ) {
-  const response = await nocobaseClient.action<TemporaryUrlResponse>(
+  const response = await digiforceClient.action<TemporaryUrlResponse>(
     descriptor.fileCollection,
     `createTemporaryURL/${file.id}`,
     {

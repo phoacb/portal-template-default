@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router";
 
 import type { Authenticator } from "@digiforce/portal-sdk/auth";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { resolvePortalUrl } from "@digiforce/portal-sdk/runtime";
 
 export function useCasSignIn(authenticator: Authenticator) {
@@ -19,9 +19,9 @@ export function useCasSignIn(authenticator: Authenticator) {
     const redirect = resolvePortalUrl(
       searchParams.get("to") || searchParams.get("redirect") || "/"
     );
-    const url = nocobaseClient.buildUrl("cas:login", {
+    const url = digiforceClient.buildUrl("cas:login", {
       authenticator: authenticator.name,
-      __appName: nocobaseClient.getAppName(),
+      __appName: digiforceClient.getAppName(),
       redirect,
     });
     window.location.replace(url.toString());

@@ -280,14 +280,6 @@ const getUrlOrigin = (value: string) => {
 
 export const digiforceClient = new DigiforceClient();
 
-/**
- * @deprecated Use `digiforceClient` instead.
- * Backward-compatible alias retained during the NocoBase → Digiforce namespace migration.
- */
-export const nocobaseClient = digiforceClient;
-export type NocoBaseClient = DigiforceClient;
-export const NocoBaseClient = DigiforceClient;
-
 export * from './auth-session.ts';
 export * from './error.ts';
 export * from './websocket.ts';

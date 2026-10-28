@@ -193,10 +193,3 @@ export class DigiforceWebSocketClient {
 }
 
 export const digiforceWebSocket = new DigiforceWebSocketClient();
-
-/** Backward-compatible aliases */
-export const nocobaseWebSocket = digiforceWebSocket;
-export type NocoBaseWebSocketClient = DigiforceWebSocketClient;
-export const NocoBaseWebSocketClient = DigiforceWebSocketClient;
-export type NocoBaseWebSocketMessage = DigiforceWebSocketMessage;
-export type NocoBaseWebSocketOptions = DigiforceWebSocketOptions;

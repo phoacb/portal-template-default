@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { LanguageSwitcher } from "..";
 import { I18nPromptGenerator } from "./prompt-generator";
 
@@ -146,7 +146,7 @@ export function I18nDemoPage() {
             />
             <DemoRow
               label="X-Locale"
-              value={nocobaseClient.getLocale() ?? locale}
+              value={digiforceClient.getLocale() ?? locale}
               code
             />
           </div>

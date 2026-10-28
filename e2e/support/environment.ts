@@ -2,8 +2,8 @@ import {
   normalizePortalBase,
   resolveDigiforceAppName,
   resolveDigiforcePortalName,
-  resolveNocoBaseAppName,
-  resolveNocoBasePortalName,
+  resolveDigiforceAppName,
+  resolveDigiforcePortalName,
 } from "@digiforce/portal-sdk/runtime";
 
 export type PortalE2EStorageType = "localStorage" | "sessionStorage";
@@ -41,7 +41,7 @@ const readValue = (source: EnvironmentSource, name: string) => {
 const resolvePort = (source: EnvironmentSource) => {
   const configured =
     readValue(source, "DIGIFORCE_E2E_PORT") ??
-    readValue(source, "NOCOBASE_E2E_PORT");
+    readValue(source, "DIGIFORCE_E2E_PORT");
   if (!configured) return 4173;
   const port = Number(configured);
   if (!Number.isInteger(port) || port < 1 || port > 65_535) {
@@ -67,14 +67,14 @@ export function loadPortalE2EEnvironment(
   const origin = `http://127.0.0.1:${port}`;
   const portalBase = normalizePortalBase(
     readValue(source, "DIGIFORCE_PORTAL_BASE") ??
-      readValue(source, "NOCOBASE_PORTAL_BASE")
+      readValue(source, "DIGIFORCE_PORTAL_BASE")
   );
   const baseURL = new URL(portalBase, `${origin}/`).toString();
   const apiURL = resolveApiURL(
     readValue(source, "DIGIFORCE_E2E_API_URL") ??
       readValue(source, "DIGIFORCE_API_URL") ??
-      readValue(source, "NOCOBASE_E2E_API_URL") ??
-      readValue(source, "NOCOBASE_API_URL"),
+      readValue(source, "DIGIFORCE_E2E_API_URL") ??
+      readValue(source, "DIGIFORCE_API_URL"),
     baseURL
   );
   const storageTypeValue = readValue(source, "API_CLIENT_STORAGE_TYPE");
@@ -90,21 +90,21 @@ export function loadPortalE2EEnvironment(
     portalBase,
     portalName:
       readValue(source, "DIGIFORCE_E2E_PORTAL") ??
-      readValue(source, "NOCOBASE_E2E_PORTAL") ??
+      readValue(source, "DIGIFORCE_E2E_PORTAL") ??
       resolveDigiforcePortalName(portalBase),
     appName: resolveDigiforceAppName(portalBase, apiURL),
     authenticator:
       readValue(source, "DIGIFORCE_E2E_AUTHENTICATOR") ??
       readValue(source, "DIGIFORCE_AUTHENTICATOR") ??
-      readValue(source, "NOCOBASE_E2E_AUTHENTICATOR") ??
-      readValue(source, "NOCOBASE_AUTHENTICATOR") ??
+      readValue(source, "DIGIFORCE_E2E_AUTHENTICATOR") ??
+      readValue(source, "DIGIFORCE_AUTHENTICATOR") ??
       "basic",
     role:
       readValue(source, "DIGIFORCE_E2E_ROLE") ??
-      readValue(source, "NOCOBASE_E2E_ROLE"),
+      readValue(source, "DIGIFORCE_E2E_ROLE"),
     locale:
       readValue(source, "DIGIFORCE_E2E_LOCALE") ??
-      readValue(source, "NOCOBASE_E2E_LOCALE"),
+      readValue(source, "DIGIFORCE_E2E_LOCALE"),
     storagePrefix:
       readValue(source, "API_CLIENT_STORAGE_PREFIX") ?? defaultStoragePrefix,
     storageType:
@@ -119,13 +119,13 @@ export function requirePortalE2ECredentials(
 ): PortalE2ECredentials {
   const account =
     readValue(source, "DIGIFORCE_E2E_ACCOUNT") ??
-    readValue(source, "NOCOBASE_E2E_ACCOUNT");
+    readValue(source, "DIGIFORCE_E2E_ACCOUNT");
   const password =
-    source.DIGIFORCE_E2E_PASSWORD ?? source.NOCOBASE_E2E_PASSWORD;
+    source.DIGIFORCE_E2E_PASSWORD ?? source.DIGIFORCE_E2E_PASSWORD;
 
   if (!account || typeof password !== "string" || !password.trim()) {
     throw new Error(
-      "NOCOBASE_E2E_ACCOUNT and NOCOBASE_E2E_PASSWORD are required for the login E2E test. Copy .env.e2e.example to .env.e2e and provide test credentials."
+      "DIGIFORCE_E2E_ACCOUNT and DIGIFORCE_E2E_PASSWORD are required for the login E2E test. Copy .env.e2e.example to .env.e2e and provide test credentials."
     );
   }
 

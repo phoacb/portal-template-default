@@ -3,7 +3,7 @@ import {
   useLogout,
   useTranslate,
 } from "@refinedev/core";
-import { resolveNocoBaseSettingsUrl } from "@digiforce/portal-sdk/runtime";
+import { resolveDigiforceSettingsUrl } from "@digiforce/portal-sdk/runtime";
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -131,7 +131,7 @@ function SettingsLink({ className }: { className?: string }) {
             <Button
               render={
                 <a
-                  href={resolveNocoBaseSettingsUrl()}
+                  href={resolveDigiforceSettingsUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
                 />

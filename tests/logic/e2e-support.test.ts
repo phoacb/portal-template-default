@@ -11,12 +11,12 @@ import {
 describe("Portal E2E environment", () => {
   it("resolves a locally hosted sub-application Portal and its API metadata", () => {
     const environment = loadPortalE2EEnvironment({
-      NOCOBASE_E2E_PORT: "4180",
-      NOCOBASE_PORTAL_BASE: "/x/apps/sales/crm",
-      NOCOBASE_E2E_API_URL:
+      DIGIFORCE_E2E_PORT: "4180",
+      DIGIFORCE_PORTAL_BASE: "/x/apps/sales/crm",
+      DIGIFORCE_E2E_API_URL:
         "https://api.example.test/api/__app/sales",
-      NOCOBASE_E2E_AUTHENTICATOR: "password",
-      NOCOBASE_E2E_ROLE: "sales-manager",
+      DIGIFORCE_E2E_AUTHENTICATOR: "password",
+      DIGIFORCE_E2E_ROLE: "sales-manager",
     });
 
     expect(environment).toMatchObject({
@@ -40,19 +40,19 @@ describe("Portal E2E environment", () => {
 
   it("uses app-scoped session keys unless the sub-app token is shared", () => {
     const environment = loadPortalE2EEnvironment({
-      NOCOBASE_PORTAL_BASE: "/x/apps/sales/crm/",
-      NOCOBASE_API_URL: "/api/__app/sales",
+      DIGIFORCE_PORTAL_BASE: "/x/apps/sales/crm/",
+      DIGIFORCE_API_URL: "/api/__app/sales",
     });
 
     expect(getPortalStorageKey(environment, "token")).toBe(
-      "NOCOBASE_SALES_TOKEN"
+      "DIGIFORCE_SALES_TOKEN"
     );
     expect(getPortalStorageKey(environment, "role")).toBe(
-      "NOCOBASE_SALES_ROLE"
+      "DIGIFORCE_SALES_ROLE"
     );
     expect(
       getPortalStorageKey({ ...environment, shareToken: true }, "token")
-    ).toBe("NOCOBASE_TOKEN");
+    ).toBe("DIGIFORCE_TOKEN");
   });
 
   it("requires non-empty credentials for login tests", () => {
@@ -60,9 +60,9 @@ describe("Portal E2E environment", () => {
 
     expect(() =>
       requirePortalE2ECredentials(environment, {
-        NOCOBASE_E2E_ACCOUNT: "nocobase",
-        NOCOBASE_E2E_PASSWORD: "",
+        DIGIFORCE_E2E_ACCOUNT: "nocobase",
+        DIGIFORCE_E2E_PASSWORD: "",
       })
-    ).toThrow(/NOCOBASE_E2E_ACCOUNT and NOCOBASE_E2E_PASSWORD are required/);
+    ).toThrow(/DIGIFORCE_E2E_ACCOUNT and DIGIFORCE_E2E_PASSWORD are required/);
   });
 });

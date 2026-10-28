@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { resolvePortalUrl } from "@digiforce/portal-sdk/runtime";
 
 import { LoadingState } from "@/components/app-shell/loading-state";
@@ -36,7 +36,7 @@ export function AuthAutoRedirectProvider({
   const redirect = resolvePortalUrl(`${pathname}${search}`);
   const shouldCheck =
     enabled &&
-    !nocobaseClient.getToken() &&
+    !digiforceClient.getToken() &&
     !publicAuthPaths.has(pathname);
   const [isChecking, setIsChecking] = useState(shouldCheck);
   const stableQuery = useMemo(() => query, [JSON.stringify(query)]);
@@ -51,7 +51,7 @@ export function AuthAutoRedirectProvider({
     setIsChecking(true);
     const controller = new AbortController();
 
-    void nocobaseClient
+    void digiforceClient
       .action<AutoRedirectResponse>(resource, action, {
         method: "GET",
         query: { redirect, ...stableQuery },
@@ -62,7 +62,7 @@ export function AuthAutoRedirectProvider({
       })
       .then((result) => {
         if (result?.success === false && result.authUrl) {
-          window.location.replace(nocobaseClient.resolveUrl(result.authUrl));
+          window.location.replace(digiforceClient.resolveUrl(result.authUrl));
           return;
         }
         setIsChecking(false);

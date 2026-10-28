@@ -1,7 +1,7 @@
 import type { APIRequestContext } from "@playwright/test";
 import {
-  getNocoBaseErrorMessage,
-  NocoBaseHttpError,
+  getDigiforceErrorMessage,
+  DigiforceHttpError,
 } from "@digiforce/portal-sdk/client";
 
 import {
@@ -36,7 +36,7 @@ export type PortalActionOptions = {
   unwrap?: "data" | "deep-data" | "none";
 };
 
-export { NocoBaseHttpError as PortalE2EApiError };
+export { DigiforceHttpError as PortalE2EApiError };
 
 const getTimezone = () => {
   const minutes = -new Date().getTimezoneOffset();
@@ -120,8 +120,8 @@ export async function portalAction<T>(
   const payload = await readPayload(await response.text());
 
   if (!response.ok()) {
-    throw new NocoBaseHttpError({
-      message: getNocoBaseErrorMessage(
+    throw new DigiforceHttpError({
+      message: getDigiforceErrorMessage(
         payload,
         `NocoBase request failed (${response.status()})`
       ),

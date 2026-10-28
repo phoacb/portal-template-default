@@ -1,4 +1,4 @@
-import type { NocoBaseRuntimeError } from "@digiforce/portal-sdk/client";
+import type { DigiforceRuntimeError } from "@digiforce/portal-sdk/client";
 import { translate } from "@digiforce/portal-sdk/i18n";
 import {
   AlertTriangle,
@@ -36,7 +36,7 @@ const failureCodes = new Set([
 
 export type NocoBaseRuntimeStatusProps = {
   context?: Omit<PortalErrorDiagnosticContext, "componentStack" | "occurredAt">;
-  error: NocoBaseRuntimeError;
+  error: DigiforceRuntimeError;
   locale?: string;
   onLogout?: () => void | Promise<void>;
   onRetry?: () => void | Promise<void>;
@@ -160,7 +160,7 @@ const t = (key: string, defaultMessage: string, locale?: string) =>
   );
 
 const getRuntimeStatusText = (
-  error: NocoBaseRuntimeError,
+  error: DigiforceRuntimeError,
   locale?: string
 ): RuntimeStatusText => {
   const code = error.code;

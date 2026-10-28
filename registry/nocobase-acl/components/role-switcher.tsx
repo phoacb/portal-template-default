@@ -29,7 +29,7 @@ import {
   type AclIdentity,
   type Role,
 } from "@digiforce/portal-sdk/acl";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { cn } from "@/lib/utils";
 import {
   canSwitchRoles,
@@ -49,7 +49,7 @@ export type RoleSwitcherProps = {
 function useRoleSwitcherOptions() {
   const { data: identity, isLoading } = useGetIdentity<AclIdentity>();
   const acl = useAclState();
-  const context = resolveRoleSwitcherContext(acl, nocobaseClient.getRole());
+  const context = resolveRoleSwitcherContext(acl, digiforceClient.getRole());
   const roles = useMemo(
     () =>
       getRoleOptions({

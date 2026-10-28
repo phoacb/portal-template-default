@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import type { Authenticator } from "@digiforce/portal-sdk/auth";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { resolvePortalUrl } from "@digiforce/portal-sdk/runtime";
 
 export function useSamlSignIn(authenticator: Authenticator) {
@@ -24,7 +24,7 @@ export function useSamlSignIn(authenticator: Authenticator) {
       const redirect = resolvePortalUrl(
         searchParams.get("to") || searchParams.get("redirect") || "/"
       );
-      const authUrl = await nocobaseClient.action<string>(
+      const authUrl = await digiforceClient.action<string>(
         "saml",
         "getAuthUrl",
         {
@@ -38,7 +38,7 @@ export function useSamlSignIn(authenticator: Authenticator) {
       if (!authUrl) {
         throw new Error("NocoBase did not return a SAML authorization URL.");
       }
-      window.location.replace(nocobaseClient.resolveUrl(authUrl));
+      window.location.replace(digiforceClient.resolveUrl(authUrl));
     } catch (cause) {
       setError(
         cause instanceof Error

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useAuthenticatorSignIn } from "@digiforce/portal-sdk/auth";
 import type { Authenticator } from "@digiforce/portal-sdk/auth";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 
 type SmsCodeResponse = {
   expiresAt?: string;
@@ -42,7 +42,7 @@ export function useSmsSignIn(authenticator: Authenticator) {
       setSendError(undefined);
       setIsSendingCode(true);
       try {
-        const result = await nocobaseClient.action<SmsCodeResponse>(
+        const result = await digiforceClient.action<SmsCodeResponse>(
           "smsOTP",
           "publicCreate",
           {

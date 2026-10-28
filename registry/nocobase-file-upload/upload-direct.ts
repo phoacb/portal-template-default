@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 
 import { getDataSourceHeaders } from "./storage";
 import type {
@@ -29,7 +29,7 @@ export async function uploadDirect(
   const headers = getDataSourceHeaders(dataSourceKey);
   const mimetype = file.type || "application/octet-stream";
 
-  const initialized = await nocobaseClient.action<PresignedUploadResult>(
+  const initialized = await digiforceClient.action<PresignedUploadResult>(
     "storages",
     "createPresignedUrl",
     {
@@ -65,7 +65,7 @@ export async function uploadDirect(
 
   const { fileInfo } = initialized;
 
-  return nocobaseClient.action<NocoBaseFileRecord>(
+  return digiforceClient.action<NocoBaseFileRecord>(
     descriptor.fileCollection,
     "create",
     {

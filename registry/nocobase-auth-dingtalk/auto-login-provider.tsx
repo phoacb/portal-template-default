@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 import { LoadingState } from "@/components/app-shell/loading-state";
 import { clearAcl } from "@digiforce/portal-sdk/acl";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { resolvePortalUrl } from "@digiforce/portal-sdk/runtime";
 
 import { isDingtalkBrowser } from "./use-dingtalk-sign-in";
@@ -107,7 +107,7 @@ export default function DingtalkAutoLoginProvider({
   const redirect = resolvePortalUrl(`${pathname}${search}`);
   const shouldCheck =
     insideDingtalk &&
-    !nocobaseClient.getToken() &&
+    !digiforceClient.getToken() &&
     !publicAuthPaths.has(pathname);
   const [isChecking, setIsChecking] = useState(shouldCheck);
 
@@ -122,7 +122,7 @@ export default function DingtalkAutoLoginProvider({
 
     void (async () => {
       try {
-        const result = await nocobaseClient.action<CheckLoginResponse>(
+        const result = await digiforceClient.action<CheckLoginResponse>(
           "dingtalk",
           "checkLogin",
           {
@@ -137,7 +137,7 @@ export default function DingtalkAutoLoginProvider({
 
         if (result?.success !== false) return;
         if (result.autoLoginType === "oauth" && result.authUrl) {
-          window.location.replace(nocobaseClient.resolveUrl(result.authUrl));
+          window.location.replace(digiforceClient.resolveUrl(result.authUrl));
           return;
         }
         if (
@@ -149,7 +149,7 @@ export default function DingtalkAutoLoginProvider({
         }
 
         const authCode = await requestDingtalkAuthCode(result.corpId);
-        const signedIn = await nocobaseClient.action<SignInResponse>(
+        const signedIn = await digiforceClient.action<SignInResponse>(
           "auth",
           "signIn",
           {
@@ -161,9 +161,9 @@ export default function DingtalkAutoLoginProvider({
         if (!signedIn.token) {
           throw new Error("NocoBase did not return an access token.");
         }
-        nocobaseClient.setAuthenticator(result.authenticator);
-        nocobaseClient.setToken(signedIn.token);
-        nocobaseClient.setRole(null);
+        digiforceClient.setAuthenticator(result.authenticator);
+        digiforceClient.setToken(signedIn.token);
+        digiforceClient.setRole(null);
         clearAcl();
         window.location.replace(redirect);
       } catch (error) {

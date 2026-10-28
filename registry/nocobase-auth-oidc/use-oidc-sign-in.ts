@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from "react";
 import { useSearchParams } from "react-router";
 
 import type { Authenticator } from "@digiforce/portal-sdk/auth";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { resolvePortalUrl } from "@digiforce/portal-sdk/runtime";
 
 export function useOidcSignIn(authenticator: Authenticator) {
@@ -25,7 +25,7 @@ export function useOidcSignIn(authenticator: Authenticator) {
       const redirect = resolvePortalUrl(
         searchParams.get("to") || searchParams.get("redirect") || "/"
       );
-      const authUrl = await nocobaseClient.action<string>(
+      const authUrl = await digiforceClient.action<string>(
         "oidc",
         "getAuthUrl",
         {
@@ -41,7 +41,7 @@ export function useOidcSignIn(authenticator: Authenticator) {
         throw new Error("NocoBase did not return an OIDC authorization URL.");
       }
 
-      window.location.replace(nocobaseClient.resolveUrl(authUrl));
+      window.location.replace(digiforceClient.resolveUrl(authUrl));
     } catch (cause) {
       setError(
         cause instanceof Error

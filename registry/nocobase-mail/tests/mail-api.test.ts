@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { mailApi } from "../components/mail-api";
 
 afterEach(() => vi.restoreAllMocks());
@@ -8,7 +8,7 @@ afterEach(() => vi.restoreAllMocks());
 describe("Mail API adapter", () => {
   it("maps mutations to the server actions expected by the plugin", async () => {
     const action = vi
-      .spyOn(nocobaseClient, "action")
+      .spyOn(digiforceClient, "action")
       .mockResolvedValue({} as never);
 
     await mailApi.cancelScheduled(7);
@@ -29,7 +29,7 @@ describe("Mail API adapter", () => {
   });
 
   it("loads all pages of bulk messages", async () => {
-    const action = vi.spyOn(nocobaseClient, "action").mockImplementation(
+    const action = vi.spyOn(digiforceClient, "action").mockImplementation(
       async (_resource, _name, options) => {
         const page = Number(options?.query?.page ?? 1);
         return {

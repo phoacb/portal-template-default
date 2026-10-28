@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 
 import { getDataSourceHeaders } from "./storage";
 import type { FileFieldDescriptor, StorageCheckResult } from "./types";
@@ -11,7 +11,7 @@ export function checkFileStorage(
 ) {
   const dataSourceKey = descriptor.dataSourceKey ?? "main";
 
-  return nocobaseClient.action<StorageCheckResult>("storages", "check", {
+  return digiforceClient.action<StorageCheckResult>("storages", "check", {
     method: "POST",
     query: {
       fileCollectionName: descriptor.fileCollection,

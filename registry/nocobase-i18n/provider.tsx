@@ -1,7 +1,7 @@
 import { useEffect, useState, type PropsWithChildren } from "react";
 
 import { LoadingState } from "@/components/app-shell/loading-state";
-import { nocobaseClient } from "@digiforce/portal-sdk/client";
+import { digiforceClient } from "@digiforce/portal-sdk/client";
 import { setLocalePersistence } from "@digiforce/portal-sdk/i18n";
 import { useSystemSettings } from "@digiforce/portal-sdk/system-settings";
 import { loadServerLocaleResources } from "./server-resources";
@@ -13,8 +13,8 @@ export function NocoBaseI18nBootstrap({ children }: PropsWithChildren) {
   useEffect(
     () =>
       setLocalePersistence(async (locale) => {
-        if (!nocobaseClient.getToken()) return;
-        await nocobaseClient.action("users", "updateLang", {
+        if (!digiforceClient.getToken()) return;
+        await digiforceClient.action("users", "updateLang", {
           method: "POST",
           body: { appLang: locale },
         });

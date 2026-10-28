@@ -1,9 +1,9 @@
 import { authProvider } from "@digiforce/portal-sdk/auth";
 import {
-  isNocoBaseServiceError,
-  nocobaseClient,
-  nocobaseWebSocket,
-  normalizeNocoBaseRuntimeError,
+  isDigiforceServiceError,
+  digiforceClient,
+  digiforceWebSocket,
+  normalizeDigiforceRuntimeError,
   type DigiforceWebSocketMessage,
 } from "@digiforce/portal-sdk/client";
 import {
@@ -32,13 +32,13 @@ export function PortalRuntimeGate({ children }: PropsWithChildren) {
   if (
     runtimeError?.source !== "websocket" &&
     runtimeError &&
-    isNocoBaseServiceError(runtimeError)
+    isDigiforceServiceError(runtimeError)
   ) {
     hasLoadErrorRef.current = true;
   }
 
   useEffect(() => {
-    const unsubscribeMessages = nocobaseWebSocket.subscribe((message: DigiforceWebSocketMessage) => {
+    const unsubscribeMessages = digiforceWebSocket.subscribe((message: DigiforceWebSocketMessage) => {
       if (!message.payload) return;
 
       if (message.payload.refresh) {
@@ -47,16 +47,16 @@ export function PortalRuntimeGate({ children }: PropsWithChildren) {
       }
 
       if (message.type !== "maintaining") return;
-      const nextError = normalizeNocoBaseRuntimeError(
+      const nextError = normalizeDigiforceRuntimeError(
         message.payload,
         "websocket"
       );
 
       if (nextError.code === "APP_RUNNING") {
         const currentError = errorRef.current;
-        if (currentError && !isNocoBaseServiceError(currentError)) return;
+        if (currentError && !isDigiforceServiceError(currentError)) return;
         const shouldReload = hasLoadErrorRef.current;
-        nocobaseWebSocket.authenticate();
+        digiforceWebSocket.authenticate();
         errorRef.current = undefined;
         portalRuntimeStore.clear();
         if (shouldReload) window.location.reload();
@@ -69,17 +69,17 @@ export function PortalRuntimeGate({ children }: PropsWithChildren) {
 
     const handleOnline = () => {
       const currentError = errorRef.current;
-      if (currentError && isNocoBaseServiceError(currentError)) {
-        nocobaseWebSocket.reconnect();
+      if (currentError && isDigiforceServiceError(currentError)) {
+        digiforceWebSocket.reconnect();
       }
     };
 
     window.addEventListener("online", handleOnline);
-    nocobaseWebSocket.connect();
+    digiforceWebSocket.connect();
     return () => {
       window.removeEventListener("online", handleOnline);
       unsubscribeMessages();
-      nocobaseWebSocket.close();
+      digiforceWebSocket.close();
     };
   }, []);
 
@@ -109,7 +109,7 @@ export function PortalRuntimeGate({ children }: PropsWithChildren) {
         window.location.assign(resolvePortalUrl(result.redirectTo));
       }
     } catch {
-      nocobaseClient.clearAuthentication();
+      digiforceClient.clearAuthentication();
       errorRef.current = undefined;
       portalRuntimeStore.clear();
       window.location.assign(resolvePortalUrl("/login"));
