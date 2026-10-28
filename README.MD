@@ -51,7 +51,7 @@ pnpm build:html
 ```
 
 Application pages and resources live under `src`. The included Users page is a
-working example based on the standard NocoBase `users` collection.
+working example based on the standard Digiforce `users` collection.
 
 Application translations live in `src/locales`. Default locale, available
 locale labels, i18next options, and post-switch behavior remain customizable in

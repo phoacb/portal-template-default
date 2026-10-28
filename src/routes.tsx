@@ -1,3 +1,4 @@
+import { Shield } from "lucide-react";
 import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 
 // Set this to false when the application no longer needs the example routes
@@ -8,4 +9,20 @@ export const registryRoutesEnabled = true;
 // Add application-owned business routes here. Installed Registry extensions
 // contribute their own route definitions through the same runtime. Add a
 // resource entry when a route should also appear in navigation.
-export const appRoutes = defineAppRoutes([]);
+export const appRoutes = defineAppRoutes([
+  {
+    name: "roles",
+    path: "/roles",
+    lazy: () => import("./pages/roles/list"),
+    resource: {
+      meta: {
+        label: "Roles",
+        priority: 2,
+        singularLabel: "Role",
+        icon: <Shield />,
+        description: "Manage and inspect roles and access permissions.",
+        acl: { type: "collection" },
+      },
+    },
+  },
+]);

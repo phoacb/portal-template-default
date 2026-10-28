@@ -36,12 +36,12 @@ export function BrandWordmark({ className }: BrandLogoProps) {
     >
       <img
         src={assetUrl("/logo.png")}
-        alt="NocoBase"
+        alt="Digiforce"
         className="h-full w-auto object-contain dark:hidden"
       />
       <img
         src={assetUrl("/logo-dark.png")}
-        alt="NocoBase"
+        alt="Digiforce"
         className="hidden h-full w-auto object-contain dark:block"
       />
     </span>

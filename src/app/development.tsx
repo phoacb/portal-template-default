@@ -21,7 +21,7 @@ const coreDevelopmentResources: ResourceProps[] = [
     meta: {
       label: "Authentication",
       icon: <KeyRound />,
-      description: "NocoBase authentication UI and integration patterns.",
+      description: "Digiforce authentication UI and integration patterns.",
     },
   },
   {

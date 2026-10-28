@@ -84,11 +84,11 @@ export const starter = {
   "unsavedChanges.leave": "Discard changes",
   "views.create.title": "Create {{resource}}",
   "views.create.description":
-    "Add a new {{resource}} to your NocoBase workspace.",
+    "Add a new {{resource}} to your Digiforce workspace.",
   "views.edit.title": "Edit {{resource}}",
   "views.edit.description":
-    "Update this {{resource}} while NocoBase keeps the data consistent.",
-  "views.show.description": "Review the record and its NocoBase-managed data.",
+    "Update this {{resource}} while Digiforce keeps the data consistent.",
+  "views.show.description": "Review the record and its Digiforce-managed data.",
   "table.empty.title": "No data to display",
   "table.empty.description": "This table is empty for the time being.",
   "table.pagination.total": "{{count}} row(s)",
