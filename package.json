@@ -18,7 +18,6 @@
     "@hookform/resolvers": "^5.0.1",
     "@nocobase/ai-employee-avatars": "^1.0.2",
     "@digiforce/portal-sdk": "workspace:^",
-    "@nocobase/portal-sdk": "link:./sdk",
     "@playwright/test": "^1.62.1",
     "@refinedev/cli": "^2.16.48",
     "@refinedev/core": "^5.0.8",

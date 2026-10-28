@@ -42,7 +42,10 @@ const normalizeBase = (base?: string) => {
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const apiUrl = env.DIGIFORCE_API_URL || env.NOCOBASE_API_URL;
+  const apiUrl =
+    env.DIGIFORCE_API_URL ||
+    env.NOCOBASE_API_URL ||
+    (command === "serve" ? "http://127.0.0.1:13000/api" : undefined);
   const proxyTarget = getDefaultProxyTarget(apiUrl);
   const proxyOrigin = proxyTarget
     ? (() => {
@@ -108,12 +111,19 @@ export default defineConfig(({ command, mode }) => {
                   proxyResponse.headers["x-accel-buffering"] = "no";
                 });
               },
+              ws: true,
               headers: proxyOrigin
                 ? {
                     origin: proxyOrigin,
                     referer: `${proxyOrigin}/`,
                   }
                 : undefined,
+            },
+            "/ws": {
+              target: proxyTarget,
+              ws: true,
+              changeOrigin: true,
+              secure: false,
             },
           },
         }

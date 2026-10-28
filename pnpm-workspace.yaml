@@ -3,5 +3,4 @@ packages:
 
 allowBuilds:
   '@digiforce/portal-sdk': true
-  '@nocobase/portal-sdk': true
   esbuild: true

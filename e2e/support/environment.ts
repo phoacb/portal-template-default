@@ -2,8 +2,6 @@ import {
   normalizePortalBase,
   resolveDigiforceAppName,
   resolveDigiforcePortalName,
-  resolveDigiforceAppName,
-  resolveDigiforcePortalName,
 } from "@digiforce/portal-sdk/runtime";
 
 export type PortalE2EStorageType = "localStorage" | "sessionStorage";

@@ -13,7 +13,7 @@ export function DefaultSignInPage({
   return (
     <AuthLayout
       title="Welcome back"
-      description="Choose a sign-in method configured in NocoBase."
+      description="Choose a sign-in method configured in Digiforce."
     >
       <DynamicSignIn renderAuthenticator={renderAuthenticator} />
     </AuthLayout>
