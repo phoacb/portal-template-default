@@ -9,13 +9,13 @@ are independent SemVer values connected by compatibility metadata.
 - Patch SDK releases fix behavior without changing documented APIs.
 - Minor SDK releases add backward-compatible APIs.
 - Major SDK releases may remove or change documented APIs.
-- `nocobase.supportedDefaultTemplateRange` declares the base template versions
+- `digiforce.supportedDefaultTemplateRange` declares the base template versions
   with which that SDK release can run.
 - A derived Portal keeps its own package name and version, but preserves the
   exact base release it has incorporated in
-  `nocobase.defaultTemplateVersion`.
+  `digiforce.defaultTemplateVersion`.
 
-Do not update `nocobase.defaultTemplateVersion` merely to satisfy the
+Do not update `digiforce.defaultTemplateVersion` merely to satisfy the
 compatibility check. Update it only after the corresponding base template
 changes have actually been merged and verified.
 
@@ -28,16 +28,16 @@ When a breaking SDK release requires coordinated template source changes, use
 a new compatibility generation:
 
 ```text
-@nocobase/portal-sdk        1.x -> 2.0.0
+@digiforce/portal-sdk        1.x -> 2.0.0
 Default Portal Template     2.x -> 3.0.0
 ```
 
 The coordinated packages then declare:
 
 ```json
-// @nocobase/portal-sdk@2.0.0
+// @digiforce/portal-sdk@2.0.0
 {
-  "nocobase": {
+  "digiforce": {
     "supportedDefaultTemplateRange": ">=3.0.0 <4.0.0"
   }
 }
@@ -46,11 +46,11 @@ The coordinated packages then declare:
 ```json
 // Default Portal Template 3.0.0
 {
-  "nocobase": {
+  "digiforce": {
     "defaultTemplateVersion": "3.0.0"
   },
   "dependencies": {
-    "@nocobase/portal-sdk": "^2.0.0"
+    "@digiforce/portal-sdk": "^2.0.0"
   }
 }
 ```
@@ -96,9 +96,9 @@ exceptional maintenance, but normal releases should use automatic detection.
 3. Merge the required base template release without overwriting application
    pages, UI composition, translations, or installed extension customizations.
 4. Apply API replacements to application code and customized Registry source.
-5. Update `nocobase.defaultTemplateVersion` to the base release actually
+5. Update `digiforce.defaultTemplateVersion` to the base release actually
    incorporated by the project.
-6. Update `@nocobase/portal-sdk` to the required major.
+6. Update `@digiforce/portal-sdk` to the required major.
 7. Run `pnpm sdk:check`, install dependencies, build, and exercise direct URLs,
    authentication, ACL, locale switching, and routed surfaces.
 
@@ -150,7 +150,7 @@ page is a named export. Keep resource/action ACL boundaries in the loaded page
 module; use route `access.roles` only for centralized role constraints.
 
 Upgrade derived Portals by merging Default Template 3.0 source before changing
-`nocobase.defaultTemplateVersion` to `3.0.0` and the Portal SDK dependency to
+`digiforce.defaultTemplateVersion` to `3.0.0` and the Portal SDK dependency to
 `^2.0.0`. Update customized installed Registry extensions to the route contract
 above, then run `pnpm sdk:check`, the production build, and direct-route, nested
 surface, authentication, and ACL verification.

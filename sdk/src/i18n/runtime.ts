@@ -1,7 +1,7 @@
-import type { I18nProvider } from "@refinedev/core";
-import { createInstance, type InitOptions, type TOptions } from "i18next";
+import type { I18nProvider } from '@refinedev/core';
+import { createInstance, type InitOptions, type TOptions } from 'i18next';
 
-import { nocobaseClient } from "../client/index.ts";
+import { digiforceClient } from '../client/index.ts';
 import {
   configurePortalLocales,
   getDefaultLocale,
@@ -12,18 +12,15 @@ import {
   resolveSupportedLocale,
   setEnabledLocales,
   type LocaleDefinition,
-} from "./locales.ts";
+} from './locales.ts';
 import {
   getTranslationResources,
   setTranslationResolver,
   subscribeTranslationResources,
   type TranslationOptions,
-} from "./translation.ts";
+} from './translation.ts';
 
-export type LocaleResources = Record<
-  string,
-  Record<string, string | number | boolean>
->;
+export type LocaleResources = Record<string, Record<string, string | number | boolean>>;
 
 export type LocaleSystemSettings = {
   appLang?: string | null;
@@ -40,7 +37,7 @@ export type PortalI18nConfiguration = {
 type LocalePersistence = (locale: string) => void | Promise<void>;
 
 let localePersistence: LocalePersistence | undefined;
-let onLocaleChanged: PortalI18nConfiguration["onLocaleChanged"];
+let onLocaleChanged: PortalI18nConfiguration['onLocaleChanged'];
 let i18nBindingsConfigured = false;
 
 export const i18n = createInstance();
@@ -76,9 +73,9 @@ export async function configurePortalI18n({
   configureI18nBindings();
 
   await i18n.init({
-    lng: resolveSupportedLocale(nocobaseClient.getLocale()),
+    lng: resolveSupportedLocale(digiforceClient.getLocale()),
     fallbackLng: defaultLocale,
-    defaultNS: "translation",
+    defaultNS: 'translation',
     keySeparator: false,
     nsSeparator: false,
     initImmediate: false,
@@ -88,26 +85,17 @@ export async function configurePortalI18n({
     ...initOptions,
   });
 
-  getTranslationResources().forEach(([namespace, resources]) =>
-    addLocaleResources(namespace, resources)
-  );
+  getTranslationResources().forEach(([namespace, resources]) => addLocaleResources(namespace, resources));
   applyDocumentLocale();
 }
 
 export function getCurrentLocale() {
-  return resolveSupportedLocale(
-    i18n.resolvedLanguage ?? i18n.language ?? nocobaseClient.getLocale()
-  );
+  return resolveSupportedLocale(i18n.resolvedLanguage ?? i18n.language ?? digiforceClient.getLocale());
 }
 
-export function translate(
-  key: string,
-  options?: TranslationOptions | string,
-  defaultMessage?: string
-) {
-  const normalizedOptions = typeof options === "string" ? undefined : options;
-  const normalizedDefault =
-    typeof options === "string" ? options : defaultMessage;
+export function translate(key: string, options?: TranslationOptions | string, defaultMessage?: string) {
+  const normalizedOptions = typeof options === 'string' ? undefined : options;
+  const normalizedDefault = typeof options === 'string' ? options : defaultMessage;
   if (!i18n.isInitialized) {
     return normalizedDefault ?? normalizedOptions?.defaultValue ?? key;
   }
@@ -117,52 +105,39 @@ export function translate(
     defaultValue: normalizedDefault ?? normalizedOptions?.defaultValue ?? key,
   });
 
-  return typeof value === "string" ? value : String(value);
+  return typeof value === 'string' ? value : String(value);
 }
 
 export function applyDocumentLocale(locale = getCurrentLocale()) {
-  if (typeof document === "undefined") return;
-  const direction =
-    getLocaleDefinition(locale)?.direction ?? getLocaleDirection(locale);
+  if (typeof document === 'undefined') return;
+  const direction = getLocaleDefinition(locale)?.direction ?? getLocaleDirection(locale);
   document.documentElement.lang = locale;
   document.documentElement.dir = direction;
 }
 
 function resolveSystemLocale(settings?: LocaleSystemSettings) {
-  const enabledLanguages = Array.isArray(settings?.enabledLanguages)
-    ? settings.enabledLanguages.filter(Boolean)
-    : [];
-  const storedLocale = nocobaseClient.getStoredLocale();
+  const enabledLanguages = Array.isArray(settings?.enabledLanguages) ? settings.enabledLanguages.filter(Boolean) : [];
+  const storedLocale = digiforceClient.getStoredLocale();
 
-  if (
-    storedLocale &&
-    (!enabledLanguages.length || enabledLanguages.includes(storedLocale))
-  ) {
+  if (storedLocale && (!enabledLanguages.length || enabledLanguages.includes(storedLocale))) {
     return resolveSupportedLocale(storedLocale);
   }
 
-  const defaultLocale =
-    settings?.appLang || enabledLanguages[0] || getDefaultLocale();
+  const defaultLocale = settings?.appLang || enabledLanguages[0] || getDefaultLocale();
   return resolveSupportedLocale(defaultLocale);
 }
 
 export async function applySystemLocale(settings?: LocaleSystemSettings) {
-  const enabledLanguages = Array.isArray(settings?.enabledLanguages)
-    ? settings.enabledLanguages.filter(Boolean)
-    : [];
+  const enabledLanguages = Array.isArray(settings?.enabledLanguages) ? settings.enabledLanguages.filter(Boolean) : [];
   if (enabledLanguages.length) setEnabledLocales(enabledLanguages);
 
-  const storedLocale = nocobaseClient.getStoredLocale();
-  if (
-    storedLocale &&
-    enabledLanguages.length &&
-    !enabledLanguages.includes(storedLocale)
-  ) {
-    nocobaseClient.setLocale(null);
+  const storedLocale = digiforceClient.getStoredLocale();
+  if (storedLocale && enabledLanguages.length && !enabledLanguages.includes(storedLocale)) {
+    digiforceClient.setLocale(null);
   }
 
   const locale = resolveSystemLocale(settings);
-  nocobaseClient.setRuntimeLocale(locale);
+  digiforceClient.setRuntimeLocale(locale);
   await i18n.changeLanguage(locale);
   applyDocumentLocale(locale);
   return locale;
@@ -181,10 +156,10 @@ export async function changeLocale(locale: string) {
   try {
     await localePersistence?.(nextLocale);
   } catch (error) {
-    console.warn("Unable to persist the language preference", error);
+    console.warn('Unable to persist the language preference', error);
   }
 
-  nocobaseClient.setLocale(nextLocale);
+  digiforceClient.setLocale(nextLocale);
   await i18n.changeLanguage(nextLocale);
   applyDocumentLocale(nextLocale);
   await onLocaleChanged?.(nextLocale);

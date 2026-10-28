@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@nocobase/portal-sdk/client";
+import { nocobaseClient } from "@digiforce/portal-sdk/client";
 import {
   type LocaleSystemSettings,
   applyDocumentLocale,
@@ -6,7 +6,7 @@ import {
   i18n,
   registerLocale,
   setEnabledLocales,
-} from "@nocobase/portal-sdk/i18n";
+} from "@digiforce/portal-sdk/i18n";
 
 type ServerLanguagePayload = {
   lang?: string;

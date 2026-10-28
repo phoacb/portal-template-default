@@ -1,5 +1,5 @@
-import { nocobaseClient } from "../client/index.ts";
-import type { SystemSettings } from "./context.ts";
+import { digiforceClient } from '../client/index.ts';
+import type { SystemSettings } from './context.ts';
 
 let cachedSettings: SystemSettings | undefined;
 let settingsRequest: Promise<SystemSettings> | undefined;
@@ -12,9 +12,9 @@ export function loadSystemSettings(force = false) {
   if (force) settingsGeneration += 1;
   const requestGeneration = settingsGeneration;
 
-  const request = nocobaseClient
-    .action<SystemSettings>("systemSettings", "get", {
-      method: "GET",
+  const request = digiforceClient
+    .action<SystemSettings>('systemSettings', 'get', {
+      method: 'GET',
       includeRole: false,
       withAclMeta: false,
     })

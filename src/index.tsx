@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { captureAuthenticationCallback } from "@nocobase/portal-sdk/auth";
+import { captureAuthenticationCallback } from "@digiforce/portal-sdk/auth";
 import {
   NocoBaseErrorBoundary,
   NocoBaseErrorFallback,

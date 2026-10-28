@@ -20,19 +20,15 @@ import type {
   UpdateManyResponse,
   UpdateParams,
   UpdateResponse,
-} from "@refinedev/core";
+} from '@refinedev/core';
 
-import { nocobaseClient } from "../client/index.ts";
-import {
-  resolveAclDataSourceKey,
-  type ResourceAcl,
-  updateRecordPermissions,
-} from "../acl/index.ts";
+import { digiforceClient } from '../client/index.ts';
+import { resolveAclDataSourceKey, type ResourceAcl, updateRecordPermissions } from '../acl/index.ts';
 
-type NocoBaseListResponse<T> = {
+type DigiforceListResponse<T> = {
   rows?: T[];
   count?: number;
-  data?: T[] | NocoBaseListResponse<T>;
+  data?: T[] | DigiforceListResponse<T>;
   meta?: {
     count?: number;
     allowedActions?: Record<string, Array<string | number>>;
@@ -40,14 +36,14 @@ type NocoBaseListResponse<T> = {
   allowedActions?: Record<string, Array<string | number>>;
 };
 
-type NocoBaseGetResponse<T> = {
+type DigiforceGetResponse<T> = {
   data?: T;
   meta?: {
     allowedActions?: Record<string, Array<string | number>>;
   };
 };
 
-type NocoBaseMeta = MetaQuery & {
+type DigiforceMeta = MetaQuery & {
   appends?: string[];
   token?: string;
   dataSourceKey?: string;
@@ -55,37 +51,35 @@ type NocoBaseMeta = MetaQuery & {
   acl?: ResourceAcl;
 };
 
-type NocoBaseFilter = Record<string, unknown>;
+type DigiforceFilter = Record<string, unknown>;
 
-const toNocoBaseFilter = (
-  filters: GetListParams["filters"] = []
-): NocoBaseFilter | undefined => {
-  const filterItems: NocoBaseFilter[] = filters.flatMap((filter) => {
-    if ("field" in filter) {
+const toDigiforceFilter = (filters: GetListParams['filters'] = []): DigiforceFilter | undefined => {
+  const filterItems: DigiforceFilter[] = filters.flatMap((filter) => {
+    if ('field' in filter) {
       const operatorMap: Record<string, string> = {
-        eq: "$eq",
-        ne: "$ne",
-        lt: "$lt",
-        gt: "$gt",
-        lte: "$lte",
-        gte: "$gte",
-        in: "$in",
-        nin: "$notIn",
-        contains: "$includes",
-        containss: "$includes",
-        startswith: "$startsWith",
-        endswith: "$endsWith",
-        null: "$null",
-        nnull: "$notNull",
-        between: "$between",
-        nbetween: "$notBetween",
+        eq: '$eq',
+        ne: '$ne',
+        lt: '$lt',
+        gt: '$gt',
+        lte: '$lte',
+        gte: '$gte',
+        in: '$in',
+        nin: '$notIn',
+        contains: '$includes',
+        containss: '$includes',
+        startswith: '$startsWith',
+        endswith: '$endsWith',
+        null: '$null',
+        nnull: '$notNull',
+        between: '$between',
+        nbetween: '$notBetween',
       };
 
-      const operator = operatorMap[filter.operator] ?? "$eq";
+      const operator = operatorMap[filter.operator] ?? '$eq';
       return [{ [filter.field]: { [operator]: filter.value } }];
     }
 
-    const value = toNocoBaseFilter(filter.value as GetListParams["filters"]);
+    const value = toDigiforceFilter(filter.value as GetListParams['filters']);
     return value ? [{ [`$${filter.operator}`]: value.$and ?? [value] }] : [];
   });
 
@@ -97,40 +91,36 @@ const request = async <T>(
   resource: string,
   action: string,
   options: {
-    method?: "GET" | "POST";
+    method?: 'GET' | 'POST';
     query?: Record<string, string | number | undefined>;
     body?: unknown;
-    meta?: NocoBaseMeta;
+    meta?: DigiforceMeta;
     unwrapData?: boolean;
-  } = {}
+  } = {},
 ): Promise<T> => {
   const dataSourceKey = resolveAclDataSourceKey(options.meta);
   const fields = Array.isArray(options.meta?.fields)
-    ? options.meta.fields.filter(
-        (field): field is string => typeof field === "string"
-      )
+    ? options.meta.fields.filter((field): field is string => typeof field === 'string')
     : undefined;
-  return nocobaseClient.action<T>(resource, action, {
+  return digiforceClient.action<T>(resource, action, {
     method: options.method,
     query: {
       ...options.query,
-      ...(options.meta?.appends?.length
-        ? { "appends[]": options.meta.appends }
-        : {}),
-      ...(fields?.length ? { "fields[]": fields } : {}),
+      ...(options.meta?.appends?.length ? { 'appends[]': options.meta.appends } : {}),
+      ...(fields?.length ? { 'fields[]': fields } : {}),
     },
     body: options.body,
     token: options.meta?.token,
-    headers: dataSourceKey ? { "X-Data-Source": dataSourceKey } : undefined,
-    unwrap: options.unwrapData === false ? "none" : "data",
+    headers: dataSourceKey ? { 'X-Data-Source': dataSourceKey } : undefined,
+    unwrap: options.unwrapData === false ? 'none' : 'data',
   });
 };
 
-const getAllowedActions = (response: NocoBaseListResponse<unknown>) =>
+const getAllowedActions = (response: DigiforceListResponse<unknown>) =>
   response.meta?.allowedActions ??
   response.allowedActions ??
   (!Array.isArray(response.data) && response.data
-    ? response.data.meta?.allowedActions ?? response.data.allowedActions
+    ? (response.data.meta?.allowedActions ?? response.data.allowedActions)
     : undefined);
 
 const cacheAllowedActions = <TData extends BaseRecord>({
@@ -141,17 +131,14 @@ const cacheAllowedActions = <TData extends BaseRecord>({
 }: {
   resource: string;
   records: TData[];
-  response: NocoBaseListResponse<TData>;
-  meta?: NocoBaseMeta;
+  response: DigiforceListResponse<TData>;
+  meta?: DigiforceMeta;
 }) => {
-  const idField = meta?.idField ?? "id";
+  const idField = meta?.idField ?? 'id';
   const dataSourceKey = resolveAclDataSourceKey(meta);
   const recordIds = records
     .map((record) => record[idField])
-    .filter(
-      (id): id is string | number =>
-        typeof id === "string" || typeof id === "number"
-    );
+    .filter((id): id is string | number => typeof id === 'string' || typeof id === 'number');
   return updateRecordPermissions({
     dataSourceKey,
     resource,
@@ -160,9 +147,8 @@ const cacheAllowedActions = <TData extends BaseRecord>({
   });
 };
 
-const getResponseData = <TData extends BaseRecord>(
-  response: NocoBaseGetResponse<TData>
-) => response.data ?? (response as TData);
+const getResponseData = <TData extends BaseRecord>(response: DigiforceGetResponse<TData>) =>
+  response.data ?? (response as TData);
 
 export const dataProvider: DataProvider = {
   async getList<TData extends BaseRecord = BaseRecord>({
@@ -174,28 +160,22 @@ export const dataProvider: DataProvider = {
   }: GetListParams): Promise<GetListResponse<TData>> {
     const page = pagination?.currentPage ?? 1;
     const pageSize = pagination?.pageSize ?? 10;
-    const filter = toNocoBaseFilter(filters);
-    const sort = sorters?.map(
-      (sorter) => `${sorter.order === "desc" ? "-" : ""}${sorter.field}`
-    );
-    const response = await request<NocoBaseListResponse<TData>>(
-      resource,
-      "list",
-      {
-        query: {
-          page,
-          pageSize,
-          ...(filter ? { filter: JSON.stringify(filter) } : {}),
-          ...(sort?.length ? { sort: sort.join(",") } : {}),
-        },
-        meta,
-        unwrapData: false,
-      }
-    );
+    const filter = toDigiforceFilter(filters);
+    const sort = sorters?.map((sorter) => `${sorter.order === 'desc' ? '-' : ''}${sorter.field}`);
+    const response = await request<DigiforceListResponse<TData>>(resource, 'list', {
+      query: {
+        page,
+        pageSize,
+        ...(filter ? { filter: JSON.stringify(filter) } : {}),
+        ...(sort?.length ? { sort: sort.join(',') } : {}),
+      },
+      meta,
+      unwrapData: false,
+    });
 
     const list = Array.isArray(response.data)
       ? { rows: response.data, count: response.meta?.count }
-      : response.data ?? response;
+      : (response.data ?? response);
     const records = list.rows ?? [];
     cacheAllowedActions({ resource, records, response, meta });
 
@@ -211,20 +191,16 @@ export const dataProvider: DataProvider = {
     id,
     meta,
   }: GetOneParams): Promise<GetOneResponse<TData>> {
-    const response = await request<NocoBaseGetResponse<TData>>(
-      resource,
-      "get",
-      {
-        query: { filterByTk: id },
-        meta,
-        unwrapData: false,
-      }
-    );
+    const response = await request<DigiforceGetResponse<TData>>(resource, 'get', {
+      query: { filterByTk: id },
+      meta,
+      unwrapData: false,
+    });
     const data = getResponseData(response);
     cacheAllowedActions({
       resource,
       records: [data],
-      response: response as NocoBaseListResponse<TData>,
+      response: response as DigiforceListResponse<TData>,
       meta,
     });
     return {
@@ -239,74 +215,65 @@ export const dataProvider: DataProvider = {
   }: GetManyParams): Promise<GetManyResponse<TData>> {
     const responses = await Promise.all(
       ids.map((id) =>
-        request<NocoBaseGetResponse<TData>>(resource, "get", {
+        request<DigiforceGetResponse<TData>>(resource, 'get', {
           query: { filterByTk: id },
           meta,
           unwrapData: false,
-        })
-      )
+        }),
+      ),
     );
     const data = responses.map(getResponseData);
     responses.forEach((response, index) => {
       cacheAllowedActions({
         resource,
         records: [data[index]],
-        response: response as NocoBaseListResponse<TData>,
+        response: response as DigiforceListResponse<TData>,
         meta,
       });
     });
     return { data };
   },
 
-  async create<
-    TData extends BaseRecord = BaseRecord,
-    TVariables = Record<string, unknown>
-  >({
+  async create<TData extends BaseRecord = BaseRecord, TVariables = Record<string, unknown>>({
     resource,
     variables,
     meta,
   }: CreateParams<TVariables>): Promise<CreateResponse<TData>> {
     return {
-      data: await request<TData>(resource, "create", {
-        method: "POST",
+      data: await request<TData>(resource, 'create', {
+        method: 'POST',
         body: variables,
         meta,
       }),
     };
   },
 
-  async createMany<
-    TData extends BaseRecord = BaseRecord,
-    TVariables = Record<string, unknown>
-  >({
+  async createMany<TData extends BaseRecord = BaseRecord, TVariables = Record<string, unknown>>({
     resource,
     variables,
     meta,
   }: CreateManyParams<TVariables>): Promise<CreateManyResponse<TData>> {
     const data = await Promise.all(
       variables.map((values) =>
-        request<TData>(resource, "create", {
-          method: "POST",
+        request<TData>(resource, 'create', {
+          method: 'POST',
           body: values,
           meta,
-        })
-      )
+        }),
+      ),
     );
     return { data };
   },
 
-  async update<
-    TData extends BaseRecord = BaseRecord,
-    TVariables = Record<string, unknown>
-  >({
+  async update<TData extends BaseRecord = BaseRecord, TVariables = Record<string, unknown>>({
     resource,
     id,
     variables,
     meta,
   }: UpdateParams<TVariables>): Promise<UpdateResponse<TData>> {
     return {
-      data: await request<TData>(resource, "update", {
-        method: "POST",
+      data: await request<TData>(resource, 'update', {
+        method: 'POST',
         query: { filterByTk: id },
         body: variables,
         meta,
@@ -314,10 +281,7 @@ export const dataProvider: DataProvider = {
     };
   },
 
-  async updateMany<
-    TData extends BaseRecord = BaseRecord,
-    TVariables = Record<string, unknown>
-  >({
+  async updateMany<TData extends BaseRecord = BaseRecord, TVariables = Record<string, unknown>>({
     resource,
     ids,
     variables,
@@ -325,53 +289,47 @@ export const dataProvider: DataProvider = {
   }: UpdateManyParams<TVariables>): Promise<UpdateManyResponse<TData>> {
     const data = await Promise.all(
       ids.map((id) =>
-        request<TData>(resource, "update", {
-          method: "POST",
+        request<TData>(resource, 'update', {
+          method: 'POST',
           query: { filterByTk: id },
           body: variables,
           meta,
-        })
-      )
+        }),
+      ),
     );
     return { data };
   },
 
-  async deleteOne<
-    TData extends BaseRecord = BaseRecord,
-    TVariables = Record<string, unknown>
-  >({
+  async deleteOne<TData extends BaseRecord = BaseRecord, TVariables = Record<string, unknown>>({
     resource,
     id,
     meta,
   }: DeleteOneParams<TVariables>): Promise<DeleteOneResponse<TData>> {
     return {
-      data: await request<TData>(resource, "destroy", {
-        method: "POST",
+      data: await request<TData>(resource, 'destroy', {
+        method: 'POST',
         query: { filterByTk: id },
         meta,
       }),
     };
   },
 
-  async deleteMany<
-    TData extends BaseRecord = BaseRecord,
-    TVariables = Record<string, unknown>
-  >({
+  async deleteMany<TData extends BaseRecord = BaseRecord, TVariables = Record<string, unknown>>({
     resource,
     ids,
     meta,
   }: DeleteManyParams<TVariables>): Promise<DeleteManyResponse<TData>> {
     const data = await Promise.all(
       ids.map((id) =>
-        request<TData>(resource, "destroy", {
-          method: "POST",
+        request<TData>(resource, 'destroy', {
+          method: 'POST',
           query: { filterByTk: id },
           meta,
-        })
-      )
+        }),
+      ),
     );
     return { data };
   },
 
-  getApiUrl: () => nocobaseClient.getApiUrl(),
+  getApiUrl: () => digiforceClient.getApiUrl(),
 };

@@ -2,8 +2,8 @@ import { type HttpError, useOne, useTranslate } from "@refinedev/core";
 import { useForm } from "@refinedev/react-hook-form";
 import { useMemo } from "react";
 import { useParams } from "react-router";
-import { useCanAccess } from "@nocobase/portal-sdk/acl";
-import { useRouteSurfaceClose } from "@nocobase/portal-sdk/routing";
+import { useCanAccess } from "@digiforce/portal-sdk/acl";
+import { useRouteSurfaceClose } from "@digiforce/portal-sdk/routing";
 
 import { AccessDenied } from "@/components/access-control/access-denied";
 import { CanAccess } from "@/components/access-control/can-access";

@@ -6,7 +6,7 @@ import { defineConfig, loadEnv } from "vite";
 import {
   portalRawIndexHtmlPlugin,
   portalSdkCompatibilityPlugin,
-} from "@nocobase/portal-sdk/vite";
+} from "@digiforce/portal-sdk/vite";
 
 const portalTemplate = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, "package.json"), "utf8")
@@ -42,7 +42,8 @@ const normalizeBase = (base?: string) => {
 // https://vite.dev/config/
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  const proxyTarget = getDefaultProxyTarget(env.NOCOBASE_API_URL);
+  const apiUrl = env.DIGIFORCE_API_URL || env.NOCOBASE_API_URL;
+  const proxyTarget = getDefaultProxyTarget(apiUrl);
   const proxyOrigin = proxyTarget
     ? (() => {
         try {
@@ -53,7 +54,9 @@ export default defineConfig(({ command, mode }) => {
       })()
     : undefined;
 
-  const portalBase = normalizeBase(env.NOCOBASE_PORTAL_BASE);
+  const portalBase = normalizeBase(
+    env.DIGIFORCE_PORTAL_BASE || env.NOCOBASE_PORTAL_BASE
+  );
   const registrySourceRoot = path.resolve(__dirname, "./registry");
   const extensionsRoot = fs.existsSync(registrySourceRoot)
     ? registrySourceRoot
@@ -68,7 +71,7 @@ export default defineConfig(({ command, mode }) => {
       __PORTAL_TEMPLATE_NAME__: JSON.stringify(portalTemplate.displayName),
       __PORTAL_TEMPLATE_VERSION__: JSON.stringify(portalTemplate.version),
     },
-    envPrefix: ["VITE_", "NOCOBASE_", "API_CLIENT_"],
+    envPrefix: ["VITE_", "DIGIFORCE_", "NOCOBASE_", "API_CLIENT_"],
     plugins: [
       portalSdkCompatibilityPlugin({ root: __dirname }),
       react(),
@@ -84,7 +87,7 @@ export default defineConfig(({ command, mode }) => {
     server: proxyTarget
       ? {
           proxy: {
-            [getProxyPath(env.NOCOBASE_API_URL)]: {
+            [getProxyPath(apiUrl)]: {
               target: proxyTarget,
               changeOrigin: true,
               secure: false,

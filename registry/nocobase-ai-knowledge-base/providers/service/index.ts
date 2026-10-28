@@ -1,4 +1,4 @@
-import { nocobaseClient } from "@nocobase/portal-sdk/client";
+import { nocobaseClient } from "@digiforce/portal-sdk/client";
 import { createKnowledgeBaseService } from "./knowledge-base-factory";
 
 export { createKnowledgeBaseService } from "./knowledge-base-factory";

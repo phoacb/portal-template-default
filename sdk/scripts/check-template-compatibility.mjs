@@ -41,7 +41,9 @@ const findProjectPackage = () => {
         fallback ??= candidate;
         const pkg = candidate.value;
         if (
+          pkg?.digiforce?.defaultTemplateVersion ||
           pkg?.nocobase?.defaultTemplateVersion ||
+          pkg?.name === "@digiforce/portal-template-default" ||
           pkg?.name === "@nocobase/portal-template-default"
         ) {
           return candidate;
@@ -60,31 +62,33 @@ export const checkTemplateCompatibility = ({ silent = false } = {}) => {
   const sdkPackage = readPackage(sdkRoot)?.value;
   const projectPackage = findProjectPackage();
   const supportedRange =
-    sdkPackage?.nocobase?.supportedDefaultTemplateRange;
+    sdkPackage?.digiforce?.supportedDefaultTemplateRange;
   const project = projectPackage?.value;
   const templateVersion =
+    project?.digiforce?.defaultTemplateVersion ??
     project?.nocobase?.defaultTemplateVersion ??
-    (project?.name === "@nocobase/portal-template-default"
+    (project?.name === "@digiforce/portal-template-default" ||
+    project?.name === "@nocobase/portal-template-default"
       ? project.version
       : undefined);
 
   if (!supportedRange) {
     throw new Error(
-      "@nocobase/portal-sdk does not declare nocobase.supportedDefaultTemplateRange."
+      "@digiforce/portal-sdk does not declare digiforce.supportedDefaultTemplateRange."
     );
   }
   if (!templateVersion) {
     throw new Error(
       [
-        "Unable to determine the NocoBase Default Template version.",
+        "Unable to determine the Digiforce Default Template version.",
         `Project: ${projectPackage?.path ?? "not found"}`,
-        "Add nocobase.defaultTemplateVersion to the project package.json before installing the SDK.",
+        "Add digiforce.defaultTemplateVersion to the project package.json before installing the SDK.",
       ].join("\n")
     );
   }
   if (!semver.valid(templateVersion)) {
     throw new Error(
-      `Invalid nocobase.defaultTemplateVersion: ${templateVersion}`
+      `Invalid digiforce.defaultTemplateVersion: ${templateVersion}`
     );
   }
   if (!semver.validRange(supportedRange)) {
@@ -97,11 +101,11 @@ export const checkTemplateCompatibility = ({ silent = false } = {}) => {
   if (!compatible) {
     throw new Error(
       [
-        "Incompatible NocoBase Portal SDK.",
+        "Incompatible Digiforce Portal SDK.",
         `Current Default Template: ${templateVersion}`,
         `Installing Portal SDK: ${sdkPackage.version}`,
         `Supported Default Template range: ${supportedRange}`,
-        "Upgrade the base template first, or install a compatible @nocobase/portal-sdk version.",
+        "Upgrade the base template first, or install a compatible @digiforce/portal-sdk version.",
       ].join("\n")
     );
   }

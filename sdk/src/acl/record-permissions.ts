@@ -1,4 +1,4 @@
-import type { BaseKey } from "@refinedev/core";
+import type { BaseKey } from '@refinedev/core';
 
 type RecordPermissionEntry = {
   allowedIds: Map<string, Set<string>>;
@@ -8,8 +8,7 @@ type RecordPermissionEntry = {
 let permissions = new Map<string, RecordPermissionEntry>();
 const listeners = new Set<() => void>();
 
-const getKey = (dataSourceKey: string, resource: string) =>
-  `${dataSourceKey}:${resource}`;
+const getKey = (dataSourceKey: string, resource: string) => `${dataSourceKey}:${resource}`;
 
 export const clearRecordPermissions = () => {
   if (!permissions.size) return;
@@ -25,7 +24,7 @@ export const subscribeRecordPermissions = (listener: () => void) => {
 export const getRecordPermissions = () => permissions;
 
 export const updateRecordPermissions = ({
-  dataSourceKey = "main",
+  dataSourceKey = 'main',
   resource,
   recordIds,
   allowedActions,
@@ -41,18 +40,8 @@ export const updateRecordPermissions = ({
   const existingEntry = permissions.get(key);
   const entry = existingEntry
     ? {
-        allowedIds: new Map(
-          Array.from(existingEntry.allowedIds, ([action, ids]) => [
-            action,
-            new Set(ids),
-          ])
-        ),
-        knownIds: new Map(
-          Array.from(existingEntry.knownIds, ([action, ids]) => [
-            action,
-            new Set(ids),
-          ])
-        ),
+        allowedIds: new Map(Array.from(existingEntry.allowedIds, ([action, ids]) => [action, new Set(ids)])),
+        knownIds: new Map(Array.from(existingEntry.knownIds, ([action, ids]) => [action, new Set(ids)])),
       }
     : {
         allowedIds: new Map<string, Set<string>>(),
@@ -60,15 +49,9 @@ export const updateRecordPermissions = ({
       };
   const normalizedIds = new Set(recordIds.map(String));
   const normalizedAllowedActions = new Map(
-    Object.entries(allowedActions).map(([action, ids]) => [
-      action,
-      new Set(ids.map(String)),
-    ])
+    Object.entries(allowedActions).map(([action, ids]) => [action, new Set(ids.map(String))]),
   );
-  const actionNames = new Set([
-    ...entry.knownIds.keys(),
-    ...normalizedAllowedActions.keys(),
-  ]);
+  const actionNames = new Set([...entry.knownIds.keys(), ...normalizedAllowedActions.keys()]);
   let changed = false;
 
   for (const action of actionNames) {
@@ -80,9 +63,7 @@ export const updateRecordPermissions = ({
       const previousKnown = Boolean(previousKnownIds?.has(id));
       if (
         previousKnown !== nextKnown ||
-        (nextKnown &&
-          Boolean(previousAllowedIds?.has(id)) !==
-            Boolean(nextAllowedIds?.has(id)))
+        (nextKnown && Boolean(previousAllowedIds?.has(id)) !== Boolean(nextAllowedIds?.has(id)))
       ) {
         changed = true;
       }
@@ -116,7 +97,7 @@ export const updateRecordPermissions = ({
 };
 
 export const getRecordActionPermission = ({
-  dataSourceKey = "main",
+  dataSourceKey = 'main',
   resource,
   action,
   id,
@@ -132,9 +113,7 @@ export const getRecordActionPermission = ({
   if (!entry) return undefined;
 
   const canonicalAction = actionAlias?.[action] ?? action;
-  const targetAction = entry.knownIds.has(canonicalAction)
-    ? canonicalAction
-    : action;
+  const targetAction = entry.knownIds.has(canonicalAction) ? canonicalAction : action;
   const recordId = String(id);
   if (!entry.knownIds.get(targetAction)?.has(recordId)) return undefined;
   return Boolean(entry.allowedIds.get(targetAction)?.has(recordId));

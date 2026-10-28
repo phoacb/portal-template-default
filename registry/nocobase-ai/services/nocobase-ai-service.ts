@@ -1,4 +1,4 @@
-import { nocobaseClient, type NocoBaseClient } from "@nocobase/portal-sdk/client";
+import { nocobaseClient, type NocoBaseClient } from "@digiforce/portal-sdk/client";
 import type {
   AIChatMessage,
   AIConversation,

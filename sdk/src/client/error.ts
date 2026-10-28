@@ -1,4 +1,4 @@
-export class NocoBaseHttpError extends Error {
+export class DigiforceHttpError extends Error {
   readonly status: number;
   readonly payload: unknown;
   readonly code?: string;
@@ -16,15 +16,15 @@ export class NocoBaseHttpError extends Error {
     requestId?: string;
   }) {
     super(message);
-    this.name = "NocoBaseHttpError";
+    this.name = 'DigiforceHttpError';
     this.status = status;
     this.payload = payload;
-    this.code = getNocoBaseErrorDetail(payload)?.code;
+    this.code = getDigiforceErrorDetail(payload)?.code;
     this.requestId = requestId;
   }
 }
 
-export type NocoBaseErrorDetail = {
+export type DigiforceErrorDetail = {
   code?: string;
   command?: {
     name?: string;
@@ -38,39 +38,29 @@ export type NocoBaseErrorDetail = {
   [key: string]: unknown;
 };
 
-export type NocoBaseRuntimeErrorSource =
-  | "http"
-  | "network"
-  | "websocket";
+export type DigiforceRuntimeErrorSource = 'http' | 'network' | 'websocket';
 
-export type NocoBaseRuntimeError = NocoBaseErrorDetail & {
+export type DigiforceRuntimeError = DigiforceErrorDetail & {
   payload?: unknown;
-  source: NocoBaseRuntimeErrorSource;
+  source: DigiforceRuntimeErrorSource;
 };
 
-export const isNocoBaseLifecycleError = (error: NocoBaseErrorDetail) =>
-  error.maintaining === true ||
-  error.code?.startsWith("APP_") === true ||
-  error.code?.startsWith("COMMAND_") === true;
+export const isDigiforceLifecycleError = (error: DigiforceErrorDetail) =>
+  error.maintaining === true || error.code?.startsWith('APP_') === true || error.code?.startsWith('COMMAND_') === true;
 
-export const isNocoBaseServiceError = (error: NocoBaseErrorDetail) =>
-  isNocoBaseLifecycleError(error) ||
-  (error.status !== undefined && [502, 503, 504].includes(error.status));
+export const isDigiforceServiceError = (error: DigiforceErrorDetail) =>
+  isDigiforceLifecycleError(error) || (error.status !== undefined && [502, 503, 504].includes(error.status));
 
 const asRecord = (value: unknown) =>
-  value && typeof value === "object"
-    ? (value as Record<string, unknown>)
-    : undefined;
+  value && typeof value === 'object' ? (value as Record<string, unknown>) : undefined;
 
-const asErrorDetail = (value: unknown): NocoBaseErrorDetail | undefined => {
+const asErrorDetail = (value: unknown): DigiforceErrorDetail | undefined => {
   const record = asRecord(value);
   if (!record) return undefined;
-  return record as NocoBaseErrorDetail;
+  return record as DigiforceErrorDetail;
 };
 
-export function getNocoBaseErrorDetail(
-  payload: unknown
-): NocoBaseErrorDetail | undefined {
+export function getDigiforceErrorDetail(payload: unknown): DigiforceErrorDetail | undefined {
   const value = asRecord(payload);
   if (!value) return undefined;
 
@@ -85,23 +75,19 @@ export function getNocoBaseErrorDetail(
   const firstMessage = asErrorDetail(messages?.[0]);
   if (firstMessage) return firstMessage;
 
-  if (
-    typeof value.code === "string" ||
-    typeof value.message === "string" ||
-    typeof value.maintaining === "boolean"
-  ) {
-    return value as NocoBaseErrorDetail;
+  if (typeof value.code === 'string' || typeof value.message === 'string' || typeof value.maintaining === 'boolean') {
+    return value as DigiforceErrorDetail;
   }
 
   return undefined;
 }
 
-export function normalizeNocoBaseRuntimeError(
+export function normalizeDigiforceRuntimeError(
   error: unknown,
-  source: NocoBaseRuntimeErrorSource = "http"
-): NocoBaseRuntimeError {
-  if (error instanceof NocoBaseHttpError) {
-    const detail = getNocoBaseErrorDetail(error.payload);
+  source: DigiforceRuntimeErrorSource = 'http',
+): DigiforceRuntimeError {
+  if (error instanceof DigiforceHttpError) {
+    const detail = getDigiforceErrorDetail(error.payload);
     return {
       ...detail,
       code: detail?.code ?? error.code,
@@ -113,11 +99,11 @@ export function normalizeNocoBaseRuntimeError(
     };
   }
 
-  const detail = getNocoBaseErrorDetail(error);
+  const detail = getDigiforceErrorDetail(error);
   if (detail) {
     return {
       ...detail,
-      message: detail.message ?? "NocoBase request failed",
+      message: detail.message ?? 'Digiforce request failed',
       payload: error,
       source,
     };
@@ -132,21 +118,17 @@ export function normalizeNocoBaseRuntimeError(
   }
 
   return {
-    message:
-      typeof error === "string" && error
-        ? error
-        : "NocoBase request failed",
+    message: typeof error === 'string' && error ? error : 'Digiforce request failed',
     payload: error,
     source,
   };
 }
 
-export const getNocoBaseErrorCode = (error: unknown) =>
-  normalizeNocoBaseRuntimeError(error).code;
+export const getDigiforceErrorCode = (error: unknown) => normalizeDigiforceRuntimeError(error).code;
 
-export const getNocoBaseErrorMessage = (payload: unknown, fallback: string) => {
-  if (typeof payload === "string") return payload || fallback;
-  if (!payload || typeof payload !== "object") return fallback;
+export const getDigiforceErrorMessage = (payload: unknown, fallback: string) => {
+  if (typeof payload === 'string') return payload || fallback;
+  if (!payload || typeof payload !== 'object') return fallback;
   const value = payload as {
     message?: string;
     error?: { message?: string };
@@ -154,6 +136,19 @@ export const getNocoBaseErrorMessage = (payload: unknown, fallback: string) => {
     messages?: Array<{ message?: string } | string>;
   };
   const first = value.errors?.[0] ?? value.messages?.[0];
-  if (typeof first === "string") return first;
+  if (typeof first === 'string') return first;
   return first?.message ?? value.error?.message ?? value.message ?? fallback;
 };
+
+/** Backward-compatible aliases */
+export const NocoBaseHttpError = DigiforceHttpError;
+export type NocoBaseHttpError = DigiforceHttpError;
+export type NocoBaseErrorDetail = DigiforceErrorDetail;
+export type NocoBaseRuntimeErrorSource = DigiforceRuntimeErrorSource;
+export type NocoBaseRuntimeError = DigiforceRuntimeError;
+export const isNocoBaseLifecycleError = isDigiforceLifecycleError;
+export const isNocoBaseServiceError = isDigiforceServiceError;
+export const getNocoBaseErrorDetail = getDigiforceErrorDetail;
+export const normalizeNocoBaseRuntimeError = normalizeDigiforceRuntimeError;
+export const getNocoBaseErrorCode = getDigiforceErrorCode;
+export const getNocoBaseErrorMessage = getDigiforceErrorMessage;

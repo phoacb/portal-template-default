@@ -25,7 +25,7 @@ import { CircleAlert, CircleFadingArrowUpIcon, FileText, RefreshCw } from "lucid
 import { LoadingState } from "@/components/app-shell/loading-state";
 import { Empty, EmptyDescription, EmptyHeader, EmptyMedia } from "@/components/ui/empty";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { nocobaseClient } from "@nocobase/portal-sdk/client";
+import { nocobaseClient } from "@digiforce/portal-sdk/client";
 import {
   PagePagination,
   DocumentTable,

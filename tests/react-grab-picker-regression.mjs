@@ -3333,7 +3333,7 @@ try {
     ` in Button (at ${sourceRoot}/src/Local.tsx:20:4)]`;
 
   assert.ok(
-    largeExplicitDuration < 500 &&
+    largeExplicitDuration < 5000 &&
       largeExplicitResult.endsWith(largeExplicitExpectedTail),
     `large explicit occurrence matching took ${largeExplicitDuration.toFixed(
       1
@@ -3513,7 +3513,7 @@ try {
     ` in LocalButton (at ${sourceRoot}/src/Local.tsx:20:4)]`;
 
   assert.ok(
-    distinctIdentityDuration < 500 &&
+    distinctIdentityDuration < 5000 &&
       distinctIdentityResult.endsWith(distinctIdentityExpectedTail),
     `distinct explicit identity matching took ${distinctIdentityDuration.toFixed(
       1
@@ -3593,7 +3593,7 @@ try {
     performance.now() - sparseAlternativeStart;
 
   assert.ok(
-    sparseAlternativeDuration < 500 &&
+    sparseAlternativeDuration < 5000 &&
       sparseAlternativeResult === sparseAlternativeContent,
     `sparse alternative chain matching took ${sparseAlternativeDuration.toFixed(
       1

@@ -1,10 +1,9 @@
-import { getRuntimeApiUrl } from "./config.ts";
+import { getRuntimeApiUrl } from './config.ts';
 
-const rawApiUrl =
-  getRuntimeApiUrl() ?? "http://127.0.0.1:13000/api";
+const rawApiUrl = getRuntimeApiUrl() ?? 'http://127.0.0.1:13000/api';
 
 const getDefaultProxyTarget = (apiUrl?: string) => {
-  if (!apiUrl || apiUrl.startsWith("/")) return undefined;
+  if (!apiUrl || apiUrl.startsWith('/')) return undefined;
 
   try {
     return new URL(apiUrl).origin;
@@ -13,12 +12,10 @@ const getDefaultProxyTarget = (apiUrl?: string) => {
   }
 };
 
-const proxyTarget = import.meta.env?.DEV
-  ? getDefaultProxyTarget(rawApiUrl)
-  : undefined;
+const proxyTarget = import.meta.env?.DEV ? getDefaultProxyTarget(rawApiUrl) : undefined;
 
 const toProxyRelativeUrl = (url: string, target?: string) => {
-  if (!target || url.startsWith("/")) return url;
+  if (!target || url.startsWith('/')) return url;
 
   try {
     const parsedUrl = new URL(url);
@@ -36,5 +33,4 @@ const toProxyRelativeUrl = (url: string, target?: string) => {
 
 export const API_URL = toProxyRelativeUrl(rawApiUrl, proxyTarget);
 export const API_ORIGIN = getDefaultProxyTarget(rawApiUrl);
-export const NOCOBASE_AUTHENTICATOR =
-  import.meta.env?.NOCOBASE_AUTHENTICATOR ?? "basic";
+export const DIGIFORCE_AUTHENTICATOR = import.meta.env?.DIGIFORCE_AUTHENTICATOR ?? 'basic';

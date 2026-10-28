@@ -1,4 +1,4 @@
-import type { AclState, RoleMode } from "@nocobase/portal-sdk/acl";
+import type { AclState, RoleMode } from "@digiforce/portal-sdk/acl";
 
 export type RoleSwitcherContext = {
   currentRole?: string;

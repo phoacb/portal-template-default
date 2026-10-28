@@ -1,13 +1,13 @@
 import { LogIn } from "lucide-react";
 
-import type { AuthenticatorComponentProps } from "@nocobase/portal-sdk/auth";
+import type { AuthenticatorComponentProps } from "@digiforce/portal-sdk/auth";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
 } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { resolveTranslatableText } from "@nocobase/portal-sdk/i18n";
+import { resolveTranslatableText } from "@digiforce/portal-sdk/i18n";
 
 import { useOidcSignIn } from "./use-oidc-sign-in";
 

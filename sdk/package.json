@@ -1,12 +1,12 @@
 {
-  "name": "@nocobase/portal-sdk",
+  "name": "@digiforce/portal-sdk",
   "version": "2.1.0",
-  "description": "Stable runtime and extension APIs for NocoBase Portal applications.",
+  "description": "Stable runtime and extension APIs for Digiforce Portal applications.",
   "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nocobase/portal-template-default.git",
+    "url": "git+https://github.com/digiforce/dgf.git",
     "directory": "sdk"
   },
   "files": [
@@ -63,6 +63,9 @@
   },
   "bin": {
     "portal-sdk": "./scripts/cli.mjs"
+  },
+  "digiforce": {
+    "supportedDefaultTemplateRange": ">=3.0.0 <4.0.0"
   },
   "nocobase": {
     "supportedDefaultTemplateRange": ">=3.0.0 <4.0.0"

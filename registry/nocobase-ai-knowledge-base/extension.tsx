@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import type { AppExtension } from "@nocobase/portal-sdk/extensions";
-import { defineAppRoutes } from "@nocobase/portal-sdk/routing";
+import type { AppExtension } from "@digiforce/portal-sdk/extensions";
+import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { BookOpenText, Boxes, FileText, PanelsTopLeft, Search, Upload } from "lucide-react";
 import "./locales";
 

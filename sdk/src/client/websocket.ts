@@ -1,73 +1,59 @@
-import {
-  getNocoBaseAppName,
-  resolveNocoBaseServerUrl,
-} from "../runtime/config.ts";
-import { authSession } from "./auth-session.ts";
+import { getDigiforceAppName, resolveDigiforceServerUrl } from '../runtime/config.ts';
+import { authSession } from './auth-session.ts';
 
-export type NocoBaseWebSocketMessage = {
+export type DigiforceWebSocketMessage = {
   payload?: Record<string, unknown>;
   type?: string;
   [key: string]: unknown;
 };
 
-export type NocoBaseWebSocketOptions = {
+export type DigiforceWebSocketOptions = {
   pingInterval?: number;
   reconnectMaxInterval?: number;
   url?: string;
   wsPath?: string;
 };
 
-type MessageListener = (message: NocoBaseWebSocketMessage) => void;
+type MessageListener = (message: DigiforceWebSocketMessage) => void;
 type OpenListener = () => void;
 
 type WebSocketRuntime = Window & {
-  NOCOBASE_WS_PATH?: string;
-  NOCOBASE_WS_URL?: string;
-  __nocobase_ws_path__?: string;
-  __nocobase_ws_url__?: string;
+  DIGIFORCE_WS_PATH?: string;
+  DIGIFORCE_WS_URL?: string;
+  __digiforce_ws_path__?: string;
+  __digiforce_ws_url__?: string;
 };
 
-const getRuntimeWindow = () =>
-  typeof window === "undefined" ? undefined : (window as WebSocketRuntime);
+const getRuntimeWindow = () => (typeof window === 'undefined' ? undefined : (window as WebSocketRuntime));
 
 const getRuntimeWebSocketUrl = () => {
   const runtime = getRuntimeWindow();
-  return (
-    runtime?.NOCOBASE_WS_URL ??
-    runtime?.__nocobase_ws_url__ ??
-    import.meta.env?.NOCOBASE_WS_URL
-  );
+  return runtime?.DIGIFORCE_WS_URL ?? runtime?.__digiforce_ws_url__ ?? import.meta.env?.DIGIFORCE_WS_URL;
 };
 
 const getRuntimeWebSocketPath = () => {
   const runtime = getRuntimeWindow();
-  return (
-    runtime?.NOCOBASE_WS_PATH ??
-    runtime?.__nocobase_ws_path__ ??
-    import.meta.env?.NOCOBASE_WS_PATH
-  );
+  return runtime?.DIGIFORCE_WS_PATH ?? runtime?.__digiforce_ws_path__ ?? import.meta.env?.DIGIFORCE_WS_PATH;
 };
 
-export function resolveNocoBaseWebSocketUrl(
-  options: NocoBaseWebSocketOptions = {}
-) {
-  if (typeof window === "undefined") return undefined;
+export function resolveDigiforceWebSocketUrl(options: DigiforceWebSocketOptions = {}) {
+  if (typeof window === 'undefined') return undefined;
 
   const configuredUrl = options.url ?? getRuntimeWebSocketUrl();
-  const wsPath = options.wsPath ?? getRuntimeWebSocketPath() ?? "/ws";
-  const value = configuredUrl || resolveNocoBaseServerUrl(wsPath);
+  const wsPath = options.wsPath ?? getRuntimeWebSocketPath() ?? '/ws';
+  const value = configuredUrl || resolveDigiforceServerUrl(wsPath);
   const url = new URL(value, window.location.origin);
-  if (url.protocol === "http:") url.protocol = "ws:";
-  if (url.protocol === "https:") url.protocol = "wss:";
+  if (url.protocol === 'http:') url.protocol = 'ws:';
+  if (url.protocol === 'https:') url.protocol = 'wss:';
 
-  const appName = getNocoBaseAppName();
-  if (appName !== "main" && !url.searchParams.has("__appName")) {
-    url.searchParams.set("__appName", appName);
+  const appName = getDigiforceAppName();
+  if (appName !== 'main' && !url.searchParams.has('__appName')) {
+    url.searchParams.set('__appName', appName);
   }
   return url.toString();
 }
 
-export class NocoBaseWebSocketClient {
+export class DigiforceWebSocketClient {
   private socket?: WebSocket;
   private reconnectTimer?: ReturnType<typeof setTimeout>;
   private pingTimer?: ReturnType<typeof setInterval>;
@@ -77,14 +63,14 @@ export class NocoBaseWebSocketClient {
   private readonly messageListeners = new Set<MessageListener>();
   private readonly openListeners = new Set<OpenListener>();
 
-  constructor(private readonly options: NocoBaseWebSocketOptions = {}) {}
+  constructor(private readonly options: DigiforceWebSocketOptions = {}) {}
 
   get connected() {
     return this.socket?.readyState === 1;
   }
 
   getURL() {
-    return resolveNocoBaseWebSocketUrl(this.options);
+    return resolveDigiforceWebSocketUrl(this.options);
   }
 
   subscribe(listener: MessageListener) {
@@ -98,7 +84,7 @@ export class NocoBaseWebSocketClient {
   }
 
   connect() {
-    if (typeof WebSocket === "undefined") return;
+    if (typeof WebSocket === 'undefined') return;
     if (this.socket?.readyState === 0 || this.socket?.readyState === 1) return;
     const url = this.getURL();
     if (!url) return;
@@ -118,12 +104,12 @@ export class NocoBaseWebSocketClient {
 
     socket.onmessage = (event) => {
       if (this.socket !== socket) return;
-      if (typeof event.data !== "string") return;
+      if (typeof event.data !== 'string') return;
       try {
-        const message = JSON.parse(event.data) as NocoBaseWebSocketMessage;
+        const message = JSON.parse(event.data) as DigiforceWebSocketMessage;
         this.messageListeners.forEach((listener) => listener(message));
       } catch (error) {
-        console.warn("Unable to parse NocoBase WebSocket message", error);
+        console.warn('Unable to parse Digiforce WebSocket message', error);
       }
     };
 
@@ -141,7 +127,7 @@ export class NocoBaseWebSocketClient {
 
     if (!this.authUnsubscribe) {
       this.authUnsubscribe = authSession.subscribe((field) => {
-        if (field === "token" || field === "auth") {
+        if (field === 'token' || field === 'auth') {
           this.authenticate();
         }
       });
@@ -168,18 +154,16 @@ export class NocoBaseWebSocketClient {
 
   send(message: string | Record<string, unknown>) {
     if (!this.connected) return false;
-    this.socket?.send(
-      typeof message === "string" ? message : JSON.stringify(message)
-    );
+    this.socket?.send(typeof message === 'string' ? message : JSON.stringify(message));
     return true;
   }
 
   authenticate() {
     return this.send({
-      type: "auth:token",
+      type: 'auth:token',
       payload: {
-        token: authSession.get("token"),
-        authenticator: authSession.get("auth"),
+        token: authSession.get('token'),
+        authenticator: authSession.get('auth'),
       },
     });
   }
@@ -187,10 +171,7 @@ export class NocoBaseWebSocketClient {
   private scheduleReconnect() {
     this.clearReconnectTimer();
     const maxInterval = this.options.reconnectMaxInterval ?? 30_000;
-    const delay = Math.min(
-      maxInterval,
-      1_000 * 2 ** Math.min(this.reconnectCount, 5)
-    );
+    const delay = Math.min(maxInterval, 1_000 * 2 ** Math.min(this.reconnectCount, 5));
     this.reconnectCount += 1;
     this.reconnectTimer = setTimeout(() => this.connect(), delay);
   }
@@ -202,10 +183,7 @@ export class NocoBaseWebSocketClient {
 
   private startPing() {
     this.stopPing();
-    this.pingTimer = setInterval(
-      () => this.send("ping"),
-      this.options.pingInterval ?? 300_000
-    );
+    this.pingTimer = setInterval(() => this.send('ping'), this.options.pingInterval ?? 300_000);
   }
 
   private stopPing() {
@@ -214,4 +192,11 @@ export class NocoBaseWebSocketClient {
   }
 }
 
-export const nocobaseWebSocket = new NocoBaseWebSocketClient();
+export const digiforceWebSocket = new DigiforceWebSocketClient();
+
+/** Backward-compatible aliases */
+export const nocobaseWebSocket = digiforceWebSocket;
+export type NocoBaseWebSocketClient = DigiforceWebSocketClient;
+export const NocoBaseWebSocketClient = DigiforceWebSocketClient;
+export type NocoBaseWebSocketMessage = DigiforceWebSocketMessage;
+export type NocoBaseWebSocketOptions = DigiforceWebSocketOptions;

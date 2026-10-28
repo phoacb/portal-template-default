@@ -1,6 +1,6 @@
 import { useTranslate } from "@refinedev/core";
 import { useCallback } from "react";
-import { registerTranslationResources } from "@nocobase/portal-sdk/i18n";
+import { registerTranslationResources } from "@digiforce/portal-sdk/i18n";
 import enUS from "./en-US";
 import zhCN from "./zh-CN";
 

@@ -1,8 +1,8 @@
 import { lazy } from "react";
 import { BadgeCheck } from "lucide-react";
 
-import type { AppExtension } from "@nocobase/portal-sdk/extensions";
-import { defineAppRoutes } from "@nocobase/portal-sdk/routing";
+import type { AppExtension } from "@digiforce/portal-sdk/extensions";
+import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 
 const SamlSignInButton = lazy(() => import("./saml-sign-in-button"));
 const SamlAutoRedirectProvider = lazy(() => import("./auto-redirect-provider"));

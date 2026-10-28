@@ -2,8 +2,8 @@ import type { BaseKey } from "@refinedev/core";
 import type { PropsWithChildren, ReactNode } from "react";
 
 import { AccessDenied } from "@/components/access-control/access-denied";
-import { useAclEvaluator } from "@nocobase/portal-sdk/acl";
-import type { RoleConstraint } from "@nocobase/portal-sdk/acl";
+import { useAclEvaluator } from "@digiforce/portal-sdk/acl";
+import type { RoleConstraint } from "@digiforce/portal-sdk/acl";
 
 export type AclPermission = {
   resource: string;

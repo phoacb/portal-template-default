@@ -1,70 +1,54 @@
-import fs from "node:fs";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-import semver from "semver";
-import type { Plugin, RenderBuiltAssetUrl } from "vite";
+import semver from 'semver';
+import type { Plugin, RenderBuiltAssetUrl } from 'vite';
 
-import { formatPortalTemplateCompatibilityError } from "../compat/index.ts";
+import { formatPortalTemplateCompatibilityError } from '../compat/index.ts';
 
 type PortalPackage = {
   name?: string;
   version?: string;
-  nocobase?: {
+  digiforce?: {
     defaultTemplateVersion?: string;
     supportedDefaultTemplateRange?: string;
   };
 };
 
 const readPackage = (packagePath: string): PortalPackage =>
-  JSON.parse(fs.readFileSync(packagePath, "utf8")) as PortalPackage;
+  JSON.parse(fs.readFileSync(packagePath, 'utf8')) as PortalPackage;
 
-const sdkPackagePath = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  "../../package.json"
-);
+const sdkPackagePath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../package.json');
 
 export const portalSdkCompatibilityPlugin = ({
   root = process.cwd(),
 }: {
   root?: string;
 } = {}): Plugin => ({
-  name: "nocobase-portal-sdk-compatibility",
+  name: 'digiforce-portal-sdk-compatibility',
   configResolved() {
-    const projectPackage = readPackage(path.resolve(root, "package.json"));
+    const projectPackage = readPackage(path.resolve(root, 'package.json'));
     const sdkPackage = readPackage(sdkPackagePath);
     const defaultTemplateVersion =
-      projectPackage.nocobase?.defaultTemplateVersion ??
-      (projectPackage.name === "@nocobase/portal-template-default"
-        ? projectPackage.version
-        : undefined);
-    const supportedDefaultTemplateRange =
-      sdkPackage.nocobase?.supportedDefaultTemplateRange;
+      projectPackage.digiforce?.defaultTemplateVersion ??
+      (projectPackage.name === '@digiforce/portal-template-default' ? projectPackage.version : undefined);
+    const supportedDefaultTemplateRange = sdkPackage.digiforce?.supportedDefaultTemplateRange;
 
     if (!defaultTemplateVersion) {
-      throw new Error(
-        "Missing nocobase.defaultTemplateVersion in the project package.json."
-      );
+      throw new Error('Missing digiforce.defaultTemplateVersion in the project package.json.');
     }
     if (!supportedDefaultTemplateRange || !sdkPackage.version) {
-      throw new Error(
-        "The installed @nocobase/portal-sdk has incomplete compatibility metadata."
-      );
+      throw new Error('The installed @digiforce/portal-sdk has incomplete compatibility metadata.');
     }
     if (!semver.valid(defaultTemplateVersion)) {
-      throw new Error(
-        `Invalid nocobase.defaultTemplateVersion: ${defaultTemplateVersion}`
-      );
+      throw new Error(`Invalid digiforce.defaultTemplateVersion: ${defaultTemplateVersion}`);
     }
     if (!semver.valid(sdkPackage.version)) {
-      throw new Error(
-        `Invalid @nocobase/portal-sdk version: ${sdkPackage.version}`
-      );
+      throw new Error(`Invalid @digiforce/portal-sdk version: ${sdkPackage.version}`);
     }
     if (!semver.validRange(supportedDefaultTemplateRange)) {
-      throw new Error(
-        `Invalid SDK supportedDefaultTemplateRange: ${supportedDefaultTemplateRange}`
-      );
+      throw new Error(`Invalid SDK supportedDefaultTemplateRange: ${supportedDefaultTemplateRange}`);
     }
     if (!semver.satisfies(defaultTemplateVersion, supportedDefaultTemplateRange)) {
       throw new Error(
@@ -72,38 +56,35 @@ export const portalSdkCompatibilityPlugin = ({
           defaultTemplateVersion,
           sdkVersion: sdkPackage.version,
           supportedDefaultTemplateRange,
-        })
+        }),
       );
     }
   },
 });
 
-const defaultRuntimeConfig = `<!-- nocobase-runtime-config:start -->
+const defaultRuntimeConfig = `<!-- digiforce-runtime-config:start -->
 <script>
-  window.NOCOBASE_PORTAL_BASE = "/";
-  window.NOCOBASE_API_URL = "/api";
-  window.__nocobase_api_client_storage_prefix__ = window.__nocobase_api_client_storage_prefix__ ?? "NOCOBASE_";
-  window.__nocobase_api_client_storage_type__ = window.__nocobase_api_client_storage_type__ ?? "localStorage";
-  window.__nocobase_api_client_share_token__ = window.__nocobase_api_client_share_token__ ?? false;
+  window.DIGIFORCE_PORTAL_BASE = "/";
+  window.DIGIFORCE_API_URL = "/api";
+  window.__digiforce_api_client_storage_prefix__ = window.__digiforce_api_client_storage_prefix__ ?? "DIGIFORCE_";
+  window.__digiforce_api_client_storage_type__ = window.__digiforce_api_client_storage_type__ ?? "localStorage";
+  window.__digiforce_api_client_share_token__ = window.__digiforce_api_client_share_token__ ?? false;
 </script>
-<!-- nocobase-runtime-config:end -->
+<!-- digiforce-runtime-config:end -->
 `;
 
-const getBasePrefix = (base: string) => base.replace(/\/$/, "");
+const getBasePrefix = (base: string) => base.replace(/\/$/, '');
 
-const renderPortalBuiltUrl: RenderBuiltAssetUrl = (
-  filename,
-  { hostType, ssr }
-) => {
+const renderPortalBuiltUrl: RenderBuiltAssetUrl = (filename, { hostType, ssr }) => {
   if (ssr) return undefined;
 
-  if (hostType === "js") {
+  if (hostType === 'js') {
     return {
-      runtime: `new URL(${JSON.stringify(filename)}, new URL(window.NOCOBASE_PORTAL_BASE || "/", window.location.origin)).href`,
+      runtime: `new URL(${JSON.stringify(filename)}, new URL(window.DIGIFORCE_PORTAL_BASE || "/", window.location.origin)).href`,
     };
   }
 
-  if (hostType === "css") {
+  if (hostType === 'css') {
     return { relative: true };
   }
 
@@ -119,18 +100,12 @@ const stripBaseFromIndexHtml = (html: string, base: string) => {
   return html.replace(attributePattern, (match, attribute, quote, assetPath) => {
     const value = `/${assetPath}`;
     if (!value.startsWith(`${basePrefix}/`)) return match;
-    return `${attribute}=${quote}${value.slice(basePrefix.length) || "/"}${quote}`;
+    return `${attribute}=${quote}${value.slice(basePrefix.length) || '/'}${quote}`;
   });
 };
 
-export const portalRawIndexHtmlPlugin = ({
-  root = process.cwd(),
-  base,
-}: {
-  root?: string;
-  base: string;
-}): Plugin => ({
-  name: "nocobase-copy-raw-index-html",
+export const portalRawIndexHtmlPlugin = ({ root = process.cwd(), base }: { root?: string; base: string }): Plugin => ({
+  name: 'digiforce-copy-raw-index-html',
   config() {
     return {
       experimental: {
@@ -139,13 +114,13 @@ export const portalRawIndexHtmlPlugin = ({
     };
   },
   closeBundle() {
-    const distDir = path.resolve(root, "dist");
-    const indexHtml = path.join(distDir, "index.html");
-    const rawIndexHtml = path.join(distDir, "index.raw.html");
+    const distDir = path.resolve(root, 'dist');
+    const indexHtml = path.join(distDir, 'index.html');
+    const rawIndexHtml = path.join(distDir, 'index.raw.html');
 
     if (!fs.existsSync(indexHtml)) return;
 
-    const html = fs.readFileSync(indexHtml, "utf8");
+    const html = fs.readFileSync(indexHtml, 'utf8');
     const rawHtml = stripBaseFromIndexHtml(html, base);
     const moduleScriptPattern = /<script\s+[^>]*type=["']module["'][^>]*>/i;
     const moduleScriptMatch = rawHtml.match(moduleScriptPattern);
@@ -157,7 +132,7 @@ export const portalRawIndexHtmlPlugin = ({
 
     fs.writeFileSync(
       rawIndexHtml,
-      `${rawHtml.slice(0, moduleScriptMatch.index)}${defaultRuntimeConfig}${rawHtml.slice(moduleScriptMatch.index)}`
+      `${rawHtml.slice(0, moduleScriptMatch.index)}${defaultRuntimeConfig}${rawHtml.slice(moduleScriptMatch.index)}`,
     );
   },
 });

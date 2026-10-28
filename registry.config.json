@@ -1,5 +1,5 @@
 {
-  "name": "nocobase-ai",
+  "name": "digiforce-ai",
   "homepage": "https://www.nocobase.com",
   "items": [
     {
@@ -8,7 +8,7 @@
       "title": "NocoBase Error Boundary",
       "description": "Reusable render boundaries and NocoBase runtime status views with copyable redacted diagnostics and recovery actions.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-error-boundary@^6.0.0",
         "react-router@^7.0.2"
@@ -27,7 +27,7 @@
       "title": "NocoBase Route Surfaces",
       "description": "URL-backed drawer, dialog, and page containers with nested drawer stacking and a shared close lifecycle.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.1.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@base-ui/react@^1.6.0",
         "@refinedev/core@^5.0.8",
         "lucide-react@^0.487.0",
@@ -56,7 +56,7 @@
       "title": "NocoBase Client Components",
       "description": "Small reusable Portal client components with transport-agnostic APIs and shadcn UI composition.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@tanstack/react-query@^5.81.5",
         "lucide-react@^0.487.0"
       ],
@@ -82,7 +82,7 @@
       "title": "NocoBase Users Example",
       "description": "Complete Users resource example with ACL-aware list, filters, route-backed drawers, nested role details, and optional AI page context.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "@refinedev/react-hook-form@^5.0.0",
         "@refinedev/react-table@^6.0.0",
@@ -92,8 +92,8 @@
         "react-router@^7.0.2"
       ],
       "registryDependencies": [
-        "@nocobase/client",
-        "@nocobase/route-surfaces",
+        "@digiforce/client",
+        "@digiforce/route-surfaces",
         "alert",
         "badge",
         "button",
@@ -102,7 +102,7 @@
         "separator",
         "skeleton"
       ],
-      "docs": "Requires the compatible Portal Starter resource components, data table, NocoBase data provider, and ACL provider. AI page-element and form registration is enabled automatically when @nocobase/ai is also installed.",
+      "docs": "Requires the compatible Portal Starter resource components, data table, NocoBase data provider, and ACL provider. AI page-element and form registration is enabled automatically when @digiforce/ai is also installed.",
       "source": {
         "root": "registry/nocobase-users-example",
         "target": "src/extensions/nocobase-users-example",
@@ -115,7 +115,7 @@
       "title": "NocoBase i18n",
       "description": "Optional NocoBase server-language resources, user preference persistence, reusable language controls, and an integrated showcase for the Portal SDK i18n runtime.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
@@ -143,7 +143,7 @@
       "title": "NocoBase OIDC Authentication",
       "description": "Dynamic OIDC sign-in adapter, headless sign-in hook, and integrated component demo.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
@@ -160,7 +160,7 @@
       "title": "NocoBase SAML Authentication",
       "description": "Dynamic SAML sign-in adapter, automatic redirect provider, headless hook, and integrated demo.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
@@ -177,7 +177,7 @@
       "title": "NocoBase CAS Authentication",
       "description": "Dynamic CAS sign-in adapter, headless sign-in hook, and integrated component demo.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
@@ -193,7 +193,7 @@
       "type": "registry:block",
       "title": "NocoBase LDAP Authentication",
       "description": "Dynamic LDAP account/password form, headless sign-in hook, and integrated component demo.",
-      "dependencies": ["@nocobase/portal-sdk@^2.0.0"],
+      "dependencies": ["@digiforce/portal-sdk@^2.1.0"],
       "docs": "Requires the Starter authentication runtime and an enabled LDAP authenticator in NocoBase.",
       "source": {
         "root": "registry/nocobase-auth-ldap",
@@ -206,7 +206,7 @@
       "type": "registry:block",
       "title": "NocoBase SMS Authentication",
       "description": "Dynamic SMS verification-code form, delivery countdown, headless hook, and integrated demo.",
-      "dependencies": ["@nocobase/portal-sdk@^2.0.0"],
+      "dependencies": ["@digiforce/portal-sdk@^2.1.0"],
       "docs": "Requires the Starter authentication runtime, an enabled SMS authenticator, and a configured public SMS verifier in NocoBase.",
       "source": {
         "root": "registry/nocobase-auth-sms",
@@ -220,7 +220,7 @@
       "title": "NocoBase WeCom Authentication",
       "description": "Dynamic WeCom sign-in adapter, browser automatic login, headless hook, and integrated demo.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
@@ -237,7 +237,7 @@
       "title": "NocoBase DingTalk Authentication",
       "description": "Dynamic DingTalk sign-in adapter, automatic login, headless hook, and integrated demo.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "dingtalk-jsapi@3.1.1",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
@@ -255,7 +255,7 @@
       "title": "NocoBase AI Runtime",
       "description": "NocoBase AI services, providers, transports, controllers, and avatars.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@ai-sdk/react@2.0.0",
         "ai@5.0.0",
         "@dicebear/core@^9.4.3",
@@ -274,7 +274,7 @@
       "title": "NocoBase AI Chat Components",
       "description": "Reusable NocoBase AI chat window, containers, floating trigger, and employee shortcut.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "echarts@^5.5.0",
         "echarts-for-react@3.0.2",
@@ -284,8 +284,8 @@
         "remark-gfm@^4.0.1"
       ],
       "registryDependencies": [
-        "@nocobase/ai-runtime",
-        "@nocobase/error-boundary",
+        "@digiforce/ai-runtime",
+        "@digiforce/error-boundary",
         "badge",
         "button",
         "collapsible",
@@ -313,7 +313,7 @@
       "title": "NocoBase AI React Hook Form Adapter",
       "description": "Optional React Hook Form adapter for the built-in AI Form filler.",
       "dependencies": ["react-hook-form@^7.57.0"],
-      "registryDependencies": ["@nocobase/ai-chat"],
+      "registryDependencies": ["@digiforce/ai-chat"],
       "source": {
         "root": "registry/nocobase-ai",
         "target": "src/extensions/nocobase-ai",
@@ -326,13 +326,13 @@
       "title": "NocoBase AI Components and Demo",
       "description": "Complete NocoBase AI component runtime with application resources, routes, and component showcase pages.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.1.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "react-router@^7.0.2"
       ],
       "registryDependencies": [
-        "@nocobase/ai-chat",
-        "@nocobase/ai-react-hook-form",
+        "@digiforce/ai-chat",
+        "@digiforce/ai-react-hook-form",
         "accordion",
         "alert",
         "badge",
@@ -356,7 +356,7 @@
       "title": "NocoBase File Upload",
       "description": "Controlled shadcn/ui file upload field for NocoBase file collections.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@tanstack/react-query@^5.81.5",
         "lucide-react@^0.487.0",
         "react-markdown@^10.1.0",
@@ -383,7 +383,7 @@
       "title": "NocoBase Mail",
       "description": "Mail inbox, compose, detail, and label components backed by the NocoBase mail API.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "@tiptap/extension-link@^3.29.0",
         "@tiptap/extension-placeholder@^3.29.0",
@@ -428,7 +428,7 @@
       "title": "NocoBase ACL UI",
       "description": "Page, region, field, and role-switching components backed by the Starter's NocoBase accessControlProvider.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "lucide-react@^0.487.0"
       ],
@@ -446,12 +446,12 @@
       "title": "NocoBase ACL Components and Demo",
       "description": "Complete ACL composition demo with live role switching, action matrix, multi-collection regions, and field permissions.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "react-router@^7.0.2"
       ],
       "registryDependencies": [
-        "@nocobase/acl-ui",
+        "@digiforce/acl-ui",
         "button",
         "card",
         "dropdown-menu",
@@ -472,7 +472,7 @@
       "title": "NocoBase AI Knowledge Base Providers",
       "description": "User-side DTOs, injected Portal-safe service contract, response normalization, and stale-safe data hooks.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0"
+        "@digiforce/portal-sdk@^2.1.0"
       ],
       "docs": "Providers only: no UI, routes, demos, extension, generic management API client, or tests. Requires a Portal-owned server adapter with current-user authorization, LOCAL write enforcement, and response allowlists.",
       "source": {
@@ -490,11 +490,11 @@
       "title": "NocoBase AI Knowledge Base Components",
       "description": "Controlled knowledge-base, document, retrieval, segment, and upload components for composition in Portal pages.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0"
       ],
       "registryDependencies": [
-        "@nocobase/ai-knowledge-base-providers",
+        "@digiforce/ai-knowledge-base-providers",
         "alert",
         "avatar",
         "badge",
@@ -529,14 +529,14 @@
       "title": "NocoBase AI Knowledge Base Components and Knowledge Base Workspace",
       "description": "Complete AI Knowledge Base Registry integration with five deterministic development workflows, a Portal-safe Knowledge base workspace, URL-backed result and segment drawers, resource hooks, and consolidated documentation.",
       "dependencies": [
-        "@nocobase/portal-sdk@^2.0.0",
+        "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
       "registryDependencies": [
-        "@nocobase/ai-knowledge-base-components",
-        "@nocobase/route-surfaces",
+        "@digiforce/ai-knowledge-base-components",
+        "@digiforce/route-surfaces",
         "alert",
         "alert-dialog",
         "badge",

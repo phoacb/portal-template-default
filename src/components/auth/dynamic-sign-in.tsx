@@ -4,7 +4,7 @@ import {
   usePublicAuthenticators,
   type Authenticator,
   type RenderAuthenticator,
-} from "@nocobase/portal-sdk/auth";
+} from "@digiforce/portal-sdk/auth";
 
 import { authenticatorAdapterMap } from "@/components/auth/authenticator-adapters";
 import {
@@ -22,7 +22,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Spinner } from "@/components/ui/spinner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { resolveTranslatableText } from "@nocobase/portal-sdk/i18n";
+import { resolveTranslatableText } from "@digiforce/portal-sdk/i18n";
 
 type DynamicSignInProps = {
   renderAuthenticator?: RenderAuthenticator;

@@ -1,7 +1,7 @@
-import type { ResourceProps } from "@refinedev/core";
-import type { ComponentType, PropsWithChildren } from "react";
-import type { AuthenticatorAdapter } from "../auth/index.ts";
-import type { AppRouteDefinition } from "../routing/index.ts";
+import type { ResourceProps } from '@refinedev/core';
+import type { ComponentType, PropsWithChildren } from 'react';
+import type { AuthenticatorAdapter } from '../auth/index.ts';
+import type { AppRouteDefinition } from '../routing/index.ts';
 
 export type AppExtension = {
   id: string;
@@ -21,9 +21,7 @@ export type AppExtension = {
 
 export const sortAppExtensions = (extensions: AppExtension[]) =>
   [...extensions].sort(
-    (left, right) =>
-      (left.priority ?? 100) - (right.priority ?? 100) ||
-      left.id.localeCompare(right.id)
+    (left, right) => (left.priority ?? 100) - (right.priority ?? 100) || left.id.localeCompare(right.id),
   );
 
 export const collectAppExtensionContributions = ({
@@ -40,10 +38,7 @@ export const collectAppExtensionContributions = ({
 
   return {
     extensions: sortedExtensions,
-    routeDefinitions: [
-      ...appRoutes,
-      ...routeExtensions.flatMap((extension) => extension.routes ?? []),
-    ],
+    routeDefinitions: [...appRoutes, ...routeExtensions.flatMap((extension) => extension.routes ?? [])],
     resources: routeExtensions.flatMap((extension) => extension.resources ?? []),
     userMenuItems: sortedExtensions
       .filter((extension) => extension.UserMenuItems)
@@ -51,18 +46,13 @@ export const collectAppExtensionContributions = ({
         id: extension.id,
         Component: extension.UserMenuItems!,
       })),
-    authAdapters: sortedExtensions.flatMap(
-      (extension) => extension.authAdapters ?? []
-    ),
-    providerExtensions: sortedExtensions.filter(
-      (extension) => extension.Provider
-    ),
+    authAdapters: sortedExtensions.flatMap((extension) => extension.authAdapters ?? []),
+    providerExtensions: sortedExtensions.filter((extension) => extension.Provider),
     authRuntimeExtensions: [...sortedExtensions]
       .filter((extension) => extension.AuthRuntimeProvider)
       .sort(
         (left, right) =>
-          (left.authRuntimePriority ?? 100) -
-            (right.authRuntimePriority ?? 100) || left.id.localeCompare(right.id)
+          (left.authRuntimePriority ?? 100) - (right.authRuntimePriority ?? 100) || left.id.localeCompare(right.id),
       ),
   };
 };

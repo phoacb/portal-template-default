@@ -2,7 +2,7 @@ import type { APIRequestContext } from "@playwright/test";
 import {
   getNocoBaseErrorMessage,
   NocoBaseHttpError,
-} from "@nocobase/portal-sdk/client";
+} from "@digiforce/portal-sdk/client";
 
 import {
   resolvePortalApiActionURL,

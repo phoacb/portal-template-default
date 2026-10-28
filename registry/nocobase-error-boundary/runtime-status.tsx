@@ -1,5 +1,5 @@
-import type { NocoBaseRuntimeError } from "@nocobase/portal-sdk/client";
-import { translate } from "@nocobase/portal-sdk/i18n";
+import type { NocoBaseRuntimeError } from "@digiforce/portal-sdk/client";
+import { translate } from "@digiforce/portal-sdk/i18n";
 import {
   AlertTriangle,
   Check,

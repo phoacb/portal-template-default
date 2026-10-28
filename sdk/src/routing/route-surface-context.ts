@@ -1,12 +1,10 @@
-import { createContext } from "react";
+import { createContext } from 'react';
 
 export type RouteSurfaceCloseOptions = {
   skipBeforeClose?: boolean;
 };
 
-export type RouteSurfaceClose = (
-  options?: RouteSurfaceCloseOptions
-) => Promise<boolean>;
+export type RouteSurfaceClose = (options?: RouteSurfaceCloseOptions) => Promise<boolean>;
 
 export const RouteSurfaceContext = createContext<RouteSurfaceClose | null>(null);
 
@@ -18,5 +16,4 @@ export type RouteOverlayViewport = {
 
 // Layouts with persistent side regions can scope route overlays to the page
 // viewport while React portals preserve the surrounding route context.
-export const RouteOverlayViewportContext =
-  createContext<RouteOverlayViewport | null>(null);
+export const RouteOverlayViewportContext = createContext<RouteOverlayViewport | null>(null);

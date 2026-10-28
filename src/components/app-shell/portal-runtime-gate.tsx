@@ -1,14 +1,15 @@
-import { authProvider } from "@nocobase/portal-sdk/auth";
+import { authProvider } from "@digiforce/portal-sdk/auth";
 import {
   isNocoBaseServiceError,
   nocobaseClient,
   nocobaseWebSocket,
   normalizeNocoBaseRuntimeError,
-} from "@nocobase/portal-sdk/client";
+  type DigiforceWebSocketMessage,
+} from "@digiforce/portal-sdk/client";
 import {
   portalRuntimeStore,
   resolvePortalUrl,
-} from "@nocobase/portal-sdk/runtime";
+} from "@digiforce/portal-sdk/runtime";
 import {
   useEffect,
   useRef,
@@ -37,7 +38,7 @@ export function PortalRuntimeGate({ children }: PropsWithChildren) {
   }
 
   useEffect(() => {
-    const unsubscribeMessages = nocobaseWebSocket.subscribe((message) => {
+    const unsubscribeMessages = nocobaseWebSocket.subscribe((message: DigiforceWebSocketMessage) => {
       if (!message.payload) return;
 
       if (message.payload.refresh) {

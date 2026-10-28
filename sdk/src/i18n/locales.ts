@@ -1,6 +1,6 @@
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore } from 'react';
 
-export type LocaleDirection = "ltr" | "rtl";
+export type LocaleDirection = 'ltr' | 'rtl';
 
 export type LocaleDefinition = {
   locale: string;
@@ -13,7 +13,7 @@ export type PortalLocaleConfiguration = {
   locales: LocaleDefinition[];
 };
 
-let defaultLocale = "en-US";
+let defaultLocale = 'en-US';
 const localeDefinitions = new Map<string, LocaleDefinition>();
 const listeners = new Set<() => void>();
 let enabledLocaleCodes: string[] = [];
@@ -31,9 +31,7 @@ function subscribe(listener: () => void) {
 function refreshSnapshot() {
   const nextSnapshot = enabledLocaleCodes
     .map((locale) => localeDefinitions.get(locale))
-    .filter((definition): definition is LocaleDefinition =>
-      Boolean(definition)
-    );
+    .filter((definition): definition is LocaleDefinition => Boolean(definition));
   const changed =
     nextSnapshot.length !== enabledLocaleSnapshot.length ||
     nextSnapshot.some((definition, index) => {
@@ -51,7 +49,7 @@ function refreshSnapshot() {
 }
 
 export function getLocaleDirection(locale: string): LocaleDirection {
-  return /^(ar|fa|he|ku|ur)(-|$)/i.test(locale) ? "rtl" : "ltr";
+  return /^(ar|fa|he|ku|ur)(-|$)/i.test(locale) ? 'rtl' : 'ltr';
 }
 
 export function getLocaleLabel(locale: string) {
@@ -59,9 +57,7 @@ export function getLocaleLabel(locale: string) {
   if (existing && existing !== locale) return existing;
 
   try {
-    return (
-      new Intl.DisplayNames([locale], { type: "language" }).of(locale) ?? locale
-    );
+    return new Intl.DisplayNames([locale], { type: 'language' }).of(locale) ?? locale;
   } catch {
     return locale;
   }
@@ -69,29 +65,20 @@ export function getLocaleLabel(locale: string) {
 
 export function registerLocale(definition: LocaleDefinition) {
   const current = localeDefinitions.get(definition.locale);
-  const currentLabel =
-    current?.label && current.label !== definition.locale
-      ? current.label
-      : undefined;
+  const currentLabel = current?.label && current.label !== definition.locale ? current.label : undefined;
   localeDefinitions.set(definition.locale, {
     locale: definition.locale,
     label:
       definition.label && definition.label !== definition.locale
         ? definition.label
-        : currentLabel ?? getLocaleLabel(definition.locale),
-    direction:
-      definition.direction ??
-      current?.direction ??
-      getLocaleDirection(definition.locale),
+        : (currentLabel ?? getLocaleLabel(definition.locale)),
+    direction: definition.direction ?? current?.direction ?? getLocaleDirection(definition.locale),
   });
 
   if (enabledLocaleCodes.includes(definition.locale)) refreshSnapshot();
 }
 
-export function configurePortalLocales({
-  defaultLocale: nextDefaultLocale,
-  locales,
-}: PortalLocaleConfiguration) {
+export function configurePortalLocales({ defaultLocale: nextDefaultLocale, locales }: PortalLocaleConfiguration) {
   defaultLocale = nextDefaultLocale;
   localeDefinitions.clear();
 
@@ -126,26 +113,19 @@ export function getLocaleDefinitions() {
 }
 
 export function useEnabledLocales() {
-  return useSyncExternalStore(
-    subscribe,
-    getLocaleDefinitions,
-    getLocaleDefinitions
-  );
+  return useSyncExternalStore(subscribe, getLocaleDefinitions, getLocaleDefinitions);
 }
 
 export function resolveSupportedLocale(locale?: string) {
   if (!locale) return defaultLocale;
 
-  const exact = [...localeDefinitions.keys()].find(
-    (candidate) => candidate.toLowerCase() === locale.toLowerCase()
-  );
+  const exact = [...localeDefinitions.keys()].find((candidate) => candidate.toLowerCase() === locale.toLowerCase());
   if (exact) return exact;
 
-  const language = locale.split("-")[0]?.toLowerCase();
+  const language = locale.split('-')[0]?.toLowerCase();
   return (
-    [...localeDefinitions.keys()].find(
-      (candidate) => candidate.split("-")[0]?.toLowerCase() === language
-    ) ?? defaultLocale
+    [...localeDefinitions.keys()].find((candidate) => candidate.split('-')[0]?.toLowerCase() === language) ??
+    defaultLocale
   );
 }
 

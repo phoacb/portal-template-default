@@ -1,13 +1,13 @@
-import type { NocoBaseRuntimeError } from "../client/error.ts";
+import type { DigiforceRuntimeError } from '../client/error.ts';
 
 export type PortalRuntimeState = {
-  error?: NocoBaseRuntimeError;
+  error?: DigiforceRuntimeError;
 };
 
 export type PortalRuntimeStore = {
   clear: () => void;
   getState: () => PortalRuntimeState;
-  setError: (error: NocoBaseRuntimeError) => void;
+  setError: (error: DigiforceRuntimeError) => void;
   subscribe: (listener: () => void) => () => void;
 };
 

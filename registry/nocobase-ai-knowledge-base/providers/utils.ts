@@ -1,4 +1,4 @@
-import type { NocoBaseHttpError } from "@nocobase/portal-sdk/client";
+import type { NocoBaseHttpError } from "@digiforce/portal-sdk/client";
 
 export type PagedResult<T> = { rows: T[]; count: number; page: number; pageSize: number };
 

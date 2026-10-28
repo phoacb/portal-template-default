@@ -1,7 +1,7 @@
-import { createContext, useContext, useSyncExternalStore } from "react";
+import { createContext, useContext, useSyncExternalStore } from 'react';
 
-import type { RecordPermissionResolver } from "./evaluator.ts";
-import type { AclState } from "./types.ts";
+import type { RecordPermissionResolver } from './evaluator.ts';
+import type { AclState } from './types.ts';
 
 export type AclStore = {
   getState: () => AclState;
@@ -21,7 +21,7 @@ export const AclStoreContext = createContext<AclStore | undefined>(undefined);
 export const useAclStore = () => {
   const store = useContext(AclStoreContext);
   if (!store) {
-    throw new Error("useAclStore must be used within an AclStoreProvider");
+    throw new Error('useAclStore must be used within an AclStoreProvider');
   }
   return store;
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import type { AuthenticatorComponentProps } from "@nocobase/portal-sdk/auth";
+import type { AuthenticatorComponentProps } from "@digiforce/portal-sdk/auth";
 import {
   Alert,
   AlertDescription,

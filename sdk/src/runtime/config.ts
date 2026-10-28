@@ -1,89 +1,73 @@
-const getWindowValue = (key: "NOCOBASE_PORTAL_BASE" | "NOCOBASE_API_URL") => {
-  if (typeof window === "undefined") return undefined;
-  const value = window[key];
-  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+const getWindowValue = (key: 'DIGIFORCE_PORTAL_BASE' | 'DIGIFORCE_API_URL') => {
+  if (typeof window === 'undefined') return undefined;
+  const win = window as unknown as Record<string, unknown>;
+  const legacyKey = key.replace('DIGIFORCE_', 'NOCOBASE_');
+  const value = win[key] ?? win[legacyKey];
+  return typeof value === 'string' && value.trim() ? value.trim() : undefined;
 };
 
 export const normalizePortalBase = (base?: string) => {
-  const normalized = String(base || "/").trim();
-  if (!normalized || normalized === "/") return "/";
-  return `/${normalized.replace(/^\/+|\/+$/g, "")}/`;
+  const normalized = String(base || '/').trim();
+  if (!normalized || normalized === '/') return '/';
+  return `/${normalized.replace(/^\/+|\/+$/g, '')}/`;
 };
 
 export const getPortalBase = () =>
   normalizePortalBase(
-    getWindowValue("NOCOBASE_PORTAL_BASE") ?? import.meta.env?.BASE_URL
+    getWindowValue('DIGIFORCE_PORTAL_BASE') ??
+      import.meta.env?.DIGIFORCE_PORTAL_BASE ??
+      import.meta.env?.NOCOBASE_PORTAL_BASE ??
+      import.meta.env?.BASE_URL
   );
 
 export const getRuntimeApiUrl = () =>
-  getWindowValue("NOCOBASE_API_URL") ?? import.meta.env?.NOCOBASE_API_URL;
+  getWindowValue('DIGIFORCE_API_URL') ??
+  import.meta.env?.DIGIFORCE_API_URL ??
+  import.meta.env?.NOCOBASE_API_URL;
 
-export const resolveNocoBasePortalName = (portalBase: string) =>
+export const resolveDigiforcePortalName = (portalBase: string) =>
   portalBase.match(/\/x\/(?:apps\/[^/]+\/)?([^/?#]+)(?:[/?#]|$)/)?.[1];
 
-export const getNocoBasePortalName = () =>
-  resolveNocoBasePortalName(getPortalBase());
+export const getDigiforcePortalName = () => resolveDigiforcePortalName(getPortalBase());
 
-const getAppNameFromPortalBase = (base: string) =>
-  base.match(/\/x\/apps\/([^/]+)(?:\/|$)/)?.[1];
+const getAppNameFromPortalBase = (base: string) => base.match(/\/x\/apps\/([^/]+)(?:\/|$)/)?.[1];
 
-const getAppNameFromApiUrl = (apiUrl?: string) =>
-  apiUrl?.match(/\/api\/__app\/([^/?#]+)(?:[/?#]|$)/)?.[1];
+const getAppNameFromApiUrl = (apiUrl?: string) => apiUrl?.match(/\/api\/__app\/([^/?#]+)(?:[/?#]|$)/)?.[1];
 
-export const resolveNocoBaseAppName = (portalBase: string, apiUrl?: string) =>
-  getAppNameFromPortalBase(portalBase) ??
-  getAppNameFromApiUrl(apiUrl) ??
-  "main";
+export const resolveDigiforceAppName = (portalBase: string, apiUrl?: string) =>
+  getAppNameFromPortalBase(portalBase) ?? getAppNameFromApiUrl(apiUrl) ?? 'main';
 
-export const getNocoBaseAppName = () =>
-  resolveNocoBaseAppName(getPortalBase(), getRuntimeApiUrl());
+export const getDigiforceAppName = () => resolveDigiforceAppName(getPortalBase(), getRuntimeApiUrl());
 
-export const resolveNocoBaseServerUrl = (path = "/") => {
-  if (typeof window === "undefined") return path;
+export const resolveDigiforceServerUrl = (path = '/') => {
+  if (typeof window === 'undefined') return path;
 
-  const apiUrl = new URL(
-    getRuntimeApiUrl() || "/api",
-    window.location.origin
-  );
+  const apiUrl = new URL(getRuntimeApiUrl() || '/api', window.location.origin);
   const apiPathMatch = apiUrl.pathname.match(/\/api(?:\/|$)/);
-  const serverBasePath = apiPathMatch
-    ? apiUrl.pathname.slice(0, apiPathMatch.index)
-    : "";
+  const serverBasePath = apiPathMatch ? apiUrl.pathname.slice(0, apiPathMatch.index) : '';
 
-  return new URL(
-    path.replace(/^\/+/, ""),
-    `${apiUrl.origin}${serverBasePath}/`
-  ).toString();
+  return new URL(path.replace(/^\/+/, ''), `${apiUrl.origin}${serverBasePath}/`).toString();
 };
 
-export const resolveNocoBaseSettingsUrl = () => {
-  const appName = getNocoBaseAppName();
-  const settingsPath =
-    appName === "main"
-      ? "/settings"
-      : `/settings/apps/${encodeURIComponent(appName)}`;
+export const resolveDigiforceSettingsUrl = () => {
+  const appName = getDigiforceAppName();
+  const settingsPath = appName === 'main' ? '/settings' : `/settings/apps/${encodeURIComponent(appName)}`;
 
-  return resolveNocoBaseServerUrl(settingsPath);
+  return resolveDigiforceServerUrl(settingsPath);
 };
 
-export const resolvePortalUrl = (path = "/") => {
-  if (typeof window === "undefined") return path;
+export const resolvePortalUrl = (path = '/') => {
+  if (typeof window === 'undefined') return path;
   if (/^[a-z][a-z\d+.-]*:/i.test(path)) return path;
 
   const portalBase = getPortalBase();
-  const relativePath = path.replace(/^\/+/, "");
-  const portalUrl = new URL(
-    relativePath,
-    `${window.location.origin}${portalBase}`
-  );
-  const apiUrl = new URL(
-    getRuntimeApiUrl() || "/api",
-    window.location.origin
-  );
+  const relativePath = path.replace(/^\/+/, '');
+  const portalUrl = new URL(relativePath, `${window.location.origin}${portalBase}`);
+  const apiUrl = new URL(getRuntimeApiUrl() || '/api', window.location.origin);
 
   // Same-origin deployments should use a root-relative callback. Besides
   // avoiding unnecessary origin coupling, this remains compatible with older
-  // SSO plugins that only accept NocoBase-local redirect paths. A standalone
+  // SSO plugins that only accept Digiforce-local redirect paths. A standalone
   // Portal dev server keeps the absolute URL so the callback can return to
   // Vite instead of the deployed Portal route.
   if (apiUrl.origin === portalUrl.origin) {
@@ -91,3 +75,14 @@ export const resolvePortalUrl = (path = "/") => {
   }
   return portalUrl.toString();
 };
+
+/**
+ * @deprecated Use Digiforce functions instead.
+ * Backward-compatible aliases retained during the NocoBase → Digiforce namespace migration.
+ */
+export const resolveNocoBaseSettingsUrl = resolveDigiforceSettingsUrl;
+export const resolveNocoBasePortalName = resolveDigiforcePortalName;
+export const getNocoBasePortalName = getDigiforcePortalName;
+export const resolveNocoBaseAppName = resolveDigiforceAppName;
+export const getNocoBaseAppName = getDigiforceAppName;
+export const resolveNocoBaseServerUrl = resolveDigiforceServerUrl;

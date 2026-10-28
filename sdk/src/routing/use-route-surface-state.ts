@@ -1,10 +1,7 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 
-import type {
-  RouteSurfaceClose,
-  RouteSurfaceCloseOptions,
-} from "./route-surface-context.ts";
+import type { RouteSurfaceClose, RouteSurfaceCloseOptions } from './route-surface-context.ts';
 
 export type RouteSurfaceBeforeClose = () => boolean | Promise<boolean>;
 
@@ -53,7 +50,7 @@ export function useRouteSurfaceState({
         closingRef.current = false;
       }
     },
-    [animated, beforeClose, navigateAfterClose]
+    [animated, beforeClose, navigateAfterClose],
   );
 
   return {

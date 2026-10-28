@@ -7,7 +7,7 @@ import {
   usePublicAuthenticators,
   type Authenticator,
   type AuthenticatorSignUpField,
-} from "@nocobase/portal-sdk/auth";
+} from "@digiforce/portal-sdk/auth";
 import { useSearchParams } from "react-router";
 
 import { AuthLayout } from "@/components/auth/auth-layout";
@@ -37,7 +37,7 @@ import {
 } from "@/components/ui/select";
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
-import { resolveTranslatableText } from "@nocobase/portal-sdk/i18n";
+import { resolveTranslatableText } from "@digiforce/portal-sdk/i18n";
 
 type SignUpFieldValue = string | number | boolean;
 type SignUpValues = Record<string, SignUpFieldValue>;

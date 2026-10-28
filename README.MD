@@ -1,9 +1,7 @@
-# NocoBase Portal Template
+# Digiforce Portal Template
 
 A React and shadcn/ui template for building standalone frontends backed by
-NocoBase.
-
-![NocoBase Portal Template](https://static-docs.nocobase.com/2026-07-22-08-48-12.png)
+Digiforce (with NocoBase compatibility).
 
 ## Quick start
 
@@ -20,19 +18,19 @@ The development server starts at `http://localhost:5173` by default.
 The minimum local configuration is:
 
 ```env
-NOCOBASE_API_URL=/api
-NOCOBASE_PORTAL_BASE=/
+DIGIFORCE_API_URL=/api
+DIGIFORCE_PORTAL_BASE=/
 ```
 
-- `NOCOBASE_API_URL` is the NocoBase REST API root and must include `/api`.
+- `DIGIFORCE_API_URL` (or `NOCOBASE_API_URL`) is the Digiforce REST API root and must include `/api`.
   Same-origin deployments normally use `/api`. During local development, an
   absolute URL is handled through the Vite proxy.
-- `NOCOBASE_PORTAL_BASE` is the public path where the Portal is mounted. Use
+- `DIGIFORCE_PORTAL_BASE` (or `NOCOBASE_PORTAL_BASE`) is the public path where the Portal is mounted. Use
   `/` for root development or set the deployment path before building.
-- `NOCOBASE_API_TOKEN` can provide a temporary development token. Never commit
+- `DIGIFORCE_API_TOKEN` can provide a temporary development token. Never commit
   real tokens.
 
-The Portal uses the same authentication storage convention as NocoBase. If the
+The Portal uses the same authentication storage convention as Digiforce. If the
 server customizes it, keep `API_CLIENT_STORAGE_PREFIX`,
 `API_CLIENT_STORAGE_TYPE`, and `API_CLIENT_SHARE_TOKEN` aligned with the server.
 
@@ -60,9 +58,9 @@ locale labels, i18next options, and post-switch behavior remain customizable in
 `src/providers/i18n/runtime.ts`. Shared UI components live in
 `src/components/ui` and follow the shadcn Base UI conventions.
 
-Stable NocoBase runtime behavior is provided by `@nocobase/portal-sdk`.
+Stable Digiforce runtime behavior is provided by `@digiforce/portal-sdk`.
 The template records its inherited base version in
-`nocobase.defaultTemplateVersion`; SDK installation, development, and builds
+`digiforce.defaultTemplateVersion`; SDK installation, development, and builds
 stop with an actionable error when that version is outside the SDK's supported
 range. Application composition and visual source remain owned by this project.
 
@@ -80,13 +78,13 @@ Set `registryRoutesEnabled` to `false` in `src/routes.tsx` when replacing the
 bundled example navigation with application-owned routes. Installed extension
 providers, login adapters, and the `/dev` component showcases remain available.
 
-Optional NocoBase integrations, including authentication methods and i18n, can
-be installed from the `@nocobase` Registry configured in `components.json`.
+Optional Digiforce integrations, including authentication methods and i18n, can
+be installed from the `@digiforce` Registry configured in `components.json`.
 After installation, the generated source can be customized and committed with
 the application.
 
 Registry implementations import runtime APIs from documented
-`@nocobase/portal-sdk` subpaths and continue to use `@/components` for
+`@digiforce/portal-sdk` subpaths and continue to use `@/components` for
 application-owned visual composition. Each Registry item declares the minimum
 compatible SDK version in `registry.config.json`.
 

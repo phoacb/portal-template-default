@@ -52,7 +52,8 @@ const config = JSON.parse(
 );
 const itemNames = new Set();
 const filesByRoot = new Map();
-const portalSdkImport = "@nocobase/portal-sdk";
+const portalSdkImport = "@digiforce/portal-sdk";
+const legacyPortalSdkImport = "@nocobase/portal-sdk";
 const sourceItems = config.items.map((item) => {
   if (!item.name || itemNames.has(item.name)) {
     throw new Error(`Registry item name must be unique: ${item.name}`);
@@ -92,10 +93,10 @@ const sourceItems = config.items.map((item) => {
       content: fs.readFileSync(path.join(sourceRoot, file), "utf8"),
     }));
   const usesPortalSdk = includedSource.some(({ content }) =>
-    content.includes(portalSdkImport)
+    content.includes(portalSdkImport) || content.includes(legacyPortalSdkImport)
   );
   const portalSdkDependency = item.dependencies?.find((dependency) =>
-    dependency.startsWith(`${portalSdkImport}@`)
+    dependency.startsWith(`${portalSdkImport}@`) || dependency.startsWith(`${legacyPortalSdkImport}@`)
   );
 
   if (usesPortalSdk && !portalSdkDependency) {

@@ -1,6 +1,6 @@
 import { NocoBaseAIExtensionProvider } from "./global-ai-chat";
-import type { AppExtension } from "@nocobase/portal-sdk/extensions";
-import { defineAppRoutes } from "@nocobase/portal-sdk/routing";
+import type { AppExtension } from "@digiforce/portal-sdk/extensions";
+import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import {
   Bot,
   MessageSquare,

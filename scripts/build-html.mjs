@@ -134,11 +134,17 @@ const stripExistingRuntimeConfig = (html) => {
 
 loadBuildHtmlEnv();
 
-const portalBase = normalizePortalBase(process.env.NOCOBASE_PORTAL_BASE);
-const apiUrl = String(process.env.NOCOBASE_API_URL || "/api").trim() || "/api";
+const portalBase = normalizePortalBase(
+  process.env.DIGIFORCE_PORTAL_BASE || process.env.NOCOBASE_PORTAL_BASE
+);
+const apiUrl =
+  String(
+    process.env.DIGIFORCE_API_URL || process.env.NOCOBASE_API_URL || "/api"
+  ).trim() || "/api";
 const storagePrefix =
-  String(process.env.API_CLIENT_STORAGE_PREFIX || "NOCOBASE_").trim() ||
-  "NOCOBASE_";
+  String(
+    process.env.API_CLIENT_STORAGE_PREFIX || "DIGIFORCE_"
+  ).trim() || "DIGIFORCE_";
 const storageType =
   String(process.env.API_CLIENT_STORAGE_TYPE || "localStorage").trim() ||
   "localStorage";
@@ -154,11 +160,16 @@ if (!fs.existsSync(rawIndexPath)) {
 
 const runtimeConfig = `${startMarker}
 <script>
-  window.NOCOBASE_PORTAL_BASE = ${JSON.stringify(portalBase)};
-  window.NOCOBASE_API_URL = ${JSON.stringify(apiUrl)};
-  window.__nocobase_api_client_storage_prefix__ = ${JSON.stringify(storagePrefix)};
-  window.__nocobase_api_client_storage_type__ = ${JSON.stringify(storageType)};
-  window.__nocobase_api_client_share_token__ = ${JSON.stringify(shareToken)};
+  window.DIGIFORCE_PORTAL_BASE = ${JSON.stringify(portalBase)};
+  window.DIGIFORCE_API_URL = ${JSON.stringify(apiUrl)};
+  window.__digiforce_api_client_storage_prefix__ = ${JSON.stringify(storagePrefix)};
+  window.__digiforce_api_client_storage_type__ = ${JSON.stringify(storageType)};
+  window.__digiforce_api_client_share_token__ = ${JSON.stringify(shareToken)};
+  window.NOCOBASE_PORTAL_BASE = window.DIGIFORCE_PORTAL_BASE;
+  window.NOCOBASE_API_URL = window.DIGIFORCE_API_URL;
+  window.__nocobase_api_client_storage_prefix__ = window.__digiforce_api_client_storage_prefix__;
+  window.__nocobase_api_client_storage_type__ = window.__digiforce_api_client_storage_type__;
+  window.__nocobase_api_client_share_token__ = window.__digiforce_api_client_share_token__;
 </script>
 ${endMarker}
 `;

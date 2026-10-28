@@ -6,11 +6,11 @@ import {
 import {
   collectAppExtensionContributions,
   type AppExtension,
-} from "@nocobase/portal-sdk/extensions";
+} from "@digiforce/portal-sdk/extensions";
 import {
   buildRouteResources,
   renderAppRoutes,
-} from "@nocobase/portal-sdk/routing";
+} from "@digiforce/portal-sdk/routing";
 import { LoadingState } from "@/components/app-shell/loading-state";
 import { appRoutes, registryRoutesEnabled } from "@/routes";
 import { createDevelopmentRoute } from "./development";

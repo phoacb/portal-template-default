@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 
 export type SystemSettings = Record<string, unknown> & {
   appLang?: string | null;
@@ -12,15 +12,12 @@ export type SystemSettingsContextValue = {
   refresh: () => Promise<SystemSettings | undefined>;
 };
 
-export const SystemSettingsContext =
-  createContext<SystemSettingsContextValue | null>(null);
+export const SystemSettingsContext = createContext<SystemSettingsContextValue | null>(null);
 
 export function useSystemSettings() {
   const value = useContext(SystemSettingsContext);
   if (!value) {
-    throw new Error(
-      "useSystemSettings must be used inside SystemSettingsProvider"
-    );
+    throw new Error('useSystemSettings must be used inside SystemSettingsProvider');
   }
   return value;
 }

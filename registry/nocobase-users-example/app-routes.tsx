@@ -1,6 +1,6 @@
 import { UsersRound } from "lucide-react";
 
-import { defineAppRoutes } from "@nocobase/portal-sdk/routing";
+import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { userRoutes } from "./routes";
 
 export const usersExampleRoutes = defineAppRoutes([

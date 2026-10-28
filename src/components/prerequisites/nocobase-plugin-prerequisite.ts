@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { nocobaseClient } from "@nocobase/portal-sdk/client";
+import { nocobaseClient } from "@digiforce/portal-sdk/client";
 
 export type NocoBasePluginLane = "client" | "client-v2";
 
@@ -94,8 +94,12 @@ function matchesRequirement(
   plugin: EnabledNocoBasePlugin,
   requirement: NocoBasePluginRequirement,
 ) {
-  return (
+  const normalizePkg = (pkg?: string) => pkg?.replace(/^@(nocobase|digiforce)\//, "");
+  return Boolean(
     plugin.packageName === requirement.packageName ||
+    (plugin.packageName &&
+      requirement.packageName &&
+      normalizePkg(plugin.packageName) === normalizePkg(requirement.packageName)) ||
     (!!requirement.name && plugin.name === requirement.name)
   );
 }
