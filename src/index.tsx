@@ -4,7 +4,7 @@ import { captureAuthenticationCallback } from "@digiforce/portal-sdk/auth";
 import {
   NocoBaseErrorBoundary,
   NocoBaseErrorFallback,
-} from "@/extensions/nocobase-error-boundary";
+} from "@/extensions/digiforce-error-boundary";
 
 import "./locales";
 import { portalI18nReady } from "./providers/i18n/runtime";

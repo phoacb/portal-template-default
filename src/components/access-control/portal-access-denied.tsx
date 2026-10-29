@@ -8,7 +8,7 @@ import {
   resolveRoleTitle,
   RoleSwitcher,
   UNION_ROLE,
-} from "@/extensions/nocobase-acl";
+} from "@/extensions/digiforce-acl";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,

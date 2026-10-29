@@ -10,7 +10,7 @@ import {
 import { AclGate } from "@/components/access-control/acl-gate";
 import { PortalAccessDeniedView } from "@/components/access-control/portal-access-denied";
 import { hasMultipleUserRoles } from "@/components/access-control/portal-access-denied-roles";
-import { resolveRoleSwitcherContext } from "@/extensions/nocobase-acl/components/role-switcher-context";
+import { resolveRoleSwitcherContext } from "@/extensions/digiforce-acl/components/role-switcher-context";
 import { starter as zhCN } from "@/locales/zh-CN";
 
 vi.mock("@refinedev/core", () => ({

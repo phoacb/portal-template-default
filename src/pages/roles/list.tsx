@@ -11,8 +11,8 @@ import { DataTableFilterDropdownText } from "@/components/data-table/data-table-
 import { DataTableSorter } from "@/components/data-table/data-table-sorter";
 import { ListView } from "@/components/resources/views/list-view";
 import { Badge } from "@/components/ui/badge";
-import { resolveRoleLabel } from "@/extensions/nocobase-users-example/role-utils";
-import type { RoleRecord } from "@/extensions/nocobase-users-example/types";
+import { resolveRoleLabel } from "@/extensions/digiforce-users-example/role-utils";
+import type { RoleRecord } from "@/extensions/digiforce-users-example/types";
 
 export const RoleList = () => {
   const translate = useTranslate();
