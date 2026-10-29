@@ -1,6 +1,6 @@
 import { translate } from "@digiforce/portal-sdk/i18n";
 
-import { NOCOBASE_ERROR_BOUNDARY_I18N_NAMESPACE } from "./locales";
+import { DIGIFORCE_ERROR_BOUNDARY_I18N_NAMESPACE } from "./locales";
 
 export type ErrorBoundaryLabels = {
   backHome: string;
@@ -49,7 +49,7 @@ export function getErrorBoundaryLabels(
       translate(
         keys[name],
         {
-          ns: NOCOBASE_ERROR_BOUNDARY_I18N_NAMESPACE,
+          ns: DIGIFORCE_ERROR_BOUNDARY_I18N_NAMESPACE,
           ...(locale ? { lng: locale } : {}),
         },
         defaults[name]

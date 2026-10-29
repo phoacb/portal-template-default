@@ -23,7 +23,7 @@ echarts.use([
   CanvasRenderer,
 ]);
 
-echarts.registerTheme("nocobase-dark", {
+echarts.registerTheme("digiforce-dark", {
   darkMode: true,
   backgroundColor: "transparent",
   textStyle: { color: "#d4d4d8" },

@@ -11,8 +11,8 @@ import {
 } from "lucide-react";
 import { MailUnreadProvider } from "./components/mail-unread";
 
-const nocobaseMailExtension: AppExtension = {
-  id: "nocobase-mail",
+const digiforceMailExtension: AppExtension = {
+  id: "digiforce-mail",
   Provider: MailUnreadProvider,
   dev: {
     resources: [
@@ -148,4 +148,4 @@ const nocobaseMailExtension: AppExtension = {
   },
 };
 
-export default nocobaseMailExtension;
+export default digiforceMailExtension;

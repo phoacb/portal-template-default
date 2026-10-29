@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { FileText, LoaderCircle } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
-import { getNocoBaseToolCallMetadata } from "../chat/tool-call-card";
+import { getDigiforceToolCallMetadata } from "../chat/tool-call-card";
 import type { AIToolRendererProps } from "./tool-renderer-provider";
 import {
   normalizeBusinessReportCharts,
@@ -73,7 +73,7 @@ export function BusinessReportRenderer({ part }: AIToolRendererProps) {
     }),
     [charts, input.fileName, input.markdown, reportSummary, title]
   );
-  const metadata = getNocoBaseToolCallMetadata(part);
+  const metadata = getDigiforceToolCallMetadata(part);
   const ready =
     part.state === "output-available" ||
     (metadata?.status === "success" &&

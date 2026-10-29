@@ -8,7 +8,7 @@ const WecomSignInButton = lazy(() => import("./wecom-sign-in-button"));
 const WecomAutoLoginProvider = lazy(() => import("./auto-login-provider"));
 
 const wecomAuthExtension: AppExtension = {
-  id: "nocobase-auth-wecom",
+  id: "digiforce-auth-wecom",
   AuthRuntimeProvider: WecomAutoLoginProvider,
   authRuntimePriority: 10,
   dev: {

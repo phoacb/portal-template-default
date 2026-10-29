@@ -1,6 +1,6 @@
-import type { NocoBaseStreamEvent } from "./stream-parser";
+import type { DigiforceStreamEvent } from "./stream-parser";
 
-export type NocoBaseToolCall = {
+export type DigiforceToolCall = {
   id?: string;
   index?: number;
   name?: string;
@@ -21,10 +21,10 @@ export type NocoBaseToolCall = {
 export const isRecord = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
 
-export const toolCallsFromEvent = (event: NocoBaseStreamEvent) => {
-  if (Array.isArray(event.body)) return event.body as NocoBaseToolCall[];
+export const toolCallsFromEvent = (event: DigiforceStreamEvent) => {
+  if (Array.isArray(event.body)) return event.body as DigiforceToolCall[];
   if (!isRecord(event.body) || !Array.isArray(event.body.toolCalls)) return [];
-  return event.body.toolCalls as NocoBaseToolCall[];
+  return event.body.toolCalls as DigiforceToolCall[];
 };
 
 export const parseToolInput = (input: unknown) => {
@@ -45,7 +45,7 @@ const pendingInvokeStatus = new Set([
   "running",
 ]);
 
-export const getToolCallState = (toolCall: NocoBaseToolCall) => {
+export const getToolCallState = (toolCall: DigiforceToolCall) => {
   const invokeStatus = String(toolCall.invokeStatus ?? "").toLowerCase();
   const resultStatus = String(toolCall.status ?? "").toLowerCase();
   const failed =
@@ -63,10 +63,10 @@ export const getToolCallState = (toolCall: NocoBaseToolCall) => {
   };
 };
 
-export const getToolProviderMetadata = (toolCall: NocoBaseToolCall) => {
+export const getToolProviderMetadata = (toolCall: DigiforceToolCall) => {
   const { invokeStatus, resultStatus } = getToolCallState(toolCall);
   return {
-    nocobase: {
+    digiforce: {
       requiresApproval:
         (invokeStatus === "interrupted" ||
           (!invokeStatus && toolCall.willInterrupt === true)) &&

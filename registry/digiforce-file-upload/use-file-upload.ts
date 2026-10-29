@@ -24,7 +24,7 @@ import type {
   FileUploadItem,
   FileUploadMessages,
   FileUploadMode,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
 } from "./types";
 
 export type UseFileUploadOptions = {
@@ -38,7 +38,7 @@ export type UseFileUploadOptions = {
   uploadFile?: FileUploadHandler;
   messages: FileUploadMessages;
   onUploadStart?: (file: File) => void;
-  onUploadComplete?: (record: NocoBaseFileRecord, file: File) => void;
+  onUploadComplete?: (record: DigiforceFileRecord, file: File) => void;
   onUploadError?: (error: Error, file: File) => void;
 };
 
@@ -186,7 +186,7 @@ export function useFileUpload({
       setStorageError(null);
 
       try {
-        let record: NocoBaseFileRecord;
+        let record: DigiforceFileRecord;
 
         if (uploadFile) {
           const validation = validateFileForField(file, descriptor, messages);

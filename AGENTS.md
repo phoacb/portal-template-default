@@ -1,6 +1,6 @@
 # Application Development Guidelines
 
-This repository is a starter for building a NocoBase-powered application. Keep changes focused on the application being built and follow these guidelines before introducing new abstractions.
+This repository is a starter for building a Digiforce-powered application. Keep changes focused on the application being built and follow these guidelines before introducing new abstractions.
 
 ## Reuse existing extensions
 
@@ -18,7 +18,7 @@ Portal production deployments serve the built `dist` output and do not install o
 
 ## Test at the correct boundary
 
-Put frontend logic and component tests under `tests/`. Keep them independent of backend data: pass ordinary props to components and test local rendering and interaction without mocking NocoBase APIs, authentication, ACL, or data providers. If behavior requires real data, authentication, roles, permissions, routing integration, files, AI, or another server capability, test it under `e2e/` with Playwright against a real NocoBase test environment. Do not make application tests depend on bundled Registry example pages.
+Put frontend logic and component tests under `tests/`. Keep them independent of backend data: pass ordinary props to components and test local rendering and interaction without mocking Digiforce APIs, authentication, ACL, or data providers. If behavior requires real data, authentication, roles, permissions, routing integration, files, AI, or another server capability, test it under `e2e/` with Playwright against a real Digiforce test environment. Do not make application tests depend on bundled Registry example pages.
 
 Run the relevant frontend tests while developing and update a focused E2E flow when a critical user workflow changes. Avoid tests that only assert that a component exists or duplicate implementation details.
 
@@ -36,10 +36,10 @@ Every page intended to appear in the sidebar must declare both its route and a `
 
 The bundled Registry routes are examples, not application structure. When beginning the real application, set `registryRoutesEnabled` to `false` in `src/routes.tsx` and define the application's own routes there. This removes Registry-contributed main routes, resources, and navigation without modifying installed extension source; extension providers, authentication adapters, and `/dev` showcases remain available.
 
-Route access currently centralizes role constraints only. Keep NocoBase resource/action, region, field, and record checks in the existing `CanAccess` and ACL boundaries close to the protected query or UI. Server ACL remains authoritative.
+Route access currently centralizes role constraints only. Keep Digiforce resource/action, region, field, and record checks in the existing `CanAccess` and ACL boundaries close to the protected query or UI. Server ACL remains authoritative.
 
 ## Develop Portal Registry items
 
-Canonical NocoBase Registry source lives under `registry/`. In this source repository, normal development and builds load it directly; do not copy it into `src/extensions` for preview. Registry items must import stable Portal runtime, client, authentication, ACL, routing, and extension contracts from documented `@nocobase/portal-sdk` exports. Imports to user-owned host UI and composition must use the `@/` alias. Relative imports must stay within that Registry item's own root so the item remains portable after installation. Registry items target this Portal Template's React, shadcn Base UI, and pnpm toolchain. They must never import Ant Design or NocoBase's Ant Design-based client components.
+Canonical Digiforce Registry source lives under `registry/`. In this source repository, normal development and builds load it directly; do not copy it into `src/extensions` for preview. Registry items must import stable Portal runtime, client, authentication, ACL, routing, and extension contracts from documented `@digiforce/portal-sdk` exports. Imports to user-owned host UI and composition must use the `@/` alias. Relative imports must stay within that Registry item's own root so the item remains portable after installation. Registry items target this Portal Template's React, shadcn Base UI, and pnpm toolchain. They must never import Ant Design or Digiforce's Ant Design-based client components.
 
 Keep Registry items portable and focused on reusable API adapters, hooks, components, and small demos. Update `registry.config.json` whenever an item's files, dependencies, or installation target changes. Validate Registry changes with the normal application build and the relevant regression scripts.

@@ -1,13 +1,13 @@
 import type { InferUIMessageChunk } from "ai";
 import type { AIChatMessage, AISubAgentConversation } from "./types";
-import type { NocoBaseStreamEvent } from "./stream-parser";
+import type { DigiforceStreamEvent } from "./stream-parser";
 import {
   getToolCallState,
   getToolProviderMetadata,
   isRecord,
   parseToolInput,
   toolCallsFromEvent,
-  type NocoBaseToolCall,
+  type DigiforceToolCall,
 } from "./stream-event-utils";
 
 type AIChatChunk = InferUIMessageChunk<AIChatMessage>;
@@ -53,7 +53,7 @@ const appendNarrative = (
 };
 
 const toToolPart = (
-  toolCall: NocoBaseToolCall
+  toolCall: DigiforceToolCall
 ): AIChatMessage["parts"][number] => {
   const toolCallId = toolCall.id ?? `tool-${crypto.randomUUID()}`;
   const toolName = toolCall.name ?? "tool";
@@ -96,7 +96,7 @@ const toToolPart = (
 
 const updateToolCalls = (
   message: AIChatMessage,
-  toolCalls: NocoBaseToolCall[]
+  toolCalls: DigiforceToolCall[]
 ) => {
   const parts = [...message.parts];
   for (const toolCall of toolCalls) {
@@ -163,8 +163,8 @@ export class SubAgentStreamAccumulator {
 
   private normalizeToolChunk(
     sessionId: string,
-    chunk: NocoBaseToolCall
-  ): NocoBaseToolCall | undefined {
+    chunk: DigiforceToolCall
+  ): DigiforceToolCall | undefined {
     const stream = this.getToolStream(sessionId);
     const indexedId =
       typeof chunk.index === "number"
@@ -201,8 +201,8 @@ export class SubAgentStreamAccumulator {
 
   private normalizeToolCall(
     sessionId: string,
-    toolCall: NocoBaseToolCall
-  ): NocoBaseToolCall {
+    toolCall: DigiforceToolCall
+  ): DigiforceToolCall {
     const stream = this.getToolStream(sessionId);
     const toolCallId =
       toolCall.id ?? stream.currentId ?? `tool-${crypto.randomUUID()}`;
@@ -222,7 +222,7 @@ export class SubAgentStreamAccumulator {
     };
   }
 
-  process(event: NocoBaseStreamEvent): AIChatChunk[] {
+  process(event: DigiforceStreamEvent): AIChatChunk[] {
     if (event.from !== "sub-agent" || !event.sessionId) return [];
     const username = event.username || "sub-agent";
     let conversation = this.conversations.get(event.sessionId) ?? {
@@ -277,7 +277,7 @@ export class SubAgentStreamAccumulator {
               event.body.invokeStatus ?? event.body.toolCall.invokeStatus,
             status: event.body.status ?? event.body.toolCall.status,
             content: event.body.content ?? event.body.toolCall.content,
-          } as NocoBaseToolCall)
+          } as DigiforceToolCall)
         : undefined;
       const toolCall = rawToolCall
         ? this.normalizeToolCall(event.sessionId, rawToolCall)

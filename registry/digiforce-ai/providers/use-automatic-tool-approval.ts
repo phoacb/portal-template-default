@@ -1,6 +1,6 @@
 import type { Chat } from "@ai-sdk/react";
 import { useCallback, useRef } from "react";
-import { getChatToolParts, getNocoBaseToolMetadata } from "./chat-message-utils";
+import { getChatToolParts, getDigiforceToolMetadata } from "./chat-message-utils";
 import type { AIChatMessage, AIToolCallDecision } from "./types";
 
 const isChatRunning = (chat: Chat<AIChatMessage>) =>
@@ -36,7 +36,7 @@ export function useAutomaticToolApproval({
           rerunRef.current.delete(conversationId);
           const pending = getChatToolParts(targetChat.messages)
             .filter(
-              ({ part }) => getNocoBaseToolMetadata(part)?.autoApprove === true
+              ({ part }) => getDigiforceToolMetadata(part)?.autoApprove === true
             )
             .flatMap(({ message, part }) => {
               const key = `${conversationId}:${message.id}:${part.toolCallId}`;

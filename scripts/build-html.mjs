@@ -9,8 +9,8 @@ const distDir = path.join(rootDir, "dist");
 const rawIndexPath = path.join(distDir, "index.raw.html");
 const indexPath = path.join(distDir, "index.html");
 
-const startMarker = "<!-- nocobase-runtime-config:start -->";
-const endMarker = "<!-- nocobase-runtime-config:end -->";
+const startMarker = "<!-- digiforce-runtime-config:start -->";
+const endMarker = "<!-- digiforce-runtime-config:end -->";
 
 const parseEnv = (content) => {
   if (typeof util.parseEnv === "function") return util.parseEnv(content);
@@ -135,11 +135,11 @@ const stripExistingRuntimeConfig = (html) => {
 loadBuildHtmlEnv();
 
 const portalBase = normalizePortalBase(
-  process.env.DIGIFORCE_PORTAL_BASE || process.env.NOCOBASE_PORTAL_BASE
+  process.env.DIGIFORCE_PORTAL_BASE || process.env.DIGIFORCE_PORTAL_BASE
 );
 const apiUrl =
   String(
-    process.env.DIGIFORCE_API_URL || process.env.NOCOBASE_API_URL || "/api"
+    process.env.DIGIFORCE_API_URL || process.env.DIGIFORCE_API_URL || "/api"
   ).trim() || "/api";
 const storagePrefix =
   String(
@@ -165,11 +165,11 @@ const runtimeConfig = `${startMarker}
   window.__digiforce_api_client_storage_prefix__ = ${JSON.stringify(storagePrefix)};
   window.__digiforce_api_client_storage_type__ = ${JSON.stringify(storageType)};
   window.__digiforce_api_client_share_token__ = ${JSON.stringify(shareToken)};
-  window.NOCOBASE_PORTAL_BASE = window.DIGIFORCE_PORTAL_BASE;
-  window.NOCOBASE_API_URL = window.DIGIFORCE_API_URL;
-  window.__nocobase_api_client_storage_prefix__ = window.__digiforce_api_client_storage_prefix__;
-  window.__nocobase_api_client_storage_type__ = window.__digiforce_api_client_storage_type__;
-  window.__nocobase_api_client_share_token__ = window.__digiforce_api_client_share_token__;
+  window.DIGIFORCE_PORTAL_BASE = window.DIGIFORCE_PORTAL_BASE;
+  window.DIGIFORCE_API_URL = window.DIGIFORCE_API_URL;
+  window.__digiforce_api_client_storage_prefix__ = window.__digiforce_api_client_storage_prefix__;
+  window.__digiforce_api_client_storage_type__ = window.__digiforce_api_client_storage_type__;
+  window.__digiforce_api_client_share_token__ = window.__digiforce_api_client_share_token__;
 </script>
 ${endMarker}
 `;

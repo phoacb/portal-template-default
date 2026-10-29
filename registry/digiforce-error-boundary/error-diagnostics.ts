@@ -146,7 +146,7 @@ export function formatPortalErrorDiagnostic(
     );
     appendDiagnosticLine(
       lines,
-      "NocoBase code",
+      "Digiforce code",
       readDiagnosticProperty(error, "code")
     );
     appendDiagnosticLine(

@@ -91,11 +91,11 @@ Use the fixed built-in formFiller Tool. Do not register Form filler as a custom 
 - Permission: ${toolPermission}
 - Provide a concise description, JSON inputSchema, and execute(args).
 
-Build visible state in the business work area that clearly changes when this Tool succeeds, including before/after values or a status/note update. Keep it separate from the fixed formFiller Tool. The execute function must update only the current React page state and return a serializable result. NocoBase runtime handles ASK / ALLOW execution behavior.
+Build visible state in the business work area that clearly changes when this Tool succeeds, including before/after values or a status/note update. Keep it separate from the fixed formFiller Tool. The execute function must update only the current React page state and return a serializable result. Digiforce runtime handles ASK / ALLOW execution behavior.
 `,
     }[capability];
 
-    return `Build a complete, self-contained NocoBase AI page-context scene.
+    return `Build a complete, self-contained Digiforce AI page-context scene.
 
 Scene
 - Title: ${sceneTitle}
@@ -125,7 +125,7 @@ Business surface and capability
 ${capabilityInstructions}
 
 Implementation requirements
-- Use AIProvider and AIPageElementProvider from the NocoBase AI Registry.
+- Use AIProvider and AIPageElementProvider from the Digiforce AI Registry.
 - Use AIChatProvider, ChatInline, AIChatWindow, and useAIChatController to create the working conversation beside the business surface.
 - The finished result must demonstrate the entire user journey: inspect or edit the business surface, trigger or compose the AI request, see the selected context, and observe the response or page update.
 - Keep page context serializable. Never pass React instances, DOM nodes, form instances, or callback functions to the backend.
@@ -134,7 +134,7 @@ Implementation requirements
 - Explicit task message.workContext takes precedence over trigger context and AIPageContextScope.
 - A task without explicit context inherits the surrounding scope.
 - Manual Pick affects only the current composed message.
-- Preserve NocoBase streaming, conversation history, Tool approval, and resume behavior.
+- Preserve Digiforce streaming, conversation history, Tool approval, and resume behavior.
 - Use shadcn/Base UI components and the existing Registry components.
 - Deliver the complete component code, including sample state, context registration, task configuration, chat layout, and all visible business UI.`;
   }, [

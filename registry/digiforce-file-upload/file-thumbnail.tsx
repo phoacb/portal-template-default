@@ -25,7 +25,7 @@ import {
   isPdfFile,
   isVideoFile,
 } from "./file-preview-types";
-import type { NocoBaseFileRecord } from "./types";
+import type { DigiforceFileRecord } from "./types";
 
 type FileThumbnailKind =
   | "archive"
@@ -41,7 +41,7 @@ type FileThumbnailKind =
   | "video";
 
 export type FileThumbnailProps = {
-  file?: NocoBaseFileRecord;
+  file?: DigiforceFileRecord;
   rawFile?: File;
   alt?: string;
   className?: string;
@@ -153,7 +153,7 @@ function getNameExtension(value?: string) {
   return dotIndex >= 0 ? value.slice(dotIndex).toLowerCase() : "";
 }
 
-function getRecordExtension(file?: NocoBaseFileRecord) {
+function getRecordExtension(file?: DigiforceFileRecord) {
   if (!file) return "";
   return file.extname
     ? file.extname.startsWith(".")
@@ -189,7 +189,7 @@ function getRawFileKind(file?: File): FileThumbnailKind {
   return "default";
 }
 
-function getFileThumbnailKind(file: NocoBaseFileRecord): FileThumbnailKind {
+function getFileThumbnailKind(file: DigiforceFileRecord): FileThumbnailKind {
   const extension = getRecordExtension(file) || getFileExtension(file);
   const mimetype = getFileMimeType(file);
 

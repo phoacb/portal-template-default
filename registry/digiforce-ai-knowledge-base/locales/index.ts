@@ -4,9 +4,9 @@ import { registerTranslationResources } from "@digiforce/portal-sdk/i18n";
 import enUS from "./en-US";
 import zhCN from "./zh-CN";
 
-export const NOCOBASE_AI_KNOWLEDGE_BASE_I18N_NAMESPACE = "nocobase-ai-knowledge-base";
+export const DIGIFORCE_AI_KNOWLEDGE_BASE_I18N_NAMESPACE = "digiforce-ai-knowledge-base";
 
-registerTranslationResources(NOCOBASE_AI_KNOWLEDGE_BASE_I18N_NAMESPACE, {
+registerTranslationResources(DIGIFORCE_AI_KNOWLEDGE_BASE_I18N_NAMESPACE, {
   "en-US": enUS,
   "zh-CN": zhCN,
 });
@@ -16,7 +16,7 @@ export function useT() {
 
   return useCallback(
     (key: string, options: Record<string, unknown> = {}) =>
-      translate(key, { ...options, ns: NOCOBASE_AI_KNOWLEDGE_BASE_I18N_NAMESPACE }, key),
+      translate(key, { ...options, ns: DIGIFORCE_AI_KNOWLEDGE_BASE_I18N_NAMESPACE }, key),
     [translate],
   );
 }

@@ -1,4 +1,4 @@
-export { NocoBaseAIService, nocobaseAIService } from "./nocobase-ai-service";
+export { DigiforceAIService, digiforceAIService } from "./digiforce-ai-service";
 export type {
   AIService,
   CreateAIConversationOptions,

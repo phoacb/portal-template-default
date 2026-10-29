@@ -48,7 +48,7 @@ export function useDingtalkSignIn(authenticator: Authenticator) {
       );
       if (!result?.url) {
         throw new Error(
-          "NocoBase did not return a DingTalk authorization URL."
+          "Digiforce did not return a DingTalk authorization URL."
         );
       }
       window.location.replace(digiforceClient.resolveUrl(result.url));

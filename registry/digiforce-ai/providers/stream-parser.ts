@@ -4,7 +4,7 @@ import {
   type ParseError,
 } from "eventsource-parser";
 
-export type NocoBaseStreamEvent = {
+export type DigiforceStreamEvent = {
   type: string;
   body?: unknown;
   sessionId?: string;
@@ -15,9 +15,9 @@ export type NocoBaseStreamEvent = {
 
 const MAX_SSE_BUFFER_SIZE = 16 * 1024 * 1024;
 
-export async function* parseNocoBaseSSE(
+export async function* parseDigiforceSSE(
   stream: ReadableStream<Uint8Array>
-): AsyncGenerator<NocoBaseStreamEvent> {
+): AsyncGenerator<DigiforceStreamEvent> {
   const reader = stream.getReader();
   const decoder = new TextDecoder();
   const events: EventSourceMessage[] = [];
@@ -36,7 +36,7 @@ export async function* parseNocoBaseSSE(
       if (!event) continue;
       const payload = event.data.trim();
       if (!payload || payload === "[DONE]") continue;
-      yield JSON.parse(payload) as NocoBaseStreamEvent;
+      yield JSON.parse(payload) as DigiforceStreamEvent;
     }
   };
 

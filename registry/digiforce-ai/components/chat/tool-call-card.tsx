@@ -82,7 +82,7 @@ const approvalFromPart = (
   part: ToolCallPart
 ): AIToolCallApproval | undefined => {
   if (!("callProviderMetadata" in part)) return undefined;
-  const metadata = part.callProviderMetadata?.nocobase;
+  const metadata = part.callProviderMetadata?.digiforce;
   if (!metadata || typeof metadata !== "object") return undefined;
   const requiresApproval = (metadata as { requiresApproval?: unknown })
     .requiresApproval;
@@ -91,7 +91,7 @@ const approvalFromPart = (
     : undefined;
 };
 
-export type NocoBaseToolCallMetadata = {
+export type DigiforceToolCallMetadata = {
   autoApprove?: boolean;
   invokeStatus?: string;
   messageId?: string;
@@ -100,11 +100,11 @@ export type NocoBaseToolCallMetadata = {
   status?: string;
 };
 
-export const getNocoBaseToolCallMetadata = (part: ToolCallPart) => {
+export const getDigiforceToolCallMetadata = (part: ToolCallPart) => {
   if (!("callProviderMetadata" in part)) return undefined;
-  const metadata = part.callProviderMetadata?.nocobase;
+  const metadata = part.callProviderMetadata?.digiforce;
   return metadata && typeof metadata === "object"
-    ? (metadata as NocoBaseToolCallMetadata)
+    ? (metadata as DigiforceToolCallMetadata)
     : undefined;
 };
 

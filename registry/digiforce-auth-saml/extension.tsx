@@ -8,7 +8,7 @@ const SamlSignInButton = lazy(() => import("./saml-sign-in-button"));
 const SamlAutoRedirectProvider = lazy(() => import("./auto-redirect-provider"));
 
 const samlAuthExtension: AppExtension = {
-  id: "nocobase-auth-saml",
+  id: "digiforce-auth-saml",
   AuthRuntimeProvider: SamlAutoRedirectProvider,
   authRuntimePriority: 20,
   dev: {

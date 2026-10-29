@@ -1,4 +1,4 @@
-import { NocoBaseErrorBoundary } from "@/extensions/digiforce-error-boundary";
+import { DigiforceErrorBoundary } from "@/extensions/digiforce-error-boundary";
 import { useTranslate } from "@refinedev/core";
 import type { PropsWithChildren } from "react";
 import { useLocation, useNavigate } from "react-router";
@@ -9,7 +9,7 @@ export function PageErrorBoundary({ children }: PropsWithChildren) {
   const translate = useTranslate();
 
   return (
-    <NocoBaseErrorBoundary
+    <DigiforceErrorBoundary
       variant="page"
       resetKeys={[location.pathname, location.search, location.hash]}
       context={{
@@ -43,6 +43,6 @@ export function PageErrorBoundary({ children }: PropsWithChildren) {
       onBackHome={() => navigate("/")}
     >
       {children}
-    </NocoBaseErrorBoundary>
+    </DigiforceErrorBoundary>
   );
 }

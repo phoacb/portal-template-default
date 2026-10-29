@@ -4,27 +4,27 @@ import { i18n, translate } from "@digiforce/portal-sdk/i18n";
 import { portalI18nReady } from "@/providers/i18n/runtime";
 import "../locales";
 
-describe("NocoBase AI translations", () => {
+describe("Digiforce AI translations", () => {
   beforeAll(() => portalI18nReady);
 
   it("provides the core English and Chinese interaction copy", async () => {
     await i18n.changeLanguage("en-US");
-    expect(translate("chat.conversations", { ns: "nocobase-ai" })).toBe(
+    expect(translate("chat.conversations", { ns: "digiforce-ai" })).toBe(
       "Conversations"
     );
     expect(
-      translate("tool.status.approvalRequired", { ns: "nocobase-ai" })
+      translate("tool.status.approvalRequired", { ns: "digiforce-ai" })
     ).toBe("Approval required");
 
     await i18n.changeLanguage("zh-CN");
-    expect(translate("navigation.chat", { ns: "nocobase-ai" })).toBe(
+    expect(translate("navigation.chat", { ns: "digiforce-ai" })).toBe(
       "聊天窗口"
     );
-    expect(translate("chat.composer.send", { ns: "nocobase-ai" })).toBe(
+    expect(translate("chat.composer.send", { ns: "digiforce-ai" })).toBe(
       "发送消息"
     );
     expect(
-      translate("pageElement.pick", { ns: "nocobase-ai" })
+      translate("pageElement.pick", { ns: "digiforce-ai" })
     ).toBe("选择一个页面元素");
   });
 });

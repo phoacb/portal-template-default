@@ -10,7 +10,7 @@ export function serializeReplyQuote(body: string, replyBody?: string) {
   if (!replyBody) return body;
   return [
     body,
-    '<div class="nocobase-quote nb-mail-quote" data-role="reply-quote">',
+    '<div class="digiforce-quote nb-mail-quote" data-role="reply-quote">',
     '<blockquote type="cite" style="border-left: 1px solid #ccc; padding-left: 8px; margin: 0;">',
     replyBody,
     "</blockquote>",

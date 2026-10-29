@@ -180,7 +180,7 @@ export function AclPatternsPage() {
         prompt={{
           title: "Resource navigation",
           description:
-            "Generate application resources, sidebar behavior, and guarded routes backed by NocoBase collections.",
+            "Generate application resources, sidebar behavior, and guarded routes backed by Digiforce collections.",
           defaultScene: "User and role administration",
           defaultTarget:
             "Allow administrators to open Users, but remove it from navigation and block its direct URL for other roles.",
@@ -215,7 +215,7 @@ export function AclPatternsPage() {
         prompt={{
           title: "Page permission",
           description:
-            "Generate a complete page whose availability depends on NocoBase permissions.",
+            "Generate a complete page whose availability depends on Digiforce permissions.",
           defaultScene: "User directory and account administration page",
           defaultTarget:
             "Allow administrators and user managers to render the complete page.",
@@ -293,11 +293,11 @@ export function AclPatternsPage() {
           defaultScene: "User administration table",
           defaultTarget:
             "Allow all actions for one user record and show a view-only row when update and delete are denied.",
-          requirements: `- Use the Starter dataProvider so X-With-ACL-Meta captures NocoBase allowedActions from list, get, and getMany responses.
+          requirements: `- Use the Starter dataProvider so X-With-ACL-Meta captures Digiforce allowedActions from list, get, and getMany responses.
 - Use the built-in Create, Show, Edit, and Delete buttons; do not manually compare user IDs or role names.
 - Collection-level denial hides the action everywhere.
 - Record-level allowedActions must hide or disable only the affected row action.
-- Keep 403 responses authenticated and let NocoBase perform the final action validation.`,
+- Keep 403 responses authenticated and let Digiforce perform the final action validation.`,
         }}
       >
         <OutcomeComparison
@@ -330,7 +330,7 @@ export function AclPatternsPage() {
         prompt={{
           title: "Field permission",
           description:
-            "Generate a form or detail page whose individual fields follow NocoBase field ACL.",
+            "Generate a form or detail page whose individual fields follow Digiforce field ACL.",
           defaultScene: "User profile edit form",
           defaultTarget:
             "Allow nickname editing, make email read-only, and hide phone when those fields are denied.",
@@ -338,7 +338,7 @@ export function AclPatternsPage() {
 - Pass the collection resource, application action, and exact field name.
 - Choose whether a denied field is hidden, replaced by read-only output, or shown with a custom fallback.
 - Do not infer field access from the overall edit permission.
-- Submit only values the current UI is allowed to edit; NocoBase still performs final field validation.`,
+- Submit only values the current UI is allowed to edit; Digiforce still performs final field validation.`,
         }}
       >
         <OutcomeComparison

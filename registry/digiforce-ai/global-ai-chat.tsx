@@ -10,7 +10,7 @@ import {
 import { RouteOverlayViewportContext } from "@digiforce/portal-sdk/routing";
 import {
   AIChatFloatingTrigger,
-  NocoBaseAIRootProvider,
+  DigiforceAIRootProvider,
   useAIPageElementPicker,
   type AIChatComposerAction,
 } from "./components";
@@ -25,26 +25,26 @@ import {
   useAIChatControllerState,
   useGlobalAIChatController,
 } from "./providers";
-import { nocobaseAIService } from "./services";
+import { digiforceAIService } from "./services";
 import { Globe2, MousePointer2 } from "lucide-react";
 import { useAITranslate } from "./locales/use-ai-translate";
 
 const DEFAULT_SIDE_PANEL_WIDTH = 450;
-export function NocoBaseAIExtensionProvider({
+export function DigiforceAIExtensionProvider({
   children,
   toolInvokers,
 }: PropsWithChildren<{ toolInvokers?: AIToolInvokerMap }>) {
   return (
-    <NocoBaseAIRootProvider
-      service={nocobaseAIService}
+    <DigiforceAIRootProvider
+      service={digiforceAIService}
       toolInvokers={toolInvokers}
     >
-      <NocoBaseAIGlobalEntry>{children}</NocoBaseAIGlobalEntry>
-    </NocoBaseAIRootProvider>
+      <DigiforceAIGlobalEntry>{children}</DigiforceAIGlobalEntry>
+    </DigiforceAIRootProvider>
   );
 }
 
-function NocoBaseAIGlobalEntry({ children }: PropsWithChildren) {
+function DigiforceAIGlobalEntry({ children }: PropsWithChildren) {
   const ai = useAI();
   const controller = useGlobalAIChatController();
   const { open } = useAIChatControllerState(controller);

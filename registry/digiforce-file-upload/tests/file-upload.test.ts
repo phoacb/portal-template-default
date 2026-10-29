@@ -4,7 +4,7 @@ import {
   allowsMultipleFiles,
   serializeFileFieldValue,
 } from "../form-value";
-import { isNocoBaseManagedFileUrl } from "../file-url-policy";
+import { isDigiforceManagedFileUrl } from "../file-url-policy";
 import {
   getAvailableFileCount,
   resolveFileUploadMode,
@@ -17,7 +17,7 @@ import {
 import type {
   FileFieldDescriptor,
   FileStorageInfo,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
 } from "../types";
 
 const multiDescriptor: FileFieldDescriptor = {
@@ -33,7 +33,7 @@ const singleDescriptor: FileFieldDescriptor = {
 };
 const localStorage: FileStorageInfo = { id: 1, name: "local", type: "local" };
 
-describe("NocoBase file upload", () => {
+describe("Digiforce file upload", () => {
   it("selects upload strategies from storage capabilities", () => {
     expect(resolveFileUploadMode(localStorage)).toBe("multipart");
     expect(
@@ -50,14 +50,14 @@ describe("NocoBase file upload", () => {
     expect(getAvailableFileCount(4, 1, 1, 5)).toBe(2);
   });
 
-  it("applies preview policy only to NocoBase-managed URLs", () => {
+  it("applies preview policy only to Digiforce-managed URLs", () => {
     const browserUrl = "https://portal.example.com/users";
     const apiUrl = "https://api.example.com/api";
     expect(
-      isNocoBaseManagedFileUrl("/storage/files/report.pdf", apiUrl, browserUrl)
+      isDigiforceManagedFileUrl("/storage/files/report.pdf", apiUrl, browserUrl)
     ).toBe(true);
     expect(
-      isNocoBaseManagedFileUrl(
+      isDigiforceManagedFileUrl(
         "https://bucket.example.com/report.pdf?X-Amz-Signature=abc",
         apiUrl,
         browserUrl
@@ -66,8 +66,8 @@ describe("NocoBase file upload", () => {
   });
 
   it("serializes values according to the field relation", () => {
-    const first: NocoBaseFileRecord = { id: 1, filename: "first.txt" };
-    const second: NocoBaseFileRecord = { id: 2, filename: "second.txt" };
+    const first: DigiforceFileRecord = { id: 1, filename: "first.txt" };
+    const second: DigiforceFileRecord = { id: 2, filename: "second.txt" };
     expect(allowsMultipleFiles(multiDescriptor)).toBe(true);
     expect(allowsMultipleFiles(singleDescriptor)).toBe(false);
     expect(serializeFileFieldValue(multiDescriptor, [first, second])).toEqual([

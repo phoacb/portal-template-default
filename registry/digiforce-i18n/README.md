@@ -1,12 +1,12 @@
-# NocoBase i18n
+# Digiforce i18n
 
-Optional NocoBase server-language integration and language controls for the
-NocoBase Admin Starter.
+Optional Digiforce server-language integration and language controls for the
+Digiforce Admin Starter.
 
 The Portal SDK owns the Refine i18n provider, i18next runtime, translation
 registration protocol, locale state, and shared `systemSettings:get` store.
 The application keeps its locale configuration and translation resources in
-template-owned source. This Registry adds the NocoBase-specific remote
+template-owned source. This Registry adds the Digiforce-specific remote
 capabilities:
 
 - load registered dynamic namespaces from `app:getLang`;
@@ -41,5 +41,5 @@ registerServerResourceNamespace("my-dynamic-namespace");
 ```
 
 Namespaces registered after startup are loaded incrementally. Existing exact
-NocoBase expressions such as `{{t("Orders")}}` remain supported by the
+Digiforce expressions such as `{{t("Orders")}}` remain supported by the
 Portal SDK's translation compatibility helper.

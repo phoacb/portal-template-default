@@ -23,6 +23,6 @@
   "menuAccent": "subtle",
   "registries": {
     "@digiforce": "http://localhost:5173/r/{name}.json",
-    "@nocobase": "http://localhost:5173/r/{name}.json"
+    "@digiforce": "http://localhost:5173/r/{name}.json"
   }
 }

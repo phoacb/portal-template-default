@@ -7,7 +7,7 @@ import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 const LdapSignInForm = lazy(() => import("./ldap-sign-in-form"));
 
 const ldapAuthExtension: AppExtension = {
-  id: "nocobase-auth-ldap",
+  id: "digiforce-auth-ldap",
   dev: {
     resources: [
       {

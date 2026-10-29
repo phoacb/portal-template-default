@@ -77,7 +77,7 @@ export function ChatSurface({
           }
         >
           <DialogPrimitive.Title className="sr-only">
-            {t("surface.title", "NocoBase AI employee")}
+            {t("surface.title", "Digiforce AI employee")}
           </DialogPrimitive.Title>
           <DialogPrimitive.Description className="sr-only">
             {expanded

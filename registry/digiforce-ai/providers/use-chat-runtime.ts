@@ -6,7 +6,7 @@ import {
   type MutableRefObject,
 } from "react";
 import type { AIChatAction, AIChatState } from "./chat-reducer";
-import { NocoBaseChatTransport } from "./chat-transport";
+import { DigiforceChatTransport } from "./chat-transport";
 import { findAIModel, getAIModelKey } from "./model";
 import type { useAI } from "./ai-provider";
 import {
@@ -48,7 +48,7 @@ export function useChatRuntime({
   dispatch: Dispatch<AIChatAction>;
 }) {
   const chatsRef = useRef(new Map<string, Chat<AIChatMessage>>());
-  const transportsRef = useRef(new Map<string, NocoBaseChatTransport>());
+  const transportsRef = useRef(new Map<string, DigiforceChatTransport>());
   const runtimeContextsRef = useRef(
     new Map<string, AIConversationRuntimeContext>()
   );
@@ -131,7 +131,7 @@ export function useChatRuntime({
           const previousConversationId = runtimeConversationId;
           chatsRef.current.delete(runtimeConversationId);
           chatsRef.current.set(sessionId, chat);
-          if (transport instanceof NocoBaseChatTransport) {
+          if (transport instanceof DigiforceChatTransport) {
             transportsRef.current.delete(previousConversationId);
             transportsRef.current.set(sessionId, transport);
           }
@@ -170,7 +170,7 @@ export function useChatRuntime({
         transport,
       });
       chatsRef.current.set(conversationId, chat);
-      if (transport instanceof NocoBaseChatTransport) {
+      if (transport instanceof DigiforceChatTransport) {
         transportsRef.current.set(conversationId, transport);
       }
       return chat;

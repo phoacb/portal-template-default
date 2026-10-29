@@ -17,13 +17,13 @@ import { getPreviewType } from "./file-preview-types";
 import type {
   FileFieldDescriptor,
   FilePreviewMessages,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
 } from "./types";
 
 export type FilePreviewDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  files: NocoBaseFileRecord[];
+  files: DigiforceFileRecord[];
   initialIndex?: number;
   descriptor?: FileFieldDescriptor;
   messages?: Partial<FilePreviewMessages>;

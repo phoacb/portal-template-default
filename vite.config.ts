@@ -44,7 +44,7 @@ export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const apiUrl =
     env.DIGIFORCE_API_URL ||
-    env.NOCOBASE_API_URL ||
+    env.DIGIFORCE_API_URL ||
     (command === "serve" ? "http://127.0.0.1:13000/api" : undefined);
   const proxyTarget = getDefaultProxyTarget(apiUrl);
   const proxyOrigin = proxyTarget
@@ -58,7 +58,7 @@ export default defineConfig(({ command, mode }) => {
     : undefined;
 
   const portalBase = normalizeBase(
-    env.DIGIFORCE_PORTAL_BASE || env.NOCOBASE_PORTAL_BASE
+    env.DIGIFORCE_PORTAL_BASE || env.DIGIFORCE_PORTAL_BASE
   );
   const registrySourceRoot = path.resolve(__dirname, "./registry");
   const extensionsRoot = fs.existsSync(registrySourceRoot)
@@ -74,7 +74,7 @@ export default defineConfig(({ command, mode }) => {
       __PORTAL_TEMPLATE_NAME__: JSON.stringify(portalTemplate.displayName),
       __PORTAL_TEMPLATE_VERSION__: JSON.stringify(portalTemplate.version),
     },
-    envPrefix: ["VITE_", "DIGIFORCE_", "NOCOBASE_", "API_CLIENT_"],
+    envPrefix: ["VITE_", "DIGIFORCE_", "DIGIFORCE_", "API_CLIENT_"],
     plugins: [
       portalSdkCompatibilityPlugin({ root: __dirname }),
       react(),

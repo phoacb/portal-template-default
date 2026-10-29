@@ -12,7 +12,7 @@ export function CasAuthDemoPage() {
     <AuthMethodDemo
       authType="CAS"
       methodName="Central Authentication Service"
-      description="Redirect users to a CAS server and capture the returned NocoBase token without coupling the page UI to CAS."
+      description="Redirect users to a CAS server and capture the returned Digiforce token without coupling the page UI to CAS."
     >
       <CasSignInButton authenticator={authenticator} onSignIn={() => {}} />
     </AuthMethodDemo>

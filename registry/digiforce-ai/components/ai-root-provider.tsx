@@ -9,17 +9,17 @@ import {
 } from "./tools/tool-renderer-provider";
 import type { AIPageContextFailurePolicy } from "./page-elements/page-element-provider";
 
-export type NocoBaseAIRootProviderProps = AIProviderProps & {
+export type DigiforceAIRootProviderProps = AIProviderProps & {
   toolRenderers?: AIToolRendererMap;
   contextFailurePolicy?: AIPageContextFailurePolicy;
 };
 
-export function NocoBaseAIRootProvider({
+export function DigiforceAIRootProvider({
   children,
   toolRenderers,
   contextFailurePolicy,
   ...aiProviderProps
-}: NocoBaseAIRootProviderProps) {
+}: DigiforceAIRootProviderProps) {
   return (
     <AIProvider {...aiProviderProps}>
       <AIToolRendererProvider renderers={toolRenderers}>

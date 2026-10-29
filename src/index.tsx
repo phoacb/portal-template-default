@@ -2,8 +2,8 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { captureAuthenticationCallback } from "@digiforce/portal-sdk/auth";
 import {
-  NocoBaseErrorBoundary,
-  NocoBaseErrorFallback,
+  DigiforceErrorBoundary,
+  DigiforceErrorFallback,
 } from "@/extensions/digiforce-error-boundary";
 
 import "./locales";
@@ -27,14 +27,14 @@ async function bootstrap() {
     }
 
     root.render(
-      <NocoBaseErrorBoundary variant="root" context={errorContext}>
+      <DigiforceErrorBoundary variant="root" context={errorContext}>
         <App />
-      </NocoBaseErrorBoundary>
+      </DigiforceErrorBoundary>
     );
   } catch (error) {
     console.error("Unable to bootstrap Portal", error);
     root.render(
-      <NocoBaseErrorFallback
+      <DigiforceErrorFallback
         variant="root"
         error={error}
         context={errorContext}

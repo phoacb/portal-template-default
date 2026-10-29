@@ -3,7 +3,7 @@ import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { Layers3 } from "lucide-react";
 
 const routeSurfacesExtension: AppExtension = {
-  id: "nocobase-route-surfaces",
+  id: "digiforce-route-surfaces",
   dev: {
     resources: [
       {

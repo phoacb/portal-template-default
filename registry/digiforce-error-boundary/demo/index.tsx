@@ -11,8 +11,8 @@ import { AlertTriangle, Boxes, LayoutPanelTop } from "lucide-react";
 import { useState } from "react";
 
 import {
-  NocoBaseErrorBoundary,
-  NocoBaseRuntimeStatus,
+  DigiforceErrorBoundary,
+  DigiforceRuntimeStatus,
   useErrorBoundary,
 } from "../index";
 
@@ -71,7 +71,7 @@ function BoundaryScenario({
   const [renderFailure, setRenderFailure] = useState(false);
 
   return (
-    <NocoBaseErrorBoundary
+    <DigiforceErrorBoundary
       variant={variant}
       onReset={() => setRenderFailure(false)}
       context={{
@@ -85,16 +85,16 @@ function BoundaryScenario({
         description={description}
         onRenderFailure={() => setRenderFailure(true)}
       />
-    </NocoBaseErrorBoundary>
+    </DigiforceErrorBoundary>
   );
 }
 
 function RootBoundaryPreview({ onClose }: { onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-background">
-      <NocoBaseErrorBoundary variant="root" onReset={onClose}>
+      <DigiforceErrorBoundary variant="root" onReset={onClose}>
         <RenderFailure active label="Root provider" />
-      </NocoBaseErrorBoundary>
+      </DigiforceErrorBoundary>
     </div>
   );
 }
@@ -159,7 +159,7 @@ function RuntimeStatusPreview({
   const scenario = runtimeScenarios[index];
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-background">
-      <NocoBaseRuntimeStatus
+      <DigiforceRuntimeStatus
         error={{ ...scenario, source: "http" }}
         onRetry={onClose}
         onLogout={scenario.code === "USER_HAS_NO_ROLES_ERR" ? onClose : undefined}
@@ -255,7 +255,7 @@ export default function ErrorBoundaryDemo() {
           </div>
           <CardTitle>Gateway and account states</CardTitle>
           <CardDescription>
-            Preview the original NocoBase error codes received over HTTP and WebSocket.
+            Preview the original Digiforce error codes received over HTTP and WebSocket.
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-2">

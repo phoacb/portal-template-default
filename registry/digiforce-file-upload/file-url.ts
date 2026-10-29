@@ -1,8 +1,8 @@
 import { digiforceClient } from "@digiforce/portal-sdk/client";
 
 import { getDataSourceHeaders } from "./storage";
-import { isNocoBaseManagedFileUrl } from "./file-url-policy";
-import type { FileFieldDescriptor, NocoBaseFileRecord } from "./types";
+import { isDigiforceManagedFileUrl } from "./file-url-policy";
+import type { FileFieldDescriptor, DigiforceFileRecord } from "./types";
 
 type TemporaryUrlResponse = {
   url?: string;
@@ -13,12 +13,12 @@ function resolveFileUrl(value?: string | null) {
   return value ? digiforceClient.resolveUrl(value) : "";
 }
 
-function getFileUrlSource(file: NocoBaseFileRecord) {
+function getFileUrlSource(file: DigiforceFileRecord) {
   return file.url || file.preview || file.path || "";
 }
 
-export function isNocoBaseFileUrl(value: string) {
-  return isNocoBaseManagedFileUrl(
+export function isDigiforceFileUrl(value: string) {
+  return isDigiforceManagedFileUrl(
     value,
     digiforceClient.getApiUrl(),
     typeof window === "undefined" ? undefined : window.location.href
@@ -41,27 +41,27 @@ function appendUrlFlag(value: string, flag: "download" | "preview") {
   }
 }
 
-export function getFileUrl(file: NocoBaseFileRecord) {
+export function getFileUrl(file: DigiforceFileRecord) {
   return resolveFileUrl(getFileUrlSource(file));
 }
 
-export function getPreviewFileUrl(file: NocoBaseFileRecord) {
+export function getPreviewFileUrl(file: DigiforceFileRecord) {
   const source = getFileUrlSource(file);
   const url = getFileUrl(file);
-  return isNocoBaseFileUrl(source) ? appendUrlFlag(url, "preview") : url;
+  return isDigiforceFileUrl(source) ? appendUrlFlag(url, "preview") : url;
 }
 
-export function getThumbnailUrl(file: NocoBaseFileRecord) {
+export function getThumbnailUrl(file: DigiforceFileRecord) {
   const source = file.preview || getFileUrlSource(file);
   const url = resolveFileUrl(source);
-  return isNocoBaseFileUrl(source) ? appendUrlFlag(url, "preview") : url;
+  return isDigiforceFileUrl(source) ? appendUrlFlag(url, "preview") : url;
 }
 
-export function getFileName(file: NocoBaseFileRecord) {
+export function getFileName(file: DigiforceFileRecord) {
   return file.title || file.filename || `file-${file.id}`;
 }
 
-export function getDownloadFileName(file: NocoBaseFileRecord) {
+export function getDownloadFileName(file: DigiforceFileRecord) {
   const filename = getFileName(file);
   if (file.extname && !filename.toLowerCase().endsWith(file.extname)) {
     return `${filename}${file.extname.startsWith(".") ? "" : "."}${
@@ -71,13 +71,13 @@ export function getDownloadFileName(file: NocoBaseFileRecord) {
   return filename;
 }
 
-export function getDownloadUrl(file: NocoBaseFileRecord) {
+export function getDownloadUrl(file: DigiforceFileRecord) {
   const source = getFileUrlSource(file);
   const url = getFileUrl(file);
-  return isNocoBaseFileUrl(source) ? appendUrlFlag(url, "download") : url;
+  return isDigiforceFileUrl(source) ? appendUrlFlag(url, "download") : url;
 }
 
-export function triggerFileDownload(file: NocoBaseFileRecord) {
+export function triggerFileDownload(file: DigiforceFileRecord) {
   const url = getDownloadUrl(file);
   if (!url || typeof document === "undefined") return;
 
@@ -91,7 +91,7 @@ export function triggerFileDownload(file: NocoBaseFileRecord) {
 }
 
 export async function createTemporaryFileUrl(
-  file: NocoBaseFileRecord,
+  file: DigiforceFileRecord,
   descriptor: FileFieldDescriptor
 ) {
   const response = await digiforceClient.action<TemporaryUrlResponse>(

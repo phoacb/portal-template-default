@@ -6,7 +6,7 @@ import { setLocalePersistence } from "@digiforce/portal-sdk/i18n";
 import { useSystemSettings } from "@digiforce/portal-sdk/system-settings";
 import { loadServerLocaleResources } from "./server-resources";
 
-export function NocoBaseI18nBootstrap({ children }: PropsWithChildren) {
+export function DigiforceI18nBootstrap({ children }: PropsWithChildren) {
   const { settings } = useSystemSettings();
   const [ready, setReady] = useState(false);
 
@@ -26,7 +26,7 @@ export function NocoBaseI18nBootstrap({ children }: PropsWithChildren) {
     let active = true;
     void loadServerLocaleResources(settings)
       .catch((error) => {
-        console.warn("Unable to load NocoBase locale resources", error);
+        console.warn("Unable to load Digiforce locale resources", error);
       })
       .finally(() => {
         if (active) setReady(true);

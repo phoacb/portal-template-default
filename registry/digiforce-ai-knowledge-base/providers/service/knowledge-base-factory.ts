@@ -27,7 +27,7 @@ type ActionOptions = {
   signal?: AbortSignal;
   unwrap?: "data" | "deep-data" | "none";
 };
-type NocoBaseKnowledgeBaseClient = {
+type DigiforceKnowledgeBaseClient = {
   action<T>(resource: string, action: string, options?: ActionOptions): Promise<T>;
 };
 type UnknownRecord = Record<string, unknown>;
@@ -173,7 +173,7 @@ function toSearchResult(value: unknown): KnowledgeBaseSearchResult {
 }
 
 const action = (
-  client: NocoBaseKnowledgeBaseClient,
+  client: DigiforceKnowledgeBaseClient,
   resource: string,
   name: string,
   options: ActionOptions = {},
@@ -212,7 +212,7 @@ const extensionOf = (file: File) => {
 };
 
 export function createKnowledgeBaseService(
-  client: NocoBaseKnowledgeBaseClient,
+  client: DigiforceKnowledgeBaseClient,
 ): KnowledgeBaseService {
   const getUploadStorage = async (knowledgeBaseKey: string, signal?: AbortSignal) =>
     storageFromPayload(

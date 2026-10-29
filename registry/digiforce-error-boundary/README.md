@@ -1,11 +1,11 @@
-# NocoBase error boundary
+# Digiforce error boundary
 
-`NocoBaseErrorBoundary` contains render, lifecycle, lazy-component, and errors
+`DigiforceErrorBoundary` contains render, lifecycle, lazy-component, and errors
 forwarded through `useErrorBoundary`. It presents the same copyable, redacted
 diagnostic format for root, page, and region failures.
 
-`NocoBaseRuntimeStatus` uses that diagnostic format for gateway, maintenance,
-and account states while preserving the original NocoBase error code. It is a
+`DigiforceRuntimeStatus` uses that diagnostic format for gateway, maintenance,
+and account states while preserving the original Digiforce error code. It is a
 status view rather than a React error boundary; mount it from the template's
 runtime gate instead of throwing HTTP errors into React.
 
@@ -15,7 +15,7 @@ application lifecycle message. A plain 503 remains actionable with a retry,
 while Bad Gateway and Gateway Timeout responses remain visible errors.
 
 The Registry item registers its user-facing copy under the
-`nocobase-error-boundary` translation namespace. Both the boundary and runtime
+`digiforce-error-boundary` translation namespace. Both the boundary and runtime
 status use the Portal SDK i18n runtime; the optional `locale` and `labels` props
 remain available for an explicit locale or application-specific copy.
 
@@ -30,9 +30,9 @@ or third-party renderers. Keep normal API errors in their owning page or region
 state instead of escalating every request failure to an error boundary.
 
 ```tsx
-import { NocoBaseErrorBoundary } from "@/extensions/digiforce-error-boundary";
+import { DigiforceErrorBoundary } from "@/extensions/digiforce-error-boundary";
 
-<NocoBaseErrorBoundary variant="region" resetKeys={[record.id]}>
+<DigiforceErrorBoundary variant="region" resetKeys={[record.id]}>
   <RiskyRegion />
-</NocoBaseErrorBoundary>;
+</DigiforceErrorBoundary>;
 ```

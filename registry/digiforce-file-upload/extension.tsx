@@ -2,8 +2,8 @@ import type { AppExtension } from "@digiforce/portal-sdk/extensions";
 import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { FolderOpen } from "lucide-react";
 
-const nocobaseFileUploadExtension: AppExtension = {
-  id: "nocobase-file-upload",
+const digiforceFileUploadExtension: AppExtension = {
+  id: "digiforce-file-upload",
   dev: {
     resources: [
       {
@@ -30,4 +30,4 @@ const nocobaseFileUploadExtension: AppExtension = {
   },
 };
 
-export default nocobaseFileUploadExtension;
+export default digiforceFileUploadExtension;

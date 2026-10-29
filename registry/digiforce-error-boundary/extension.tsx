@@ -3,7 +3,7 @@ import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { ShieldAlert } from "lucide-react";
 
 const errorBoundaryExtension: AppExtension = {
-  id: "nocobase-error-boundary",
+  id: "digiforce-error-boundary",
   dev: {
     resources: [
       {
@@ -12,7 +12,7 @@ const errorBoundaryExtension: AppExtension = {
         meta: {
           label: "Error boundaries",
           icon: <ShieldAlert />,
-          description: "Render boundaries and NocoBase runtime status patterns.",
+          description: "Render boundaries and Digiforce runtime status patterns.",
           acl: { type: "authenticated" },
         },
       },

@@ -8,7 +8,7 @@ const OidcSignInButton = lazy(() => import("./oidc-sign-in-button"));
 const OidcAutoRedirectProvider = lazy(() => import("./auto-redirect-provider"));
 
 const oidcAuthExtension: AppExtension = {
-  id: "nocobase-auth-oidc",
+  id: "digiforce-auth-oidc",
   AuthRuntimeProvider: OidcAutoRedirectProvider,
   authRuntimePriority: 20,
   dev: {

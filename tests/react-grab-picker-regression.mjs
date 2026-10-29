@@ -41,18 +41,18 @@ try {
     },
   };
   const defaultContent =
-    "[<div /> in NocoBaseRuntimeStatus (at runtime-status.tsx) in PortalRuntimeGate (at portal-runtime-gate.tsx) in App (at App.tsx)]";
+    "[<div /> in DigiforceRuntimeStatus (at runtime-status.tsx) in PortalRuntimeGate (at portal-runtime-gate.tsx) in App (at App.tsx)]";
   const context = {
     ...elementContext,
     stackString: [
       "",
-      "  in NocoBaseRuntimeStatus (at runtime-status.tsx)",
+      "  in DigiforceRuntimeStatus (at runtime-status.tsx)",
       "  in PortalRuntimeGate (at portal-runtime-gate.tsx)",
       "  in App (at App.tsx)",
     ].join("\n"),
     stack: [
       {
-        functionName: "NocoBaseRuntimeStatus",
+        functionName: "DigiforceRuntimeStatus",
         fileName: "runtime-status.tsx",
         lineNumber: 501,
         columnNumber: 7,
@@ -74,7 +74,7 @@ try {
       _debugStack: {
         stack: [
           "Error: react-stack-top-frame",
-          "    at NocoBaseRuntimeStatus (http://localhost:5173/x/admin/registry/digiforce-error-boundary/runtime-status.tsx?t=1:501:7)",
+          "    at DigiforceRuntimeStatus (http://localhost:5173/x/admin/registry/digiforce-error-boundary/runtime-status.tsx?t=1:501:7)",
         ].join("\n"),
       },
       _debugOwner: {
@@ -103,7 +103,7 @@ try {
       sourceRoot,
       "/x/admin/"
     ),
-    `[<div /> in NocoBaseRuntimeStatus (at ${sourceRoot}/registry/digiforce-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx:101:9) in App (at ${sourceRoot}/src/App.tsx:42:5)]`
+    `[<div /> in DigiforceRuntimeStatus (at ${sourceRoot}/registry/digiforce-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx:101:9) in App (at ${sourceRoot}/src/App.tsx:42:5)]`
   );
 
   const ambiguousContext = {
@@ -153,7 +153,7 @@ try {
       sourceRoot,
       "/x/admin/"
     ),
-    `[<div /> in NocoBaseRuntimeStatus (at ${sourceRoot}/registry/digiforce-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx) in App (at ${sourceRoot}/src/App.tsx)]`
+    `[<div /> in DigiforceRuntimeStatus (at ${sourceRoot}/registry/digiforce-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx) in App (at ${sourceRoot}/src/App.tsx)]`
   );
 
   const sharedFileFiber = {
@@ -3758,7 +3758,7 @@ try {
     assert.equal(activeCursorAttributes.size, 0);
     assert.equal(
       unregisteredPlugins.at(-1),
-      "nocobase-portal-copy-input-line"
+      "digiforce-portal-copy-input-line"
     );
   } finally {
     if (previousDocument === undefined) delete globalThis.document;

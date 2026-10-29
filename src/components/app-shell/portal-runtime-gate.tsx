@@ -17,7 +17,7 @@ import {
   type PropsWithChildren,
 } from "react";
 
-import { NocoBaseRuntimeStatus } from "@/extensions/digiforce-error-boundary";
+import { DigiforceRuntimeStatus } from "@/extensions/digiforce-error-boundary";
 
 export function PortalRuntimeGate({ children }: PropsWithChildren) {
   const runtimeState = useSyncExternalStore(
@@ -117,7 +117,7 @@ export function PortalRuntimeGate({ children }: PropsWithChildren) {
   };
 
   return (
-    <NocoBaseRuntimeStatus
+    <DigiforceRuntimeStatus
       error={runtimeError}
       onRetry={handleRetry}
       onLogout={

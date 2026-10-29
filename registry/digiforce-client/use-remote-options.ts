@@ -57,7 +57,7 @@ export function useRemoteOptions<TOption>({
   );
   const query = useInfiniteQuery({
     queryKey: [
-      "nocobase-remote-select",
+      "digiforce-remote-select",
       selectId,
       ...requestKey,
       pageSize,

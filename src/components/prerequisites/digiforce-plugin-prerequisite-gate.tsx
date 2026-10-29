@@ -13,23 +13,23 @@ import {
 } from "@/components/ui/empty";
 import { cn } from "@/lib/utils";
 import {
-  useNocoBasePluginPrerequisite,
-  type NocoBasePluginLane,
-  type NocoBasePluginRequirement,
-  type NocoBasePluginRequirementMode,
-} from "./nocobase-plugin-prerequisite";
+  useDigiforcePluginPrerequisite,
+  type DigiforcePluginLane,
+  type DigiforcePluginRequirement,
+  type DigiforcePluginRequirementMode,
+} from "./digiforce-plugin-prerequisite";
 
-export type NocoBasePluginPrerequisiteMessages = {
+export type DigiforcePluginPrerequisiteMessages = {
   unavailableTitle: ReactNode;
   unavailableDescription:
     | ReactNode
-    | ((missingPlugins: NocoBasePluginRequirement[]) => ReactNode);
+    | ((missingPlugins: DigiforcePluginRequirement[]) => ReactNode);
   errorTitle: ReactNode;
   errorDescription: ReactNode;
   retryLabel: ReactNode;
 };
 
-export function NocoBasePluginPrerequisiteGate({
+export function DigiforcePluginPrerequisiteGate({
   requirements,
   mode = "all",
   lane = "client-v2",
@@ -37,14 +37,14 @@ export function NocoBasePluginPrerequisiteGate({
   children,
   className,
 }: {
-  requirements: NocoBasePluginRequirement[];
-  mode?: NocoBasePluginRequirementMode;
-  lane?: NocoBasePluginLane;
-  messages: NocoBasePluginPrerequisiteMessages;
+  requirements: DigiforcePluginRequirement[];
+  mode?: DigiforcePluginRequirementMode;
+  lane?: DigiforcePluginLane;
+  messages: DigiforcePluginPrerequisiteMessages;
   children: ReactNode;
   className?: string;
 }) {
-  const state = useNocoBasePluginPrerequisite({ requirements, mode, lane });
+  const state = useDigiforcePluginPrerequisite({ requirements, mode, lane });
   const titleId = useId();
 
   if (state.status === "checking") {

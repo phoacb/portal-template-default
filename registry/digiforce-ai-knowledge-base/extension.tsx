@@ -12,14 +12,14 @@ const resource = (name: string, label: string, i18nKey: string, list: string, ic
     parent: group,
     label,
     i18nKey,
-    i18nOptions: { ns: "nocobase-ai-knowledge-base" },
+    i18nOptions: { ns: "digiforce-ai-knowledge-base" },
     icon,
     acl: { type: "authenticated" as const },
   },
 });
 
 const knowledgeBaseExtension: AppExtension = {
-  id: "nocobase-ai-knowledge-base",
+  id: "digiforce-ai-knowledge-base",
   dev: {
     resources: [
       {
@@ -27,7 +27,7 @@ const knowledgeBaseExtension: AppExtension = {
         meta: {
           label: "Knowledge base",
           i18nKey: "Knowledge base",
-          i18nOptions: { ns: "nocobase-ai-knowledge-base" },
+          i18nOptions: { ns: "digiforce-ai-knowledge-base" },
           icon: <BookOpenText />,
           description: "Five focused knowledge-base workflows and an isolated Knowledge base workspace.",
           acl: { type: "authenticated" },

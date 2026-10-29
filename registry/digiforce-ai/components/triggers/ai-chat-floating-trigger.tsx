@@ -4,7 +4,7 @@ import {
   useState,
   type PointerEvent as ReactPointerEvent,
 } from "react";
-import nocobaseAIChatIcon from "../../assets/nocobase-ai-chat.svg";
+import digiforceAIChatIcon from "../../assets/digiforce-ai-chat.svg";
 import { assetUrl, cn } from "@/lib/utils";
 import {
   useAI,
@@ -188,7 +188,7 @@ export function AIChatFloatingTrigger({
       >
         <span className="flex size-full overflow-hidden rounded-lg">
           <img
-            src={assetUrl(nocobaseAIChatIcon)}
+            src={assetUrl(digiforceAIChatIcon)}
             alt=""
             className="size-full object-contain"
           />

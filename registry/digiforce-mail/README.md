@@ -1,6 +1,6 @@
-# NocoBase Mail
+# Digiforce Mail
 
-Reusable mail inbox, compose, detail, and label components backed by the NocoBase mail API.
+Reusable mail inbox, compose, detail, and label components backed by the Digiforce mail API.
 
 After installation, import the components from `@/extensions/digiforce-mail`.
 
@@ -28,7 +28,7 @@ After installation, import the components from `@/extensions/digiforce-mail`.
 - Message detail resolves authenticated `cid:` inline images and keeps those images out of the
   regular attachment list.
 
-The mail API client (`mailApi`) uses `nocobaseClient` from `@digiforce/portal-sdk/client`. A compatible NocoBase backend with the mail plugin enabled is required.
+The mail API client (`mailApi`) uses `digiforceClient` from `@digiforce/portal-sdk/client`. A compatible Digiforce backend with the mail plugin enabled is required.
 
 ## Send modes
 
@@ -48,7 +48,7 @@ delivery jobs are visible together. Reusable compose forms can still opt into bu
 />
 ```
 
-Bulk and scheduled sending are separate modes, matching the NocoBase email
+Bulk and scheduled sending are separate modes, matching the Digiforce email
 manager backend. Bulk sending requires at least two recipients and does not
 support a scheduled start time.
 
@@ -63,7 +63,7 @@ Templates are stored in `mailTemplates`; the backend model stores template
 content but no subject. Signatures are stored per mail account in
 `mailAccounts.config.signatures`, so changing the selected sender also changes
 the available/default signature. Use `recipientOptions` on the compose
-components to add application-specific record recipients alongside NocoBase
+components to add application-specific record recipients alongside Digiforce
 users.
 
 Gmail aliases can be viewed and refreshed from Mail settings. Synced aliases are

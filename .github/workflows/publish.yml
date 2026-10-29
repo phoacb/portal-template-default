@@ -153,14 +153,14 @@ jobs:
             fi
 
             VERSION=$(node -p "require('./package.json').version")
-            node -e "const fs=require('fs');const pkg=require('./package.json');pkg.nocobase.defaultTemplateVersion=pkg.version;fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')"
+            node -e "const fs=require('fs');const pkg=require('./package.json');pkg.digiforce.defaultTemplateVersion=pkg.version;fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')"
 
             if git rev-parse --verify --quiet "refs/tags/v${VERSION}"; then
               echo "Git tag v${VERSION} already exists."
               exit 1
             fi
 
-            if npm view "@nocobase/portal-template-default@${VERSION}" version >/dev/null 2>&1; then
+            if npm view "@digiforce/portal-template-default@${VERSION}" version >/dev/null 2>&1; then
               VERIFY_TEMPLATE=true
             else
               PUBLISH_TEMPLATE=true
@@ -189,7 +189,7 @@ jobs:
           SDK_VERSION=$(node -p "require('./sdk/package.json').version")
 
           SDK_EXISTS=false
-          if npm view "@nocobase/portal-sdk@${SDK_VERSION}" version >/dev/null 2>&1; then
+          if npm view "@digiforce/portal-sdk@${SDK_VERSION}" version >/dev/null 2>&1; then
             SDK_EXISTS=true
           fi
 
@@ -209,7 +209,7 @@ jobs:
 
           if [ "$RELEASE_SDK" = true ]; then
             if [ "$SDK_EXISTS" = false ] && [ "$SDK_TAG_EXISTS" = true ]; then
-              echo "Git tag ${SDK_TAG} exists, but @nocobase/portal-sdk@${SDK_VERSION} is not published."
+              echo "Git tag ${SDK_TAG} exists, but @digiforce/portal-sdk@${SDK_VERSION} is not published."
               exit 1
             fi
 
@@ -224,13 +224,13 @@ jobs:
             fi
 
             if [ "$PUBLISH_SDK" = false ] && [ "$VERIFY_SDK" = false ] && [ "$TAG_SDK" = false ]; then
-              echo "@nocobase/portal-sdk@${SDK_VERSION} is already fully released."
+              echo "@digiforce/portal-sdk@${SDK_VERSION} is already fully released."
               echo "Choose template, or provide a new sdk_version."
               exit 1
             fi
           else
             if [ "$SDK_EXISTS" = false ]; then
-              echo "Template releases require a published @nocobase/portal-sdk@${SDK_VERSION}."
+              echo "Template releases require a published @digiforce/portal-sdk@${SDK_VERSION}."
               echo "Publish the SDK first or choose release_target=both."
               exit 1
             fi
@@ -296,10 +296,10 @@ jobs:
           SDK_VERSION: ${{ steps.release.outputs.sdk_version }}
         run: |
           mkdir -p "$RUNNER_TEMP/portal-sdk-remote" "$RUNNER_TEMP/portal-sdk-remote-unpacked"
-          npm pack "@nocobase/portal-sdk@${SDK_VERSION}" --pack-destination "$RUNNER_TEMP/portal-sdk-remote"
+          npm pack "@digiforce/portal-sdk@${SDK_VERSION}" --pack-destination "$RUNNER_TEMP/portal-sdk-remote"
           tar -xzf "$RUNNER_TEMP/portal-sdk-remote/"*.tgz -C "$RUNNER_TEMP/portal-sdk-remote-unpacked"
           if ! diff -ru "$RUNNER_TEMP/portal-sdk-remote-unpacked/package" "$RUNNER_TEMP/portal-sdk-local-unpacked/package"; then
-            echo "Published @nocobase/portal-sdk@${SDK_VERSION} differs from the current SDK package."
+            echo "Published @digiforce/portal-sdk@${SDK_VERSION} differs from the current SDK package."
             echo "Rerun with a new sdk_version."
             exit 1
           fi
@@ -310,11 +310,11 @@ jobs:
           VERSION: ${{ steps.release.outputs.version }}
         run: |
           mkdir -p "$RUNNER_TEMP/portal-template-remote" "$RUNNER_TEMP/portal-template-local-unpacked" "$RUNNER_TEMP/portal-template-remote-unpacked"
-          npm pack "@nocobase/portal-template-default@${VERSION}" --pack-destination "$RUNNER_TEMP/portal-template-remote"
+          npm pack "@digiforce/portal-template-default@${VERSION}" --pack-destination "$RUNNER_TEMP/portal-template-remote"
           tar -xzf "$RUNNER_TEMP/portal-template-local/"*.tgz -C "$RUNNER_TEMP/portal-template-local-unpacked"
           tar -xzf "$RUNNER_TEMP/portal-template-remote/"*.tgz -C "$RUNNER_TEMP/portal-template-remote-unpacked"
           if ! diff -ru "$RUNNER_TEMP/portal-template-remote-unpacked/package" "$RUNNER_TEMP/portal-template-local-unpacked/package"; then
-            echo "Published @nocobase/portal-template-default@${VERSION} differs from the current template package."
+            echo "Published @digiforce/portal-template-default@${VERSION} differs from the current template package."
             echo "Rerun with a new template version."
             exit 1
           fi
@@ -367,7 +367,7 @@ jobs:
             PUSH_REFS+=("refs/tags/v${VERSION}")
           fi
           if [ "$TAG_SDK" = true ]; then
-            git tag -a "portal-sdk-v${SDK_VERSION}" -m "@nocobase/portal-sdk@${SDK_VERSION}"
+            git tag -a "portal-sdk-v${SDK_VERSION}" -m "@digiforce/portal-sdk@${SDK_VERSION}"
             PUSH_REFS+=("refs/tags/portal-sdk-v${SDK_VERSION}")
           fi
           git push --atomic origin "${PUSH_REFS[@]}"

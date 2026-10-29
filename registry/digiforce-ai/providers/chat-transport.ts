@@ -1,7 +1,7 @@
 import type { ChatTransport } from "ai";
 import type { AIService } from "../services";
 import type { AIChatMessage, AIChatRequestContext } from "./types";
-import { createNocoBaseUIMessageStream } from "./ui-message-stream";
+import { createDigiforceUIMessageStream } from "./ui-message-stream";
 
 const messageText = (message?: AIChatMessage) =>
   message?.parts
@@ -9,7 +9,7 @@ const messageText = (message?: AIChatMessage) =>
     .map((part) => part.text)
     .join("\n") ?? "";
 
-export class NocoBaseChatTransport implements ChatTransport<AIChatMessage> {
+export class DigiforceChatTransport implements ChatTransport<AIChatMessage> {
   private pendingResend?: { messageId: string };
   private pendingConversationResume?: { message?: AIChatMessage };
   private pendingToolResume?: {
@@ -72,7 +72,7 @@ export class NocoBaseChatTransport implements ChatTransport<AIChatMessage> {
     const context = this.options.getContext();
     if (context.model.configured === false) {
       throw new Error(
-        "No enabled LLM model is configured in NocoBase. Configure and enable an LLM service before starting a conversation."
+        "No enabled LLM model is configured in Digiforce. Configure and enable an LLM service before starting a conversation."
       );
     }
     let sessionId = context.sessionId;
@@ -95,7 +95,7 @@ export class NocoBaseChatTransport implements ChatTransport<AIChatMessage> {
         },
         abortSignal
       );
-      return createNocoBaseUIMessageStream(stream);
+      return createDigiforceUIMessageStream(stream);
     }
 
     if (!sessionId) {
@@ -141,7 +141,7 @@ export class NocoBaseChatTransport implements ChatTransport<AIChatMessage> {
       abortSignal
     );
 
-    return createNocoBaseUIMessageStream(stream);
+    return createDigiforceUIMessageStream(stream);
   }
 
   async reconnectToStream() {
@@ -158,7 +158,7 @@ export class NocoBaseChatTransport implements ChatTransport<AIChatMessage> {
       const stream = await this.options.service.resumeConversationStream(
         context.sessionId
       );
-      return createNocoBaseUIMessageStream(stream, null, {
+      return createDigiforceUIMessageStream(stream, null, {
         seedMessage: pendingConversationResume?.message,
       });
     }
@@ -173,7 +173,7 @@ export class NocoBaseChatTransport implements ChatTransport<AIChatMessage> {
       },
       webSearch: context.task?.webSearch,
     });
-    return createNocoBaseUIMessageStream(
+    return createDigiforceUIMessageStream(
       stream,
       pendingToolResume.responseMessageId,
       {

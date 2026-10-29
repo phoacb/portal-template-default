@@ -11,7 +11,7 @@ export type KnowledgeBaseError = {
 };
 
 type UnknownRecord = Record<string, unknown>;
-type NocoBaseHttpErrorLike = Pick<DigiforceHttpError, "message" | "status" | "payload">;
+type DigiforceHttpErrorLike = Pick<DigiforceHttpError, "message" | "status" | "payload">;
 type NormalizedRuntimeError = { message: string; status?: number };
 
 const isRecord = (value: unknown): value is UnknownRecord =>
@@ -69,9 +69,9 @@ const errorDetail = (value: unknown): UnknownRecord | undefined => {
     : undefined;
 };
 
-const isNocoBaseHttpError = (value: unknown): value is NocoBaseHttpErrorLike => {
+const isDigiforceHttpError = (value: unknown): value is DigiforceHttpErrorLike => {
   if (!(value instanceof Error) || value.name !== "DigiforceHttpError") return false;
-  const candidate = value as unknown as Partial<NocoBaseHttpErrorLike>;
+  const candidate = value as unknown as Partial<DigiforceHttpErrorLike>;
   return typeof candidate.status === "number";
 };
 
@@ -79,7 +79,7 @@ const numberValue = (value: unknown) => (typeof value === "number" ? value : und
 const messageValue = (value: unknown) => (typeof value === "string" ? value : undefined);
 
 const normalizeDigiforceRuntimeError = (error: unknown): NormalizedRuntimeError => {
-  if (isNocoBaseHttpError(error)) {
+  if (isDigiforceHttpError(error)) {
     const detail = errorDetail(error.payload);
     return {
       message: messageValue(detail?.message) ?? error.message,
@@ -90,13 +90,13 @@ const normalizeDigiforceRuntimeError = (error: unknown): NormalizedRuntimeError 
   const detail = errorDetail(error);
   if (detail) {
     return {
-      message: messageValue(detail.message) ?? "NocoBase request failed",
+      message: messageValue(detail.message) ?? "Digiforce request failed",
       status: numberValue(detail.status),
     };
   }
 
   if (error instanceof Error) return { message: error.message };
-  return { message: typeof error === "string" && error ? error : "NocoBase request failed" };
+  return { message: typeof error === "string" && error ? error : "Digiforce request failed" };
 };
 
 export function normalizeKnowledgeBaseError(
@@ -105,7 +105,7 @@ export function normalizeKnowledgeBaseError(
 ): KnowledgeBaseError {
   const normalized = normalizeDigiforceRuntimeError(error);
   const message =
-    normalized.message && normalized.message !== "NocoBase request failed" ? normalized.message : fallback;
+    normalized.message && normalized.message !== "Digiforce request failed" ? normalized.message : fallback;
 
   return {
     status: normalized.status,

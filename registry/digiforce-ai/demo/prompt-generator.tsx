@@ -148,7 +148,7 @@ function PromptGeneratorContent() {
         "Render ChatInline in the target region with a mobile-first width around 390px and preserve the same responsive AIChatWindow API.",
     }[placement];
 
-    return `Add the standard NocoBase AI conversation to ${
+    return `Add the standard Digiforce AI conversation to ${
       target || "the target page"
     }.
 
@@ -174,7 +174,7 @@ Conversation capabilities:
 - Side panel can expand to a 95% dialog and collapse back: ${
       capabilities.panelExpansion
     }
-- Tool approval follows NocoBase permissions. Always show Allow / Deny when the backend marks a tool as ASK.
+- Tool approval follows Digiforce permissions. Always show Allow / Deny when the backend marks a tool as ASK.
 
 Implementation requirements:
 - Use AIProvider at application level and AIChatProvider with a stable id for this chat instance.
@@ -184,11 +184,11 @@ Implementation requirements:
 - When the right panel is expandable, render one AIChatWindow inside ChatSurface and change only its variant between "side-panel" and "dialog". Put ChatSurfaceActions in the window header.
 - Keep the generic Tool Call shell responsible for status, ASK approval, errors, and disclosure. Register business-specific bodies through AIToolRendererProvider.
 - Include the built-in specialized Tool Card renderers. This is part of the standard AI chat capability, not an optional page setting.
-- Register browser-side tool implementations through AIProvider.toolInvokers. After all interrupted calls are approved, the provider executes these handlers and sends their results when resuming the NocoBase conversation.
+- Register browser-side tool implementations through AIProvider.toolInvokers. After all interrupted calls are approved, the provider executes these handlers and sends their results when resuming the Digiforce conversation.
 - Pass application actions through composerActions.
-- AIChatProvider handles NocoBase ASK decisions and resumes tool execution. Use onToolCallDecision only for application-specific side effects or telemetry.
+- AIChatProvider handles Digiforce ASK decisions and resumes tool execution. Use onToolCallDecision only for application-specific side effects or telemetry.
 - Use shadcn/Base UI components only; do not introduce Ant Design, Radix, or Zustand.
-- Match the existing NocoBase ChatBox behavior and black/white/gray visual system.`;
+- Match the existing Digiforce ChatBox behavior and black/white/gray visual system.`;
   }, [capabilities, messagePresentation, panelWidth, placement, target]);
 
   const previewChat =
@@ -330,7 +330,7 @@ Implementation requirements:
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="400">400px</SelectItem>
-                  <SelectItem value="450">450px · NocoBase default</SelectItem>
+                  <SelectItem value="450">450px · Digiforce default</SelectItem>
                   <SelectItem value="520">520px</SelectItem>
                 </SelectContent>
               </Select>

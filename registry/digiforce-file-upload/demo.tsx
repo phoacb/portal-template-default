@@ -23,10 +23,10 @@ import { FileUploadField } from "./file-upload-field";
 import type {
   FileFieldDescriptor,
   FileUploadFieldValue,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
 } from "./types";
 
-type ManagedFileRecord = NocoBaseFileRecord & {
+type ManagedFileRecord = DigiforceFileRecord & {
   demoSource: "mock" | "uploaded";
 };
 
@@ -83,11 +83,11 @@ const mockFiles: ManagedFileRecord[] = [
   {
     id: "mock-markdown",
     demoSource: "mock",
-    title: "NocoBase README",
+    title: "Digiforce README",
     filename: "README.md",
     extname: ".md",
     mimetype: "text/markdown",
-    url: "https://raw.githubusercontent.com/nocobase/nocobase/main/README.md",
+    url: "https://raw.githubusercontent.com/digiforce/digiforce/main/README.md",
   },
   {
     id: "mock-audio",
@@ -152,7 +152,7 @@ export function FileManagerDemoPage() {
             Upload files
           </CardTitle>
           <CardDescription>
-            Files are uploaded to the configured NocoBase storage. Images, PDF,
+            Files are uploaded to the configured Digiforce storage. Images, PDF,
             text, audio, video, and Office documents use their matching previewer.
           </CardDescription>
         </CardHeader>

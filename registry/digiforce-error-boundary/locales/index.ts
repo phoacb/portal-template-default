@@ -3,10 +3,10 @@ import { registerTranslationResources } from "@digiforce/portal-sdk/i18n";
 import enUS from "./en-US";
 import zhCN from "./zh-CN";
 
-export const NOCOBASE_ERROR_BOUNDARY_I18N_NAMESPACE =
-  "nocobase-error-boundary";
+export const DIGIFORCE_ERROR_BOUNDARY_I18N_NAMESPACE =
+  "digiforce-error-boundary";
 
-registerTranslationResources(NOCOBASE_ERROR_BOUNDARY_I18N_NAMESPACE, {
+registerTranslationResources(DIGIFORCE_ERROR_BOUNDARY_I18N_NAMESPACE, {
   "en-US": enUS,
   "zh-CN": zhCN,
 });

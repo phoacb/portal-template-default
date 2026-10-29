@@ -39,7 +39,7 @@ import type {
   FileUploadMessages,
   FileUploadMode,
   FilePreviewMessages,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
 } from "./types";
 
 export type FileUploadFieldProps = Omit<ComponentProps<"div">, "onChange"> & {
@@ -55,7 +55,7 @@ export type FileUploadFieldProps = Omit<ComponentProps<"div">, "onChange"> & {
   messages?: Partial<FileUploadMessages>;
   previewMessages?: Partial<FilePreviewMessages>;
   onUploadStart?: (file: File) => void;
-  onUploadComplete?: (record: NocoBaseFileRecord, file: File) => void;
+  onUploadComplete?: (record: DigiforceFileRecord, file: File) => void;
   onUploadError?: (error: Error, file: File) => void;
 };
 

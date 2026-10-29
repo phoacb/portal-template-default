@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { DigiforceClient } from "@digiforce/portal-sdk/client";
-import { NocoBaseChatTransport } from "../providers/chat-transport";
+import { DigiforceChatTransport } from "../providers/chat-transport";
 import { StreamCoalescer } from "../providers/stream-coalescer";
 import { SubAgentStreamAccumulator } from "../providers/sub-agent-stream";
 
@@ -104,7 +104,7 @@ describe("AI streaming", () => {
         ]);
       },
     };
-    const transport = new NocoBaseChatTransport({
+    const transport = new DigiforceChatTransport({
       service: service as any,
       getContext: () => ({
         sessionId: "conversation-context",

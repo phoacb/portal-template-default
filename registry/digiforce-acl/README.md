@@ -1,13 +1,13 @@
-# NocoBase ACL UI
+# Digiforce ACL UI
 
-Reusable ACL composition components for the NocoBase Refine starter.
+Reusable ACL composition components for the Digiforce Refine starter.
 
 After installation, import the components from `@/extensions/digiforce-acl`.
 
 - The Starter's `CanAccess` supports role, resource, record, and field checks.
 - `AclPage` combines page-level permissions.
 - `AclRegion` hides or replaces individual data regions.
-- `AclField` applies NocoBase field whitelists.
+- `AclField` applies Digiforce field whitelists.
 - `RoleSwitcher` can be placed in any application surface. It supports
   normal roles, Anonymous when enabled, and Full permissions through the
   `__union__` role when the system role mode allows it.
@@ -72,7 +72,7 @@ function AuditLogsRoute() {
 
 The route runtime marks generated non-collection resources as authenticated.
 Use the `collection`, `snippet`, and `route` ACL metadata variants when a
-resource should also participate in NocoBase permission checks.
+resource should also participate in Digiforce permission checks.
 
 The underlying `accessControlProvider`, `roles:check` cache, record permissions,
 and Refine integration are provided by the compatible Starter.

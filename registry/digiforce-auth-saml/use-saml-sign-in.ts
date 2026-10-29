@@ -36,7 +36,7 @@ export function useSamlSignIn(authenticator: Authenticator) {
         }
       );
       if (!authUrl) {
-        throw new Error("NocoBase did not return a SAML authorization URL.");
+        throw new Error("Digiforce did not return a SAML authorization URL.");
       }
       window.location.replace(digiforceClient.resolveUrl(authUrl));
     } catch (cause) {

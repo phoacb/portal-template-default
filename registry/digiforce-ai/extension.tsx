@@ -1,4 +1,4 @@
-import { NocoBaseAIExtensionProvider } from "./global-ai-chat";
+import { DigiforceAIExtensionProvider } from "./global-ai-chat";
 import type { AppExtension } from "@digiforce/portal-sdk/extensions";
 import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import {
@@ -11,9 +11,9 @@ import {
 } from "lucide-react";
 import "./locales";
 
-const nocobaseAIExtension: AppExtension = {
-  id: "nocobase-ai",
-  Provider: NocoBaseAIExtensionProvider,
+const digiforceAIExtension: AppExtension = {
+  id: "digiforce-ai",
+  Provider: DigiforceAIExtensionProvider,
   dev: {
     resources: [
       {
@@ -21,7 +21,7 @@ const nocobaseAIExtension: AppExtension = {
         meta: {
           label: "AI Components",
           i18nKey: "navigation.group",
-          i18nOptions: { ns: "nocobase-ai" },
+          i18nOptions: { ns: "digiforce-ai" },
           icon: <Bot />,
           acl: { type: "authenticated" },
         },
@@ -33,10 +33,10 @@ const nocobaseAIExtension: AppExtension = {
           parent: "ai-components",
           label: "Chat window",
           i18nKey: "navigation.chat",
-          i18nOptions: { ns: "nocobase-ai" },
+          i18nOptions: { ns: "digiforce-ai" },
           icon: <MessageSquare />,
           description:
-            "Build freely with AI while NocoBase keeps the application reliable.",
+            "Build freely with AI while Digiforce keeps the application reliable.",
           acl: { type: "authenticated" },
         },
       },
@@ -47,7 +47,7 @@ const nocobaseAIExtension: AppExtension = {
           parent: "ai-components",
           label: "Floating chat",
           i18nKey: "navigation.floating",
-          i18nOptions: { ns: "nocobase-ai" },
+          i18nOptions: { ns: "digiforce-ai" },
           icon: <PanelRight />,
           acl: { type: "authenticated" },
         },
@@ -59,7 +59,7 @@ const nocobaseAIExtension: AppExtension = {
           parent: "ai-components",
           label: "Employee tasks",
           i18nKey: "navigation.tasks",
-          i18nOptions: { ns: "nocobase-ai" },
+          i18nOptions: { ns: "digiforce-ai" },
           icon: <Sparkles />,
           acl: { type: "authenticated" },
         },
@@ -71,7 +71,7 @@ const nocobaseAIExtension: AppExtension = {
           parent: "ai-components",
           label: "Page context",
           i18nKey: "navigation.context",
-          i18nOptions: { ns: "nocobase-ai" },
+          i18nOptions: { ns: "digiforce-ai" },
           icon: <MousePointer2 />,
           acl: { type: "authenticated" },
         },
@@ -83,7 +83,7 @@ const nocobaseAIExtension: AppExtension = {
           parent: "ai-components",
           label: "Tool cards",
           i18nKey: "navigation.tools",
-          i18nOptions: { ns: "nocobase-ai" },
+          i18nOptions: { ns: "digiforce-ai" },
           icon: <Wrench />,
           acl: { type: "authenticated" },
         },
@@ -140,4 +140,4 @@ const nocobaseAIExtension: AppExtension = {
   },
 };
 
-export default nocobaseAIExtension;
+export default digiforceAIExtension;

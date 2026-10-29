@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { CheckCircle2, GitBranch } from "lucide-react";
 import { useState } from "react";
 import { MarkdownMessage } from "../chat/markdown-message";
-import { getNocoBaseToolCallMetadata } from "../chat/tool-call-card";
+import { getDigiforceToolCallMetadata } from "../chat/tool-call-card";
 import type { AIToolRendererProps } from "./tool-renderer-provider";
 import { asRecord, asString } from "./tool-renderer-utils";
 import { useAITranslate } from "../../locales/use-ai-translate";
@@ -16,7 +16,7 @@ export function WorkflowRenderer({
 }: AIToolRendererProps) {
   const t = useAITranslate();
   const input = asRecord(part.input);
-  const metadata = getNocoBaseToolCallMetadata(part);
+  const metadata = getDigiforceToolCallMetadata(part);
   const entries = Object.entries(asRecord(input.result));
   const [action, setAction] = useState<"approve" | "reject" | "revise">();
   const [decided, setDecided] = useState(false);

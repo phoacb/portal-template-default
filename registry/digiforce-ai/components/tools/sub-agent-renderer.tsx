@@ -3,7 +3,7 @@ import { Bot, ChevronDown, LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import { useAI } from "../../providers";
 import { AIEmployeeAvatar } from "../chat/ai-employee-avatar";
-import { getNocoBaseToolCallMetadata } from "../chat/tool-call-card";
+import { getDigiforceToolCallMetadata } from "../chat/tool-call-card";
 import type { AIToolRendererProps } from "./tool-renderer-provider";
 import { asRecord, asString } from "./tool-renderer-utils";
 import { useAITranslate } from "../../locales/use-ai-translate";
@@ -19,7 +19,7 @@ export function SubAgentRenderer({ part }: AIToolRendererProps) {
     : t("chat.aiEmployee", "AI employee");
   const [expanded, setExpanded] = useState(false);
   const question = asString(input.question);
-  const metadata = getNocoBaseToolCallMetadata(part);
+  const metadata = getDigiforceToolCallMetadata(part);
   const generating =
     part.state !== "output-available" &&
     part.state !== "output-error" &&

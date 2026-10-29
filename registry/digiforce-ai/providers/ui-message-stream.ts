@@ -1,5 +1,5 @@
 import type { InferUIMessageChunk } from "ai";
-import { parseNocoBaseSSE, type NocoBaseStreamEvent } from "./stream-parser";
+import { parseDigiforceSSE, type DigiforceStreamEvent } from "./stream-parser";
 import { StreamCoalescer } from "./stream-coalescer";
 import {
   getToolCallState,
@@ -7,7 +7,7 @@ import {
   isRecord,
   parseToolInput,
   toolCallsFromEvent,
-  type NocoBaseToolCall,
+  type DigiforceToolCall,
 } from "./stream-event-utils";
 import { SubAgentStreamAccumulator } from "./sub-agent-stream";
 import type { AIChatMessage } from "./types";
@@ -26,17 +26,17 @@ type BufferedVisualDelta = {
 };
 
 type BufferedSubAgentEvent = {
-  event: NocoBaseStreamEvent;
+  event: DigiforceStreamEvent;
   content: string;
 };
 
 type BufferedSubAgentToolEvent = {
-  event: NocoBaseStreamEvent;
-  chunks: NocoBaseToolCall[];
+  event: DigiforceStreamEvent;
+  chunks: DigiforceToolCall[];
   size: number;
 };
 
-const reasoningContent = (event: NocoBaseStreamEvent) => {
+const reasoningContent = (event: DigiforceStreamEvent) => {
   if (typeof event.body === "object" && event.body) {
     const content = (event.body as { content?: unknown }).content;
     return typeof content === "string" ? content : "";
@@ -72,7 +72,7 @@ const mergeToolCallChunks = (
   };
 };
 
-export function createNocoBaseUIMessageStream(
+export function createDigiforceUIMessageStream(
   stream: ReadableStream<Uint8Array>,
   messageId: string | null = `assistant-${crypto.randomUUID()}`,
   options: { waitForNewMessage?: boolean; seedMessage?: AIChatMessage } = {}
@@ -136,7 +136,7 @@ export function createNocoBaseUIMessageStream(
         },
       });
 
-      const enqueueSubAgentToolEvent = (event: NocoBaseStreamEvent) => {
+      const enqueueSubAgentToolEvent = (event: DigiforceStreamEvent) => {
         const sessionId = event.sessionId;
         if (!sessionId) return;
         const chunks = toolCallsFromEvent(event);
@@ -193,7 +193,7 @@ export function createNocoBaseUIMessageStream(
         );
       };
 
-      const enqueueSubAgentNarrativeEvent = (event: NocoBaseStreamEvent) => {
+      const enqueueSubAgentNarrativeEvent = (event: DigiforceStreamEvent) => {
         const sessionId = event.sessionId;
         if (!sessionId) return;
         const content =
@@ -237,7 +237,7 @@ export function createNocoBaseUIMessageStream(
       };
 
       try {
-        for await (const event of parseNocoBaseSSE(stream)) {
+        for await (const event of parseDigiforceSSE(stream)) {
           if (event.type !== "tool_call_chunks") {
             toolInputDeltas.flushAll();
           }
@@ -381,7 +381,7 @@ export function createNocoBaseUIMessageStream(
           if (event.type === "tool_call_status" && isRecord(event.body)) {
             finishActiveNarrative();
             const toolCall = isRecord(event.body.toolCall)
-              ? (event.body.toolCall as NocoBaseToolCall)
+              ? (event.body.toolCall as DigiforceToolCall)
               : undefined;
             const toolCallId = toolCall?.id;
             if (toolCallId) {
@@ -396,7 +396,7 @@ export function createNocoBaseUIMessageStream(
                     ? event.body.status
                     : toolCall.status,
                 content: event.body.content ?? toolCall.content,
-              } satisfies NocoBaseToolCall;
+              } satisfies DigiforceToolCall;
               const toolState = getToolCallState(mergedToolCall);
               const { invokeStatus, resultStatus } = toolState;
               const toolName =

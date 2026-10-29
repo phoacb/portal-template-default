@@ -1,5 +1,5 @@
 import { LoadingState } from "@/components/app-shell/loading-state";
-import { NocoBaseErrorBoundary } from "@/extensions/digiforce-error-boundary";
+import { DigiforceErrorBoundary } from "@/extensions/digiforce-error-boundary";
 import { LoaderCircle } from "lucide-react";
 import { lazy, Suspense } from "react";
 import type { AIToolRendererProps } from "./tool-renderer-provider";
@@ -33,10 +33,10 @@ export function ChartRenderer({ part }: AIToolRendererProps) {
     );
   }
   return (
-    <NocoBaseErrorBoundary variant="region" resetKeys={[part.input]}>
+    <DigiforceErrorBoundary variant="region" resetKeys={[part.input]}>
       <div className="rounded-lg border bg-background p-3">
         <ChartPreview options={options} />
       </div>
-    </NocoBaseErrorBoundary>
+    </DigiforceErrorBoundary>
   );
 }

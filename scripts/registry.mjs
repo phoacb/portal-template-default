@@ -53,7 +53,7 @@ const config = JSON.parse(
 const itemNames = new Set();
 const filesByRoot = new Map();
 const portalSdkImport = "@digiforce/portal-sdk";
-const legacyPortalSdkImport = "@nocobase/portal-sdk";
+const legacyPortalSdkImport = "@digiforce/portal-sdk";
 const sourceItems = config.items.map((item) => {
   if (!item.name || itemNames.has(item.name)) {
     throw new Error(`Registry item name must be unique: ${item.name}`);

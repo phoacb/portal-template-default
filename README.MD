@@ -1,7 +1,7 @@
 # Digiforce Portal Template
 
 A React and shadcn/ui template for building standalone frontends backed by
-Digiforce (with NocoBase compatibility).
+Digiforce (with Digiforce compatibility).
 
 ## Quick start
 
@@ -22,10 +22,10 @@ DIGIFORCE_API_URL=/api
 DIGIFORCE_PORTAL_BASE=/
 ```
 
-- `DIGIFORCE_API_URL` (or `NOCOBASE_API_URL`) is the Digiforce REST API root and must include `/api`.
+- `DIGIFORCE_API_URL` (or `DIGIFORCE_API_URL`) is the Digiforce REST API root and must include `/api`.
   Same-origin deployments normally use `/api`. During local development, an
   absolute URL is handled through the Vite proxy.
-- `DIGIFORCE_PORTAL_BASE` (or `NOCOBASE_PORTAL_BASE`) is the public path where the Portal is mounted. Use
+- `DIGIFORCE_PORTAL_BASE` (or `DIGIFORCE_PORTAL_BASE`) is the public path where the Portal is mounted. Use
   `/` for root development or set the deployment path before building.
 - `DIGIFORCE_API_TOKEN` can provide a temporary development token. Never commit
   real tokens.
@@ -95,7 +95,7 @@ npm template contains the default extensions under `src/extensions` instead.
 ## Authentication
 
 Basic username or email and password login is built in. The default login page
-also renders enabled NocoBase authentication methods when their frontend
+also renders enabled Digiforce authentication methods when their frontend
 Registry adapters are installed.
 
 Customize `src/pages/login/index.tsx` to replace the whole login page, or use
@@ -108,7 +108,7 @@ Frontend logic and component tests live under `tests/` and run with Vitest and
 Testing Library. Registry-owned tests live beside each item under
 `registry/<name>/tests`, while Portal SDK tests live under `sdk/tests` and run
 through the SDK package. These tests exercise local behavior without mocking
-NocoBase APIs, authentication, ACL, or data providers. Put behavior that needs
+Digiforce APIs, authentication, ACL, or data providers. Put behavior that needs
 real server data under `e2e/` instead.
 
 ```bash
@@ -118,16 +118,16 @@ pnpm test:coverage
 pnpm test:sdk
 ```
 
-Playwright E2E tests connect to a real NocoBase environment. The included smoke
+Playwright E2E tests connect to a real Digiforce environment. The included smoke
 test signs in through the actual Portal login page, verifies the server session,
 and confirms that authentication survives a reload. It does not depend on any
 Registry example page.
 
 Copy `.env.e2e.example` to `.env.e2e` and provide a dedicated test account.
 Playwright always starts an isolated Portal dev server at
-`http://127.0.0.1:4173` (configurable with `NOCOBASE_E2E_PORT`) and stops it when
-the run finishes. Set `NOCOBASE_E2E_API_URL` to the real NocoBase backend and
-`NOCOBASE_PORTAL_BASE` to the Portal path under test. The default command never
+`http://127.0.0.1:4173` (configurable with `DIGIFORCE_E2E_PORT`) and stops it when
+the run finishes. Set `DIGIFORCE_E2E_API_URL` to the real Digiforce backend and
+`DIGIFORCE_PORTAL_BASE` to the Portal path under test. The default command never
 reuses a manually started frontend.
 
 ```bash
@@ -137,7 +137,7 @@ pnpm test:e2e:ui
 ```
 
 Reusable E2E helpers currently live in `e2e/support`. They provide environment
-and basename resolution, NocoBase resource/action requests, API sign-in and
+and basename resolution, Digiforce resource/action requests, API sign-in and
 session checks, and browser session installation. Keep business-specific test
 data and assertions in the application. These helpers can move into the Portal
 SDK after their application-facing contract has stabilized.
@@ -147,13 +147,13 @@ published template contains materialized extensions instead of `registry/`,
 but their tests remain source-repository checks and are not copied into user
 projects.
 Default Template source upgrades are documented in the
-[template migration guide](https://github.com/nocobase/portal-template-default/blob/main/MIGRATION.md).
+[template migration guide](https://github.com/digiforce/portal-template-default/blob/main/MIGRATION.md).
 SDK API and compatibility changes are documented separately in the
-[Portal SDK migration guide](https://github.com/nocobase/portal-template-default/blob/main/sdk/MIGRATION.md).
+[Portal SDK migration guide](https://github.com/digiforce/portal-template-default/blob/main/sdk/MIGRATION.md).
 
 ## Learn more
 
-- [NocoBase documentation](https://docs.nocobase.com/)
+- [Digiforce documentation](https://docs.digiforce.com/)
 - [Refine documentation](https://refine.dev/docs/)
 - [shadcn/ui documentation](https://ui.shadcn.com/)
 

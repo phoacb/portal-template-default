@@ -35,7 +35,7 @@ export type FileStorageInfo = {
   title?: string;
   type: string;
   rules?: StorageUploadRules;
-  // Newer NocoBase versions may expose this capability from storages:check.
+  // Newer Digiforce versions may expose this capability from storages:check.
   clientUpload?: boolean;
 };
 
@@ -44,7 +44,7 @@ export type StorageCheckResult = {
   storage: FileStorageInfo;
 };
 
-export type NocoBaseFileRecord = {
+export type DigiforceFileRecord = {
   id: string | number;
   title?: string;
   filename: string;
@@ -59,8 +59,8 @@ export type NocoBaseFileRecord = {
 };
 
 export type FileUploadFieldValue =
-  | NocoBaseFileRecord
-  | NocoBaseFileRecord[]
+  | DigiforceFileRecord
+  | DigiforceFileRecord[]
   | null;
 
 export type SerializedFileFieldValue =
@@ -85,7 +85,7 @@ export type FileUploadHandlerOptions = {
 
 export type FileUploadHandler = (
   options: FileUploadHandlerOptions
-) => Promise<NocoBaseFileRecord>;
+) => Promise<DigiforceFileRecord>;
 
 export type FileUploadItem = {
   key: string;
@@ -99,7 +99,7 @@ export type FileUploadItem = {
     | "done"
     | "error"
     | "cancelled";
-  record?: NocoBaseFileRecord;
+  record?: DigiforceFileRecord;
   error?: Error;
 };
 

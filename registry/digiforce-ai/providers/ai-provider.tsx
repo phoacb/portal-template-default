@@ -7,8 +7,8 @@ import {
   useState,
   type PropsWithChildren,
 } from "react";
-import { nocobaseAIService, type AIService } from "../services";
-import { NocoBaseChatTransport } from "./chat-transport";
+import { digiforceAIService, type AIService } from "../services";
+import { DigiforceChatTransport } from "./chat-transport";
 import { useAIChatController, type AIChatController } from "./chat-controller";
 import {
   AIFormRegistryProvider,
@@ -95,7 +95,7 @@ function AIProviderRuntime({
   children,
   employees: providedEmployees,
   models: providedModels,
-  service = nocobaseAIService,
+  service = digiforceAIService,
   toolInvokers,
   globalController: providedGlobalController,
 }: AIProviderProps) {
@@ -175,7 +175,7 @@ function AIProviderRuntime({
           error:
             employeesResult.reason instanceof Error
               ? employeesResult.reason
-              : new Error("Unable to load NocoBase AI configuration."),
+              : new Error("Unable to load Digiforce AI configuration."),
         });
         return;
       }
@@ -187,7 +187,7 @@ function AIProviderRuntime({
           models: [],
           status: "error",
           error: new Error(
-            "No AI employees are available for the current NocoBase user."
+            "No AI employees are available for the current Digiforce user."
           ),
         });
         return;
@@ -199,10 +199,10 @@ function AIProviderRuntime({
         modelsResult.status === "rejected"
           ? modelsResult.reason instanceof Error
             ? modelsResult.reason
-            : new Error("Unable to load enabled AI models from NocoBase.")
+            : new Error("Unable to load enabled AI models from Digiforce.")
           : models.length
           ? undefined
-          : new Error("No enabled AI models were returned by NocoBase.");
+          : new Error("No enabled AI models were returned by Digiforce.");
       setLiveConfiguration({
         employees,
         models: models.length ? models : [UNCONFIGURED_MODEL],
@@ -305,7 +305,7 @@ function AIProviderRuntime({
       invokeToolCall,
       canAutoApproveToolCall,
       createTransport: (options) =>
-        new NocoBaseChatTransport({ service, ...options }),
+        new DigiforceChatTransport({ service, ...options }),
     }),
     [
       configurationError,

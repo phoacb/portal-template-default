@@ -159,7 +159,7 @@ export default function DingtalkAutoLoginProvider({
           }
         );
         if (!signedIn.token) {
-          throw new Error("NocoBase did not return an access token.");
+          throw new Error("Digiforce did not return an access token.");
         }
         digiforceClient.setAuthenticator(result.authenticator);
         digiforceClient.setToken(signedIn.token);

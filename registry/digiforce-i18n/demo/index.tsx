@@ -29,13 +29,13 @@ export function I18nDemoPage() {
           <Badge variant="outline">{locale}</Badge>
         </div>
         <h1 className="text-2xl font-semibold tracking-[-0.025em] sm:text-3xl">
-          {t("demo.title", { ns: "nocobase-i18n" }, "Internationalization")}
+          {t("demo.title", { ns: "digiforce-i18n" }, "Internationalization")}
         </h1>
         <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
           {t(
             "demo.description",
-            { ns: "nocobase-i18n" },
-            "Optional NocoBase server translations and language controls built on the Starter's internationalization runtime."
+            { ns: "digiforce-i18n" },
+            "Optional Digiforce server translations and language controls built on the Starter's internationalization runtime."
           )}
         </p>
       </header>
@@ -47,14 +47,14 @@ export function I18nDemoPage() {
               <Languages className="size-4" />
               {t(
                 "demo.switcher.title",
-                { ns: "nocobase-i18n" },
+                { ns: "digiforce-i18n" },
                 "Language switcher"
               )}
             </CardTitle>
             <CardDescription>
               {t(
                 "demo.switcher.description",
-                { ns: "nocobase-i18n" },
+                { ns: "digiforce-i18n" },
                 "The same reusable component is also integrated into the signed-in user menu."
               )}
             </CardDescription>
@@ -69,15 +69,15 @@ export function I18nDemoPage() {
                   <p className="text-sm font-medium">
                     {t(
                       "demo.switcher.unavailable.title",
-                      { ns: "nocobase-i18n" },
+                      { ns: "digiforce-i18n" },
                       "Only one language is enabled"
                     )}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-muted-foreground">
                     {t(
                       "demo.switcher.unavailable.description",
-                      { ns: "nocobase-i18n" },
-                      "Enable another language in NocoBase system settings to display the switcher."
+                      { ns: "digiforce-i18n" },
+                      "Enable another language in Digiforce system settings to display the switcher."
                     )}
                   </p>
                 </div>
@@ -90,12 +90,12 @@ export function I18nDemoPage() {
           icon={<PanelsTopLeft className="size-4" />}
           title={t(
             "demo.frontend.title",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "Application UI translations"
           )}
           description={t(
             "demo.frontend.description",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "The Starter provides the runtime while application and Registry components keep their messages in local resource files."
           )}
         >
@@ -103,7 +103,7 @@ export function I18nDemoPage() {
             <DemoRow
               label={t(
                 "language.current",
-                { ns: "nocobase-i18n" },
+                { ns: "digiforce-i18n" },
                 "Current language"
               )}
               value={locale}
@@ -111,7 +111,7 @@ export function I18nDemoPage() {
             <DemoRow
               label={t(
                 "demo.frontend.actions",
-                { ns: "nocobase-i18n" },
+                { ns: "digiforce-i18n" },
                 "Common actions"
               )}
               value={`${t("buttons.apply", "Apply")} · ${t(
@@ -126,12 +126,12 @@ export function I18nDemoPage() {
           icon={<Database className="size-4" />}
           title={t(
             "demo.server.title",
-            { ns: "nocobase-i18n" },
-            "NocoBase metadata translations"
+            { ns: "digiforce-i18n" },
+            "Digiforce metadata translations"
           )}
           description={t(
             "demo.server.description",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "Collection and field labels are loaded from dynamic server namespaces such as lm-collections."
           )}
         >

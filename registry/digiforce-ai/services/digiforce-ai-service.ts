@@ -14,7 +14,7 @@ import type { UpdateToolCallDecisionOptions } from "./types";
 import {
   getToolCallState,
   getToolProviderMetadata,
-  type NocoBaseToolCall,
+  type DigiforceToolCall,
 } from "../providers/stream-event-utils";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -98,7 +98,7 @@ const toHistoryMessage = (
     if (!isRecord(rawToolCall)) continue;
     const toolCallId = String(rawToolCall.id ?? `tool-${crypto.randomUUID()}`);
     const toolName = String(rawToolCall.name ?? "tool");
-    const toolCall = rawToolCall as NocoBaseToolCall;
+    const toolCall = rawToolCall as DigiforceToolCall;
     const { failed, completed } = getToolCallState(toolCall);
     const callProviderMetadata = getToolProviderMetadata(toolCall);
     parts.push(
@@ -198,7 +198,7 @@ const toHistoryMessage = (
   };
 };
 
-export class NocoBaseAIService implements AIService {
+export class DigiforceAIService implements AIService {
   constructor(private readonly client: DigiforceClient = digiforceClient) {}
 
   async listEmployees() {
@@ -451,4 +451,4 @@ export class NocoBaseAIService implements AIService {
   }
 }
 
-export const nocobaseAIService = new NocoBaseAIService();
+export const digiforceAIService = new DigiforceAIService();

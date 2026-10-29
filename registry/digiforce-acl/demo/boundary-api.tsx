@@ -26,7 +26,7 @@ const canAccessProps: PropRow[] = [
     "resource / action",
     "string",
     "undefined",
-    "Checks a NocoBase resource action. When roles are also present, both checks must pass.",
+    "Checks a Digiforce resource action. When roles are also present, both checks must pass.",
   ],
   [
     "id / field",
@@ -75,7 +75,7 @@ const regionProps: PropRow[] = [
     "resource",
     "string",
     "required",
-    "NocoBase collection or ACL resource name.",
+    "Digiforce collection or ACL resource name.",
   ],
   [
     "action",
@@ -93,7 +93,7 @@ const regionProps: PropRow[] = [
     "dataSourceKey",
     "string",
     "undefined",
-    "Selects a non-main NocoBase data source.",
+    "Selects a non-main Digiforce data source.",
   ],
   [
     "fallback",
@@ -109,7 +109,7 @@ const fieldProps: PropRow[] = [
     "resource",
     "string",
     "required",
-    "NocoBase collection containing the field.",
+    "Digiforce collection containing the field.",
   ],
   [
     "action",
@@ -117,12 +117,12 @@ const fieldProps: PropRow[] = [
     "required",
     "The action whose field whitelist should be checked.",
   ],
-  ["field", "string", "required", "Exact NocoBase field name."],
+  ["field", "string", "required", "Exact Digiforce field name."],
   [
     "dataSourceKey",
     "string",
     "undefined",
-    "Selects a non-main NocoBase data source.",
+    "Selects a non-main Digiforce data source.",
   ],
   [
     "fallback",
