@@ -42,9 +42,7 @@ const findProjectPackage = () => {
         const pkg = candidate.value;
         if (
           pkg?.digiforce?.defaultTemplateVersion ||
-          pkg?.nocobase?.defaultTemplateVersion ||
-          pkg?.name === "@digiforce/portal-template-default" ||
-          pkg?.name === "@nocobase/portal-template-default"
+          pkg?.name === "@digiforce/portal-template-default"
         ) {
           return candidate;
         }
@@ -66,9 +64,7 @@ export const checkTemplateCompatibility = ({ silent = false } = {}) => {
   const project = projectPackage?.value;
   const templateVersion =
     project?.digiforce?.defaultTemplateVersion ??
-    project?.nocobase?.defaultTemplateVersion ??
-    (project?.name === "@digiforce/portal-template-default" ||
-    project?.name === "@nocobase/portal-template-default"
+    (project?.name === "@digiforce/portal-template-default"
       ? project.version
       : undefined);
 

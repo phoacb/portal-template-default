@@ -19,5 +19,6 @@ registry.json
 public/r/
 scripts/registry.mjs
 sdk/
+
 .github/
 !.gitignore

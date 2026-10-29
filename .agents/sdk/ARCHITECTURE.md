@@ -41,7 +41,7 @@ SDK `@digiforce/portal-sdk` đóng vai trò là tầng **Runtime & Core API Adap
 2. `@digiforce/portal-sdk/client`: Instance HTTP client (`digiforceClient`), WebSocket client, session storage (`authSession`), chuẩn hóa lỗi runtime/HTTP.
 3. `@digiforce/portal-sdk/auth`: Refine `authProvider`, cơ chế xác thực SSO/password/authenticator, token renew capture.
 4. `@digiforce/portal-sdk/acl`: Phân quyền RBAC, kiểm tra quyền action/resource/record, `aclStore`, `accessControlProvider`, role switching.
-5. `@digiforce/portal-sdk/data`: Refine `dataProvider`, chuyển đổi bộ lọc Refine sang cú pháp NocoBase (`$eq`, `$in`, `$includes`,...), tự động cập nhật cache quyền record (`cacheAllowedActions`).
+5. `@digiforce/portal-sdk/data`: Refine `dataProvider`, chuyển đổi bộ lọc Refine sang cú pháp NocoBase (`$eq`, `$in`, `$includes`, `$empty`, `$notEmpty`,...), tự động cập nhật cache quyền record (`cacheAllowedActions`). Lưu ý: Toán tử `null`/`nnull` bắt buộc ánh xạ sang `$empty`/`$notEmpty` thay vì `$null` do Postgres/NocoBase backend không hỗ trợ `$null`.
 6. `@digiforce/portal-sdk/routing`: Định nghĩa route (`defineAppRoutes`), compile sang Refine resources (`buildRouteResources`), render route có Guard/Suspense (`renderAppRoutes`).
 7. `@digiforce/portal-sdk/extensions`: Cấu trúc plugin/extension runtime (`AppExtension`), thu thập và sắp xếp theo priority (`collectAppExtensionContributions`).
 8. `@digiforce/portal-sdk/system-settings`: Cache cấu hình hệ thống từ backend (`loadSystemSettings`, `SystemSettingsProvider`).
@@ -277,3 +277,5 @@ Khi AI Agent thực hiện code hoặc refactor trong repo này, **BẮT BUỘC*
    * Phân quyền ẩn hiện thành phần UI / Nút bấm: Dùng `CanAccess` hoặc hook `useRecordPermission` (đối với hành động trên 1 record cụ thể).
 5. **Không đưa UI / Styling vào SDK**:
    * Thư mục `sdk/` chỉ chứa core logic, interfaces, adapters và headless hooks. Toàn bộ UI (shadcn, Lucide icons, CSS Tailwind) thuộc về application host (`src/`).
+6. **Quy chuẩn Toán tử Null trong Data Provider**:
+   * Trong `sdk/src/data/index.ts`, toán tử `null` và `nnull` của Refine phải luôn được map tương ứng sang `$empty` và `$notEmpty` của NocoBase. Tránh tuyệt đối map thành `$null` vì Sequelize/PostgreSQL backend không có toán tử `$null`, sẽ đối xử nó như raw object và văng lỗi SQL: `invalid input syntax for type bigint: "[object Object]"`.
