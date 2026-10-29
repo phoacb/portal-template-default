@@ -19,7 +19,7 @@ export const usersExampleRoutes = defineAppRoutes([
         descriptionI18nKey: "resources.users.description",
         icon: <UsersRound />,
         description:
-          "Manage the people who can sign in and work in this NocoBase application.",
+          "Manage the people who can sign in and work in this Digiforce application.",
         canCreate: true,
         canDelete: true,
         acl: { type: "collection" },

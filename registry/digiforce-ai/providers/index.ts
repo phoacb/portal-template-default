@@ -22,7 +22,7 @@ export {
   type AIChatController,
   type AIChatControllerSnapshot,
 } from "./chat-controller";
-export { NocoBaseChatTransport } from "./chat-transport";
+export { DigiforceChatTransport } from "./chat-transport";
 export { getAIEmployeeAvatar } from "./avatars";
 export { findAIModel, getAIModelKey, groupAIModels } from "./model";
 export type { AIModelGroup } from "./model";

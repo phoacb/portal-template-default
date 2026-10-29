@@ -19,9 +19,9 @@ export const isAISubAgentPart = (
   part: AIChatMessage["parts"][number]
 ): part is AISubAgentPart => part.type === "data-subAgent";
 
-export const getNocoBaseToolMetadata = (part: AIToolPart) => {
+export const getDigiforceToolMetadata = (part: AIToolPart) => {
   if (!("callProviderMetadata" in part)) return undefined;
-  const metadata = part.callProviderMetadata?.nocobase;
+  const metadata = part.callProviderMetadata?.digiforce;
   return metadata && typeof metadata === "object"
     ? (metadata as { autoApprove?: unknown })
     : undefined;

@@ -8,7 +8,7 @@ import {
 import type { AIChatAction, AIChatState } from "./chat-reducer";
 import { findChatMessage, isAIToolPart } from "./chat-message-utils";
 import { getAIWorkContextToolScope } from "./page-context";
-import type { NocoBaseChatTransport } from "./chat-transport";
+import type { DigiforceChatTransport } from "./chat-transport";
 import type { useAI } from "./ai-provider";
 import type { AIConversationRuntimeContext } from "./use-chat-runtime";
 import { useAutomaticToolApproval } from "./use-automatic-tool-approval";
@@ -96,7 +96,7 @@ export function useChatMessageActions({
   activeChat: Chat<AIChatMessage>;
   stateRef: MutableRefObject<AIChatState>;
   chatSurfaceOpenRef: MutableRefObject<boolean>;
-  transportsRef: MutableRefObject<Map<string, NocoBaseChatTransport>>;
+  transportsRef: MutableRefObject<Map<string, DigiforceChatTransport>>;
   getRuntimeContext: (
     conversationId: string
   ) => AIConversationRuntimeContext;
@@ -190,7 +190,7 @@ export function useChatMessageActions({
         }
         const transport = transportsRef.current.get(resolved.conversationId);
         if (!transport) {
-          throw new Error("The NocoBase chat transport is unavailable.");
+          throw new Error("The Digiforce chat transport is unavailable.");
         }
         transport.prepareResend(resolved.serverMessageId);
         try {
@@ -272,15 +272,15 @@ export function useChatMessageActions({
         ) {
           if (toolPart && "callProviderMetadata" in toolPart) {
             const providerMetadata = toolPart.callProviderMetadata ?? {};
-            const nocobase =
-              providerMetadata.nocobase &&
-              typeof providerMetadata.nocobase === "object"
-                ? providerMetadata.nocobase
+            const digiforce =
+              providerMetadata.digiforce &&
+              typeof providerMetadata.digiforce === "object"
+                ? providerMetadata.digiforce
                 : {};
             toolPart.callProviderMetadata = {
               ...providerMetadata,
-              nocobase: {
-                ...nocobase,
+              digiforce: {
+                ...digiforce,
                 autoApprove: false,
                 requiresApproval: true,
               },
@@ -358,7 +358,7 @@ export function useChatMessageActions({
 
         const transport = transportsRef.current.get(resolved.conversationId);
         if (!transport) {
-          throw new Error("The NocoBase chat transport is unavailable.");
+          throw new Error("The Digiforce chat transport is unavailable.");
         }
         if (resolved.rootIndex !== targetChat.messages.length - 1) {
           targetChat.messages = resolved.messages.slice(

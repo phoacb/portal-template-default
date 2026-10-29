@@ -40,7 +40,7 @@ export function LanguageSwitcher({
   const [error, setError] = useState<string>();
   const resolvedLabel =
     typeof label === "undefined"
-      ? translate("language.label", { ns: "nocobase-i18n" }, "Language")
+      ? translate("language.label", { ns: "digiforce-i18n" }, "Language")
       : label;
 
   if (locales.length < 2) return null;
@@ -68,7 +68,7 @@ export function LanguageSwitcher({
                 ? reason.message
                 : translate(
                     "language.switchError",
-                    { ns: "nocobase-i18n" },
+                    { ns: "digiforce-i18n" },
                     "Unable to switch language."
                   )
             );
@@ -112,7 +112,7 @@ export function LanguageUserMenuItems() {
         <DropdownMenuSubTrigger className="min-h-9 gap-2 px-2 text-muted-foreground focus:text-foreground">
           <Languages />
           <span>
-            {translate("language.label", { ns: "nocobase-i18n" }, "Language")}
+            {translate("language.label", { ns: "digiforce-i18n" }, "Language")}
           </span>
         </DropdownMenuSubTrigger>
         <DropdownMenuSubContent className="min-w-44">

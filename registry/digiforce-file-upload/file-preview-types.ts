@@ -10,7 +10,7 @@ import type {
   FileFieldDescriptor,
   FilePreviewMessages,
   FileUploadFieldValue,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
 } from "./types";
 
 export type FilePreviewFieldProps = Omit<ComponentProps<"div">, "children"> & {
@@ -22,18 +22,18 @@ export type FilePreviewFieldProps = Omit<ComponentProps<"div">, "children"> & {
 };
 
 export type FilePreviewerProps = {
-  file: NocoBaseFileRecord;
+  file: DigiforceFileRecord;
   index: number;
-  list: NocoBaseFileRecord[];
+  list: DigiforceFileRecord[];
   descriptor?: FileFieldDescriptor;
   messages: FilePreviewMessages;
-  onDownload: (file: NocoBaseFileRecord) => void;
+  onDownload: (file: DigiforceFileRecord) => void;
 };
 
 export type FilePreviewType = {
   key: string;
-  match: (file: NocoBaseFileRecord) => boolean;
-  getThumbnailUrl?: (file: NocoBaseFileRecord) => string | null;
+  match: (file: DigiforceFileRecord) => boolean;
+  getThumbnailUrl?: (file: DigiforceFileRecord) => string | null;
   Previewer: ComponentType<FilePreviewerProps>;
 };
 
@@ -91,7 +91,7 @@ function getExtensionFromValue(value?: string) {
   return dotIndex >= 0 ? decodedSegment.slice(dotIndex).toLowerCase() : "";
 }
 
-export function getFileExtension(file: NocoBaseFileRecord) {
+export function getFileExtension(file: DigiforceFileRecord) {
   const explicit = normalizeExtname(file.extname);
   if (explicit) return explicit;
 
@@ -109,27 +109,27 @@ export function getFileExtension(file: NocoBaseFileRecord) {
   return "";
 }
 
-export function getFileMimeType(file: NocoBaseFileRecord) {
+export function getFileMimeType(file: DigiforceFileRecord) {
   return file.mimetype?.split(";", 1)[0].trim().toLowerCase() ?? "";
 }
 
-export function isOfficeFile(file: NocoBaseFileRecord) {
+export function isOfficeFile(file: DigiforceFileRecord) {
   return (
     officeMimeTypes.has(getFileMimeType(file)) ||
     officeExtensions.has(getFileExtension(file))
   );
 }
 
-export function isImageFile(file: NocoBaseFileRecord) {
+export function isImageFile(file: DigiforceFileRecord) {
   const mimetype = getFileMimeType(file);
   return mimetype.startsWith("image/") && !isActiveContentFile(file);
 }
 
-export function isPdfFile(file: NocoBaseFileRecord) {
+export function isPdfFile(file: DigiforceFileRecord) {
   return getFileMimeType(file) === "application/pdf" || getFileExtension(file) === ".pdf";
 }
 
-export function isTextFile(file: NocoBaseFileRecord) {
+export function isTextFile(file: DigiforceFileRecord) {
   const mimetype = getFileMimeType(file);
   const extension = getFileExtension(file);
 
@@ -141,21 +141,21 @@ export function isTextFile(file: NocoBaseFileRecord) {
   );
 }
 
-export function isMarkdownFile(file: NocoBaseFileRecord) {
+export function isMarkdownFile(file: DigiforceFileRecord) {
   const mimetype = getFileMimeType(file);
   const extension = getFileExtension(file);
   return mimetype === "text/markdown" || extension === ".md";
 }
 
-export function isAudioFile(file: NocoBaseFileRecord) {
+export function isAudioFile(file: DigiforceFileRecord) {
   return getFileMimeType(file).startsWith("audio/");
 }
 
-export function isVideoFile(file: NocoBaseFileRecord) {
+export function isVideoFile(file: DigiforceFileRecord) {
   return getFileMimeType(file).startsWith("video/");
 }
 
-export function isActiveContentFile(file: NocoBaseFileRecord) {
+export function isActiveContentFile(file: DigiforceFileRecord) {
   return (
     activeContentMimeTypes.has(getFileMimeType(file)) ||
     activeContentExtensions.has(getFileExtension(file))
@@ -210,6 +210,6 @@ export const defaultPreviewTypes: FilePreviewType[] = [
   },
 ];
 
-export function getPreviewType(file: NocoBaseFileRecord) {
+export function getPreviewType(file: DigiforceFileRecord) {
   return defaultPreviewTypes.find((previewType) => previewType.match(file))!;
 }

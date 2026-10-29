@@ -6,7 +6,7 @@ function getUrlOrigin(value: string, baseUrl?: string) {
   }
 }
 
-export function isNocoBaseManagedFileUrl(
+export function isDigiforceManagedFileUrl(
   value: string,
   apiUrl: string,
   browserUrl?: string

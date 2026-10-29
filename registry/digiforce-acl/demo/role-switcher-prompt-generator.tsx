@@ -55,7 +55,7 @@ export function RoleSwitcherPromptGenerator() {
   );
 
   const prompt = useMemo(
-    () => `Integrate the RoleSwitcher into the existing NocoBase Admin Starter.
+    () => `Integrate the RoleSwitcher into the existing Digiforce Admin Starter.
 
 Target placement
 - Placement: ${placementLabels[placement]}

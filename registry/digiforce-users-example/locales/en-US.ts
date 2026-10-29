@@ -2,7 +2,7 @@ export const usersExample = {
   "resources.users": "Users",
   "resources.user": "User",
   "resources.users.description":
-    "Manage the people who can sign in and work in this NocoBase application.",
+    "Manage the people who can sign in and work in this Digiforce application.",
   "users.fields.id": "ID",
   "users.fields.nickname": "Nickname",
   "users.fields.username": "Username",
@@ -20,7 +20,7 @@ export const usersExample = {
   "users.actions.delete": "Delete user",
   "users.drawer.create.title": "Create user",
   "users.drawer.create.description":
-    "Add a user who can sign in to this NocoBase application.",
+    "Add a user who can sign in to this Digiforce application.",
   "users.drawer.edit.title": "Edit user",
   "users.drawer.edit.description":
     "Update this user's identity and contact information.",

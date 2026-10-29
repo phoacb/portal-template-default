@@ -33,8 +33,8 @@ export default defineConfig({
     reuseExistingServer: false,
     timeout: 120_000,
     env: {
-      NOCOBASE_API_URL: environment.apiURL,
-      NOCOBASE_PORTAL_BASE: environment.portalBase,
+      DIGIFORCE_API_URL: environment.apiURL,
+      DIGIFORCE_PORTAL_BASE: environment.portalBase,
     },
   },
   projects: [

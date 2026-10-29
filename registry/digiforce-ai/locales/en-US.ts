@@ -6,7 +6,7 @@ const enUS = {
   "navigation.context": "Page context",
   "navigation.tools": "Tool cards",
   "navigation.chat.description":
-    "Build freely with AI while NocoBase keeps the application reliable.",
+    "Build freely with AI while Digiforce keeps the application reliable.",
 
   "actions.close": "Close",
   "actions.cancel": "Cancel",
@@ -94,7 +94,7 @@ const enUS = {
   "surface.expand": "Expand panel",
   "surface.collapse": "Collapse to side panel",
   "surface.closeChat": "Close AI chat",
-  "surface.title": "NocoBase AI employee",
+  "surface.title": "Digiforce AI employee",
   "surface.dialogDescription": "Expanded AI conversation window.",
   "surface.panelDescription": "AI conversation side panel.",
   "surface.closePanel": "Close side panel",
@@ -161,10 +161,10 @@ const enUS = {
   "demo.badge.toolRenderers": "Tool renderers",
   "demo.configuration.previewTitle": "Preview mode",
   "demo.configuration.previewDescription":
-    "Component examples remain available. Sending messages requires an enabled AI model in the connected NocoBase application.",
+    "Component examples remain available. Sending messages requires an enabled AI model in the connected Digiforce application.",
   "demo.chat.title": "AI Chat Window",
   "demo.chat.description":
-    "A position-independent NocoBase AI employee conversation component. Explore message interactions independently, place the same chat in different containers, then generate an implementation prompt for a target page.",
+    "A position-independent Digiforce AI employee conversation component. Explore message interactions independently, place the same chat in different containers, then generate an implementation prompt for a target page.",
   "demo.floating.title": "Floating AI Chat",
   "demo.floating.description":
     "A global lower-right entry for the shared AI conversation. It opens as a push side panel and can expand into a focused dialog without remounting the chat window.",

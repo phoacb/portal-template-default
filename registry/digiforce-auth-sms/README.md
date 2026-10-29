@@ -1,4 +1,4 @@
-# NocoBase SMS authentication
+# Digiforce SMS authentication
 
 Adds phone and verification-code sign-in to the dynamic login page. The
 `useSmsSignIn` hook exposes code delivery, countdown state, and sign-in for

@@ -107,7 +107,7 @@ export function registerServerResourceNamespace(namespace: string) {
 
   void ensureServerResourceNamespaces([namespace]).catch((error) => {
     console.warn(
-      `Unable to load NocoBase locale namespace ${namespace}`,
+      `Unable to load Digiforce locale namespace ${namespace}`,
       error
     );
   });

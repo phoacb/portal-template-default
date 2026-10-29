@@ -1,2 +1,2 @@
-export * from "./nocobase-plugin-prerequisite";
-export * from "./nocobase-plugin-prerequisite-gate";
+export * from "./digiforce-plugin-prerequisite";
+export * from "./digiforce-plugin-prerequisite-gate";

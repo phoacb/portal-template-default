@@ -96,7 +96,7 @@ export function AIConfigurationGate({ children }: { children: ReactNode }) {
         <AlertDescription>
           {t(
             "demo.configuration.previewDescription",
-            "Component examples remain available. Sending messages requires an enabled AI model in the connected NocoBase application."
+            "Component examples remain available. Sending messages requires an enabled AI model in the connected Digiforce application."
           )}
         </AlertDescription>
       </Alert>

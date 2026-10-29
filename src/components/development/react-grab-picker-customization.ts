@@ -2,7 +2,7 @@ import type { ReactGrabAPI } from "react-grab";
 
 declare const __PORTAL_DEV_SOURCE_ROOT__: string;
 
-const PORTAL_COPY_PLUGIN = "nocobase-portal-copy-input-line";
+const PORTAL_COPY_PLUGIN = "digiforce-portal-copy-input-line";
 const REACT_GRAB_HOST_SELECTOR = '[data-react-grab="true"]';
 const V8_ANONYMOUS_DEBUG_SOURCE_LINE =
   /^\s*at (?:async\s+)?((?:[a-z][a-z\d+.-]*:|[\\/]|[A-Za-z]:[\\/]).+)\s*$/i;
@@ -2351,7 +2351,7 @@ function observeReactGrabToolbar() {
 }
 
 const REACT_GRAB_ACTIVE_CURSOR_ATTRIBUTE =
-  "data-nocobase-react-grab-active";
+  "data-digiforce-react-grab-active";
 
 function installReactGrabDefaultCursor(): {
   dispose: () => void;

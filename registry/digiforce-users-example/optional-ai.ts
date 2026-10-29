@@ -39,7 +39,7 @@ type OptionalAIModule = {
 };
 
 const aiModules = import.meta.glob<OptionalAIModule>(
-  "../nocobase-ai/index.ts",
+  "../digiforce-ai/index.ts",
   { eager: true }
 );
 const aiModule = Object.values(aiModules)[0];

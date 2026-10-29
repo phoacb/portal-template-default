@@ -31,7 +31,7 @@ export function useFileStorage(
 
   return useQuery({
     queryKey: [
-      "nocobase",
+      "digiforce",
       "file-storage",
       dataSourceKey,
       descriptor.fileCollection,

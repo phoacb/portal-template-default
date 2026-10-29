@@ -33,7 +33,7 @@ export type KnowledgeBaseDocument = {
   extname?: string;
   size?: number;
   mimetype?: string;
-  /** Server-issued file URL. Resolve it against the NocoBase origin and fetch it with the active auth headers. */
+  /** Server-issued file URL. Resolve it against the Digiforce origin and fetch it with the active auth headers. */
   url?: string;
   preview?: string;
   knowledgeBaseKey: string;

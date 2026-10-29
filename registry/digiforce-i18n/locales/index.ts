@@ -2,7 +2,7 @@ import { registerTranslationResources } from "@digiforce/portal-sdk/i18n";
 import enUS from "./en-US";
 import zhCN from "./zh-CN";
 
-registerTranslationResources("nocobase-i18n", {
+registerTranslationResources("digiforce-i18n", {
   "en-US": enUS,
   "zh-CN": zhCN,
 });

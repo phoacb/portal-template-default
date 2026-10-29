@@ -17,7 +17,7 @@ import {
   redactPortalErrorText,
   type PortalErrorDiagnosticContext,
 } from "./error-diagnostics";
-import { NOCOBASE_ERROR_BOUNDARY_I18N_NAMESPACE } from "./locales";
+import { DIGIFORCE_ERROR_BOUNDARY_I18N_NAMESPACE } from "./locales";
 
 type RuntimeStatusText = {
   description: string;
@@ -34,7 +34,7 @@ const failureCodes = new Set([
   "LOAD_ERROR",
 ]);
 
-export type NocoBaseRuntimeStatusProps = {
+export type DigiforceRuntimeStatusProps = {
   context?: Omit<PortalErrorDiagnosticContext, "componentStack" | "occurredAt">;
   error: DigiforceRuntimeError;
   locale?: string;
@@ -153,7 +153,7 @@ const t = (key: string, defaultMessage: string, locale?: string) =>
   translate(
     key,
     {
-      ns: NOCOBASE_ERROR_BOUNDARY_I18N_NAMESPACE,
+      ns: DIGIFORCE_ERROR_BOUNDARY_I18N_NAMESPACE,
       ...(locale ? { lng: locale } : {}),
     },
     defaultMessage
@@ -299,7 +299,7 @@ const getRuntimeStatusText = (
     return {
       title: t(
         "runtime.reconnecting.title",
-        "Reconnecting to NocoBase",
+        "Reconnecting to Digiforce",
         locale
       ),
       description: t(
@@ -347,21 +347,21 @@ const getRuntimeStatusText = (
     ),
     description: t(
       "runtime.unavailable.description",
-      "The NocoBase service cannot be reached. Try again shortly.",
+      "The Digiforce service cannot be reached. Try again shortly.",
       locale
     ),
     tone: "error",
   };
 };
 
-export function NocoBaseRuntimeStatus({
+export function DigiforceRuntimeStatus({
   context,
   error,
   locale,
   onLogout,
   onRetry,
   retrying = false,
-}: NocoBaseRuntimeStatusProps) {
+}: DigiforceRuntimeStatusProps) {
   const text = getRuntimeStatusText(error, locale);
   const [copyStatus, setCopyStatus] = useState<
     "copied" | "failed" | "idle"

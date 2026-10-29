@@ -17,7 +17,7 @@ import type {
 } from "../types";
 
 /**
- * Data contract for NocoBase AI Knowledge Base user-side actions. The default adapter
+ * Data contract for Digiforce AI Knowledge Base user-side actions. The default adapter
  * intentionally excludes administrator vector-store and configuration actions.
  * Server-side authorization and positive response projection remain authoritative.
  */

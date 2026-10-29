@@ -1,8 +1,8 @@
-# NocoBase AI Knowledge Base Registry
+# Digiforce AI Knowledge Base Registry
 
-A development-only Portal Registry integration for the user-facing NocoBase AI Knowledge Base experience. It provides:
+A development-only Portal Registry integration for the user-facing Digiforce AI Knowledge Base experience. It provides:
 
-- a user-side service contract and default NocoBase adapter;
+- a user-side service contract and default Digiforce adapter;
 - URL-independent resource hooks for knowledge bases, documents, and segments;
 - controlled directory, document, retrieval, segment, and upload components;
 - five deterministic, API-free development workflows; and
@@ -16,14 +16,14 @@ Choose the smallest Registry item that fits the consuming Portal:
 
 | Registry item | Intended use | Published source |
 | --- | --- | --- |
-| `@nocobase/ai-knowledge-base-providers` | Build a Portal-owned integration or custom page | `providers/` and `hooks/` |
-| `@nocobase/ai-knowledge-base-components` | Compose controlled Knowledge Base UI into an existing page | `components/` and `locales/`; installs the provider item |
-| `@nocobase/ai-knowledge-base` | Install the complete development experience | Demo and Knowledge base workspace pages, development extension/routes, locales, this README; installs the component item |
+| `@digiforce/ai-knowledge-base-providers` | Build a Portal-owned integration or custom page | `providers/` and `hooks/` |
+| `@digiforce/ai-knowledge-base-components` | Compose controlled Knowledge Base UI into an existing page | `components/` and `locales/`; installs the provider item |
+| `@digiforce/ai-knowledge-base` | Install the complete development experience | Demo and Knowledge base workspace pages, development extension/routes, locales, this README; installs the component item |
 
 ```bash
-pnpm exec shadcn add @nocobase/ai-knowledge-base-providers
-pnpm exec shadcn add @nocobase/ai-knowledge-base-components
-pnpm exec shadcn add @nocobase/ai-knowledge-base
+pnpm exec shadcn add @digiforce/ai-knowledge-base-providers
+pnpm exec shadcn add @digiforce/ai-knowledge-base-components
+pnpm exec shadcn add @digiforce/ai-knowledge-base
 ```
 
 All items install under `src/extensions/digiforce-ai-knowledge-base`. Tests are excluded from published payloads.
@@ -38,7 +38,7 @@ registry/digiforce-ai-knowledge-base/
 │   ├── utils.ts                       # PagedResult and error normalization
 │   └── service/
 │       ├── knowledge-base.ts          # KnowledgeBaseService contract
-│       ├── knowledge-base-factory.ts  # NocoBase user-action adapter
+│       ├── knowledge-base-factory.ts  # Digiforce user-action adapter
 │       └── index.ts                   # Factory and default service
 ├── hooks/
 │   ├── index.ts                       # Three public resource-hook re-exports
@@ -98,7 +98,7 @@ import {
 - retrieval tests;
 - segment listing, detail lookup, content and related-question updates, enabled state, deletion, and regeneration.
 
-The default `knowledgeBaseService` is created with the Portal SDK `nocobaseClient`, so compatible servers require no provider setup. Override it only for a deployment-specific proxy, a version-pinned server adapter, or a test double:
+The default `knowledgeBaseService` is created with the Portal SDK `digiforceClient`, so compatible servers require no provider setup. Override it only for a deployment-specific proxy, a version-pinned server adapter, or a test double:
 
 ```tsx
 import {
@@ -233,7 +233,7 @@ The browser UI and TypeScript DTOs are defense in depth, not authorization. A co
 4. returning only approved response fields; and
 5. validating file extension, MIME type, size, content, and upload ownership.
 
-The Live prerequisite route first calls the public `pm:listEnabledV2` action to confirm that `@nocobase/plugin-ai-knowledge-base` is enabled. A source/dev plugin can be loaded without a built client-v2 manifest entry, so a missing manifest match is confirmed with one read-only `aiKnowledgeBase:list` probe (`pageSize: 1`); a successful response means available, while a missing resource action means unavailable. After that check, Live business data and mutations call only user-side `aiKnowledgeBase*` actions. They must never call administrator vector-database, provider, embedding, storage, or configuration actions.
+The Live prerequisite route first calls the public `pm:listEnabledV2` action to confirm that `@digiforce/plugin-ai-knowledge-base` is enabled. A source/dev plugin can be loaded without a built client-v2 manifest entry, so a missing manifest match is confirmed with one read-only `aiKnowledgeBase:list` probe (`pageSize: 1`); a successful response means available, while a missing resource action means unavailable. After that check, Live business data and mutations call only user-side `aiKnowledgeBase*` actions. They must never call administrator vector-database, provider, embedding, storage, or configuration actions.
 
 `canMaintainKnowledgeBaseDocuments()`, `canMaintainKnowledgeBaseDocument()`, `isLocalKnowledgeBase()`, and `isKnowledgeBaseDocumentProcessing()` are UX helpers only. They control what the user sees or can attempt; they do not grant permission.
 
@@ -262,7 +262,7 @@ The Live directory selects `directory.mode: "infinite"` for cards and uses an in
 
 Core exports include `DocumentTable`, `DocumentList`, `DocumentCardGrid`, `DocumentSplitView`, `PaginatedDocumentTable`, document status/access/metric primitives, the management toolbar, and the actions menu.
 
-The Live table uses caller-supplied callbacks for Segments, Download, Re-index, and Delete. Download is the second action. It remains available whenever the host supplies `onDownload`; if a list row omits `url`, the Live host requests document detail first. Because a Portal may run on a different origin from NocoBase, the Live host resolves the server-issued file URL against the NocoBase origin, fetches it with the active authorization, role, and Portal headers, and downloads the resulting Blob URL. The file fetch intentionally omits `credentials: "include"`: the NocoBase file route accepts the Bearer token but may not opt into credentialed CORS. This preserves the NocoBase client's anchor-download behavior without navigating the Portal to a relative file path or making an unauthenticated request. Actions progressively move into an overflow menu on narrow widths. There are no bulk re-index or delete controls.
+The Live table uses caller-supplied callbacks for Segments, Download, Re-index, and Delete. Download is the second action. It remains available whenever the host supplies `onDownload`; if a list row omits `url`, the Live host requests document detail first. Because a Portal may run on a different origin from Digiforce, the Live host resolves the server-issued file URL against the Digiforce origin, fetches it with the active authorization, role, and Portal headers, and downloads the resulting Blob URL. The file fetch intentionally omits `credentials: "include"`: the Digiforce file route accepts the Bearer token but may not opt into credentialed CORS. This preserves the Digiforce client's anchor-download behavior without navigating the Portal to a relative file path or making an unauthenticated request. Actions progressively move into an overflow menu on narrow widths. There are no bulk re-index or delete controls.
 
 `canMaintain` is presentation-only. While indexing or segment generation is `PENDING` or `PROCESSING`—case-insensitive across `indexStatus` and `segmentStatus`—maintenance controls remain visible but disabled where required.
 
@@ -337,7 +337,7 @@ The fixture source also provides 24 bases, 37 documents, 12 retrieval results, a
 
 ## Knowledge base workspace routes and behavior
 
-All routes are development-only under `/dev/ai-knowledge-base`. The shared `live` parent route uses the template-level `NocoBasePluginPrerequisiteGate` before rendering any Knowledge base workspace child. It checks the public `pm:listEnabledV2` response for `@nocobase/plugin-ai-knowledge-base`, reuses the shared manifest/probe caches and in-flight requests, and falls back to a read-only `aiKnowledgeBase:list` probe when a source/dev plugin has no built client-v2 entry. A successful missing-plugin result is distinct from a network/server error, and both states offer a manual retry. Demo routes remain API-free and are not gated.
+All routes are development-only under `/dev/ai-knowledge-base`. The shared `live` parent route uses the template-level `DigiforcePluginPrerequisiteGate` before rendering any Knowledge base workspace child. It checks the public `pm:listEnabledV2` response for `@digiforce/plugin-ai-knowledge-base`, reuses the shared manifest/probe caches and in-flight requests, and falls back to a read-only `aiKnowledgeBase:list` probe when a source/dev plugin has no built client-v2 entry. A successful missing-plugin result is distinct from a network/server error, and both states offer a manual retry. Demo routes remain API-free and are not gated.
 
 | Surface | Route |
 | --- | --- |
@@ -371,7 +371,7 @@ Every composition must handle Loading, Empty, Error, `403`, and—where segment 
 
 ## Localization
 
-All user-visible Knowledge Base text uses namespace `nocobase-ai-knowledge-base` and English source text as the key.
+All user-visible Knowledge Base text uses namespace `digiforce-ai-knowledge-base` and English source text as the key.
 
 - `locales/en-US.ts` maps each English key to the same English value;
 - `locales/zh-CN.ts` has the identical key set with Chinese values;
@@ -400,11 +400,11 @@ Before publishing or changing payload boundaries, also validate generated Regist
 ```bash
 pnpm exec shadcn registry validate ./registry.json
 pnpm exec shadcn build registry.json --output public/r
-pnpm exec shadcn add @nocobase/ai-knowledge-base-providers --dry-run
-pnpm exec shadcn add @nocobase/ai-knowledge-base-components --dry-run
-pnpm exec shadcn add @nocobase/ai-knowledge-base --dry-run
+pnpm exec shadcn add @digiforce/ai-knowledge-base-providers --dry-run
+pnpm exec shadcn add @digiforce/ai-knowledge-base-components --dry-run
+pnpm exec shadcn add @digiforce/ai-knowledge-base --dry-run
 ```
 
 Verify responsive behavior around 390px, 768px, and desktop widths; keyboard navigation; light and dark themes; reduced motion; URL restoration; empty/filter-empty/read failures; unauthorized states; failed indexing; unavailable segments; conflict and partial-save recovery; and identity changes between knowledge bases, documents, and segments.
 
-Browser smoke tests must not upload, delete, re-index, regenerate, or otherwise mutate real data unless the test environment and user explicitly authorize those actions. Real API/browser verification also requires an authenticated NocoBase session and a server implementing the user-side authorization contract.
+Browser smoke tests must not upload, delete, re-index, regenerate, or otherwise mutate real data unless the test environment and user explicitly authorize those actions. Real API/browser verification also requires an authenticated Digiforce session and a server implementing the user-side authorization contract.

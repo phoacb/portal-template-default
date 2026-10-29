@@ -7,7 +7,7 @@ import {
 } from "../form-context";
 
 describe("user form values", () => {
-  it("submits roles using the NocoBase association shape", () => {
+  it("submits roles using the Digiforce association shape", () => {
     expect(
       normalizeUserFormValues({
         nickname: "Alice",

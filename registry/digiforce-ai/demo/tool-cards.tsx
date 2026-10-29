@@ -233,7 +233,7 @@ export function ToolCardsPage() {
       <section className="space-y-5">
         <SectionTitle
           eyebrow="Specialized renderers"
-          title="Adapt NocoBase tool results to the job they represent"
+          title="Adapt Digiforce tool results to the job they represent"
           description="These cards follow the original AI employee patterns while using the starter's shadcn and Base UI component system."
         />
         <div className="grid gap-4 lg:grid-cols-2">
@@ -378,7 +378,7 @@ function ToolCardCodePrompt() {
   );
   const [handlesApproval, setHandlesApproval] = useState(true);
   const referenceDefinition = referenceRenderers[reference];
-  const prompt = `Implement a specialized NocoBase AI Tool Card for the tool "${
+  const prompt = `Implement a specialized Digiforce AI Tool Card for the tool "${
     toolName || "customTool"
   }" in the shadcn Registry source at registry/digiforce-ai.
 
@@ -403,7 +403,7 @@ Implementation requirements:
 - Set standalone to true when the renderer replaces the Default Tool Card shell.
 - Do not add tool-name branches to ChatMessage or AIChatMessageList.
 - Do not render a separate raw Output section.
-- Preserve the actual message order: reasoning, assistant text, then the Tool Card in the position used by the NocoBase message renderer.
+- Preserve the actual message order: reasoning, assistant text, then the Tool Card in the position used by the Digiforce message renderer.
 - Use shadcn/Base UI components only; do not add Ant Design, Radix, or Zustand.
 - Add a fixed ToolCallPart example to registry/digiforce-ai/demo/tool-cards.tsx so every state and action can be reviewed without calling the backend.
 - Export any public renderer types or components from registry/digiforce-ai/components/index.ts when application code needs them.

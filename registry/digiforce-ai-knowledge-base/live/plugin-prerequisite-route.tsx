@@ -1,15 +1,15 @@
 import { Outlet } from "react-router";
 
 import {
-  NocoBasePluginPrerequisiteGate,
-  type NocoBasePluginRequirement,
+  DigiforcePluginPrerequisiteGate,
+  type DigiforcePluginRequirement,
 } from "@/components/prerequisites";
 import { useT } from "../locales";
 
-const knowledgeBasePluginRequirements: NocoBasePluginRequirement[] = [
+const knowledgeBasePluginRequirements: DigiforcePluginRequirement[] = [
   {
     name: "ai-knowledge-base",
-    packageName: "@nocobase/plugin-ai-knowledge-base",
+    packageName: "@digiforce/plugin-ai-knowledge-base",
     label: "AI Knowledge Base",
     probe: {
       resource: "aiKnowledgeBase",
@@ -23,7 +23,7 @@ export default function KnowledgeBasePluginPrerequisiteRoute() {
   const t = useT();
 
   return (
-    <NocoBasePluginPrerequisiteGate
+    <DigiforcePluginPrerequisiteGate
       requirements={knowledgeBasePluginRequirements}
       messages={{
         unavailableTitle: t("Knowledge base plugin is not enabled"),
@@ -38,6 +38,6 @@ export default function KnowledgeBasePluginPrerequisiteRoute() {
       }}
     >
       <Outlet />
-    </NocoBasePluginPrerequisiteGate>
+    </DigiforcePluginPrerequisiteGate>
   );
 }

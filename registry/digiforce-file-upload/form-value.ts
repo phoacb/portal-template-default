@@ -2,7 +2,7 @@ import type {
   FileFieldDescriptor,
   FileRelationType,
   FileUploadFieldValue,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
   SerializedFileFieldValue,
 } from "./types";
 
@@ -64,7 +64,7 @@ export function getFileFieldAppends(descriptors: FileFieldDescriptor[]) {
 
 export function toFileFieldValue(
   descriptor: Pick<FileFieldDescriptor, "relation">,
-  records: NocoBaseFileRecord[]
+  records: DigiforceFileRecord[]
 ): FileUploadFieldValue {
   return allowsMultipleFiles(descriptor) ? records : records[0] ?? null;
 }

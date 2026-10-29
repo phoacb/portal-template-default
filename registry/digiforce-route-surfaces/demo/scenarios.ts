@@ -92,7 +92,7 @@ export function getRouteSurfacePrompt(
 
   return `Build ${
     target || "the requested workflow"
-  } with the installed NocoBase route surfaces.
+  } with the installed Digiforce route surfaces.
 
 Scenario:
 - ${scenario.routeShape}

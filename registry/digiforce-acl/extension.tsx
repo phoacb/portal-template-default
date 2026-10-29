@@ -3,8 +3,8 @@ import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { Blocks, PanelsTopLeft, ShieldCheck } from "lucide-react";
 import { RoleSwitcherUserMenuItems } from "./components/role-switcher";
 
-const nocobaseAclExtension: AppExtension = {
-  id: "nocobase-acl",
+const digiforceAclExtension: AppExtension = {
+  id: "digiforce-acl",
   UserMenuItems: RoleSwitcherUserMenuItems,
   dev: {
     resources: [
@@ -13,7 +13,7 @@ const nocobaseAclExtension: AppExtension = {
         meta: {
           label: "Access control",
           icon: <ShieldCheck />,
-          description: "NocoBase ACL integration for admin applications.",
+          description: "Digiforce ACL integration for admin applications.",
           acl: { type: "authenticated" },
         },
       },
@@ -65,4 +65,4 @@ const nocobaseAclExtension: AppExtension = {
   },
 };
 
-export default nocobaseAclExtension;
+export default digiforceAclExtension;

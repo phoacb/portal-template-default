@@ -2,7 +2,7 @@ import "../locales";
 import { useTranslate } from "@refinedev/core";
 import { useCallback } from "react";
 
-const namespace = "nocobase-ai-knowledge-base";
+const namespace = "digiforce-ai-knowledge-base";
 
 export function useKnowledgeBaseComponentTranslate() {
   const translate = useTranslate();

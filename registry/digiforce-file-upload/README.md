@@ -1,11 +1,11 @@
-# NocoBase File Upload
+# Digiforce File Upload
 
-Controlled shadcn/ui file upload and preview fields for NocoBase file-template
+Controlled shadcn/ui file upload and preview fields for Digiforce file-template
 collections.
 
 Installations using the Starter's extension host also get a development-only
 file manager at `/dev/files`. Its preview gallery uses public remote URLs and
-does not require `attachments:list`; successful uploads to NocoBase's built-in
+does not require `attachments:list`; successful uploads to Digiforce's built-in
 `attachments` collection are appended to the gallery for the current session.
 
 This registry item is generic. Do not hard-code `users.avatar`, `users.files`,
@@ -49,7 +49,7 @@ the current `s3-compatible` direct-upload behavior. Set `uploadMode` to
 
 For demos, tests, or a custom storage adapter, pass `uploadFile`. The handler
 receives the selected file, descriptor, and abort signal and returns a complete
-file record. When this prop is present, the field does not call NocoBase storage
+file record. When this prop is present, the field does not call Digiforce storage
 APIs:
 
 ```tsx
@@ -67,7 +67,7 @@ APIs:
 ## Editing
 
 Keep the full uploaded file record in form state. Serialize file fields only
-when submitting to NocoBase:
+when submitting to Digiforce:
 
 ```tsx
 import {
@@ -141,7 +141,7 @@ through Microsoft Office Online, and a download fallback for unsupported or
 active-content files such as HTML, XML, and SVG. Private
 Office files require `descriptor` so the component can request a temporary URL;
 the temporary URL still has to be reachable by the Office Online service.
-Preview and download flags are added only to relative or same-origin NocoBase
+Preview and download flags are added only to relative or same-origin Digiforce
 file URLs. Original third-party and pre-signed URLs are used without mutation.
 
 The preview value does not have to come from a file API. Public URLs can be used
@@ -161,6 +161,6 @@ const mockFiles = [
 ];
 ```
 
-Do not submit mock ids to a NocoBase relation field. Keep mock records in the
+Do not submit mock ids to a Digiforce relation field. Keep mock records in the
 example or preview layer and replace them with uploaded file records before
 serializing a real form.

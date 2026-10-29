@@ -66,12 +66,12 @@ export function MailRecipientInput({
       .getUsers()
       .then((records) => {
         if (!active) return;
-        const nocobaseUsers = records.flatMap((record) =>
+        const digiforceUsers = records.flatMap((record) =>
             record.email
               ? [{ email: record.email, name: record.nickname || record.username }]
               : []
           );
-        const merged = [...nocobaseUsers, ...(options ?? [])];
+        const merged = [...digiforceUsers, ...(options ?? [])];
         setUsers(
           merged.filter(
             (item, index) =>

@@ -50,7 +50,7 @@ const enUS = {
   "runtime.refreshingRole.title": "Refreshing your role",
   "runtime.refreshingRole.description":
     "The previous role is no longer available. Your current role is being refreshed.",
-  "runtime.reconnecting.title": "Reconnecting to NocoBase",
+  "runtime.reconnecting.title": "Reconnecting to Digiforce",
   "runtime.reconnecting.description":
     "The service is temporarily unavailable. Try again shortly.",
   "runtime.failed.title": "Application failed",
@@ -61,7 +61,7 @@ const enUS = {
     "Try again, or copy the diagnostic information and contact an administrator.",
   "runtime.unavailable.title": "Service temporarily unavailable",
   "runtime.unavailable.description":
-    "The NocoBase service cannot be reached. Try again shortly.",
+    "The Digiforce service cannot be reached. Try again shortly.",
 } as const;
 
 export default enUS;

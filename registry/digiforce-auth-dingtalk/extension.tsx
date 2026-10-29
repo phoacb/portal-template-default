@@ -8,7 +8,7 @@ const DingtalkSignInButton = lazy(() => import("./dingtalk-sign-in-button"));
 const DingtalkAutoLoginProvider = lazy(() => import("./auto-login-provider"));
 
 const dingtalkAuthExtension: AppExtension = {
-  id: "nocobase-auth-dingtalk",
+  id: "digiforce-auth-dingtalk",
   AuthRuntimeProvider: DingtalkAutoLoginProvider,
   authRuntimePriority: 10,
   dev: {

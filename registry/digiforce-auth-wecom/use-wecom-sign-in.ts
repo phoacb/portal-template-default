@@ -47,7 +47,7 @@ export function useWecomSignIn(authenticator: Authenticator) {
         }
       );
       if (!result?.url) {
-        throw new Error("NocoBase did not return a WeCom authorization URL.");
+        throw new Error("Digiforce did not return a WeCom authorization URL.");
       }
       window.location.replace(digiforceClient.resolveUrl(result.url));
     } catch (cause) {

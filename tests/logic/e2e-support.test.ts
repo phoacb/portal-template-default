@@ -60,7 +60,7 @@ describe("Portal E2E environment", () => {
 
     expect(() =>
       requirePortalE2ECredentials(environment, {
-        DIGIFORCE_E2E_ACCOUNT: "nocobase",
+        DIGIFORCE_E2E_ACCOUNT: "digiforce",
         DIGIFORCE_E2E_PASSWORD: "",
       })
     ).toThrow(/DIGIFORCE_E2E_ACCOUNT and DIGIFORCE_E2E_PASSWORD are required/);

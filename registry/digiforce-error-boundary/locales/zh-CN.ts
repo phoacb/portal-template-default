@@ -40,14 +40,14 @@ const zhCN = {
   "runtime.noRoles.description": "请联系管理员为当前账号分配角色，然后重试。",
   "runtime.refreshingRole.title": "正在刷新角色",
   "runtime.refreshingRole.description": "原角色已不可用，正在重新获取当前账号的角色。",
-  "runtime.reconnecting.title": "正在重新连接 NocoBase",
+  "runtime.reconnecting.title": "正在重新连接 Digiforce",
   "runtime.reconnecting.description": "服务暂时不可用，请稍后重试。",
   "runtime.failed.title": "应用运行失败",
   "runtime.failed.description": "请复制诊断信息并联系管理员。",
   "runtime.access.title": "无法验证应用访问状态",
   "runtime.access.description": "请重试，或复制诊断信息联系管理员。",
   "runtime.unavailable.title": "服务暂时不可用",
-  "runtime.unavailable.description": "无法连接到 NocoBase 服务，请稍后重试。",
+  "runtime.unavailable.description": "无法连接到 Digiforce 服务，请稍后重试。",
 } as const;
 
 export default zhCN;

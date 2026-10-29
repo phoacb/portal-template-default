@@ -27,7 +27,7 @@ const secondaryButtonClassName =
 const primaryButtonClassName =
   "inline-flex h-9 items-center justify-center gap-2 rounded-md bg-primary px-3 text-sm font-medium text-primary-foreground shadow-xs transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50";
 
-export type NocoBaseErrorFallbackProps = {
+export type DigiforceErrorFallbackProps = {
   componentStack?: string | null;
   context?: Omit<PortalErrorDiagnosticContext, "componentStack" | "occurredAt">;
   error: unknown;
@@ -39,7 +39,7 @@ export type NocoBaseErrorFallbackProps = {
   variant?: ErrorBoundaryVariant;
 };
 
-export function NocoBaseErrorFallback({
+export function DigiforceErrorFallback({
   componentStack,
   context,
   error,
@@ -49,7 +49,7 @@ export function NocoBaseErrorFallback({
   onReload,
   onRetry,
   variant = "page",
-}: NocoBaseErrorFallbackProps) {
+}: DigiforceErrorFallbackProps) {
   const [copyStatus, setCopyStatus] = useState<
     "copied" | "failed" | "idle"
   >("idle");

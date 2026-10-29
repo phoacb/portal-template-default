@@ -1,8 +1,8 @@
 import "../locales";
 
 export {
-  NocoBaseAIRootProvider,
-  type NocoBaseAIRootProviderProps,
+  DigiforceAIRootProvider,
+  type DigiforceAIRootProviderProps,
 } from "./ai-root-provider";
 export { AIChatWindow, type AIChatWindowProps } from "./chat/chat-window";
 export { ChatComposer, type AIChatComposerAction } from "./chat/chat-composer";

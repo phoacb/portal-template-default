@@ -39,19 +39,19 @@ test("the generic plugin prerequisite gates only the Knowledge base workspace ro
     "utf8",
   );
   const genericPrerequisite = fs.readFileSync(
-    path.resolve("src/components/prerequisites/nocobase-plugin-prerequisite.ts"),
+    path.resolve("src/components/prerequisites/digiforce-plugin-prerequisite.ts"),
     "utf8",
   );
   const genericGate = fs.readFileSync(
-    path.resolve("src/components/prerequisites/nocobase-plugin-prerequisite-gate.tsx"),
+    path.resolve("src/components/prerequisites/digiforce-plugin-prerequisite-gate.tsx"),
     "utf8",
   );
   assert.match(
     extension,
     /path: "live"[\s\S]*?\.\/live\/plugin-prerequisite-route[\s\S]*?index: true[\s\S]*?\.\/live\/knowledge-bases-page[\s\S]*?path: ":knowledgeBaseKey"[\s\S]*?\.\/live\/knowledge-base-workspace-page/,
   );
-  assert.match(prerequisiteRoute, /NocoBasePluginPrerequisiteGate/);
-  assert.match(prerequisiteRoute, /@nocobase\/plugin-ai-knowledge-base/);
+  assert.match(prerequisiteRoute, /DigiforcePluginPrerequisiteGate/);
+  assert.match(prerequisiteRoute, /@digiforce\/plugin-ai-knowledge-base/);
   assert.match(
     prerequisiteRoute,
     /probe: \{[\s\S]*?resource: "aiKnowledgeBase"[\s\S]*?action: "list"[\s\S]*?pageSize: 1/,
@@ -190,7 +190,7 @@ test("published payload layers isolate tests and include a working user-side Kno
   assert.equal(fs.existsSync(path.join(registryRoot, "providers/errors.ts")), false);
   assert.equal(fs.existsSync(path.join(registryRoot, "providers/service/knowledge-base.tsx")), false);
   assert.equal(fs.existsSync(path.join(registryRoot, "providers/data-source.ts")), false);
-  assert.equal(fs.existsSync(path.join(registryRoot, "providers/nocobase-data-source.ts")), false);
+  assert.equal(fs.existsSync(path.join(registryRoot, "providers/digiforce-data-source.ts")), false);
   assert.equal(fs.existsSync(path.join(registryRoot, "providers/context.ts")), false);
   assert.equal(fs.existsSync(path.join(registryRoot, "providers/data-source-context.tsx")), false);
   assert.equal(fs.existsSync(path.join(registryRoot, "providers/hooks")), false);
@@ -207,7 +207,7 @@ test("published payload layers isolate tests and include a working user-side Kno
   assert.match(implementation, /knowledgeBaseService/);
   assert.match(implementation, /createKnowledgeBaseService/);
   assert.match(serviceFactory, /export function createKnowledgeBaseService/);
-  assert.doesNotMatch(serviceFactory, /createNocoBaseKnowledgeBaseDataSource|createNocoBaseKnowledgeBaseService/);
+  assert.doesNotMatch(serviceFactory, /createDigiforceKnowledgeBaseDataSource|createDigiforceKnowledgeBaseService/);
   assert.doesNotMatch(context, /KnowledgeBaseDataSource|source: KnowledgeBaseService|createElement/);
   assert.match(context, /<KnowledgeBaseServiceContext\.Provider value=\{service\}>/);
   assert.deepEqual(hooksIndex.trim().split("\n"), [
@@ -334,7 +334,7 @@ test("development demos use the Knowledge base workspace component flows in the 
   }
 });
 
-test("document table matches the NocoBase document-list fields and safe action surface", () => {
+test("document table matches the Digiforce document-list fields and safe action surface", () => {
   const documents = fs.readFileSync(path.join(registryRoot, "components/documents.tsx"), "utf8");
   const workspacePage = fs.readFileSync(
     path.join(registryRoot, "live/knowledge-base-workspace-page.tsx"),
@@ -484,7 +484,7 @@ test("knowledge-base, document, and segment lists share the Users pagination con
   assert.match(segments, /onPageSizeChange=\{\(nextPageSize\)/);
 });
 
-test("Knowledge base workspace hit tests follow the NocoBase query, settings, and ranked-card flow", () => {
+test("Knowledge base workspace hit tests follow the Digiforce query, settings, and ranked-card flow", () => {
   const retrieval = fs.readFileSync(path.join(registryRoot, "components/retrieval.tsx"), "utf8");
   const workspacePage = fs.readFileSync(
     path.join(registryRoot, "live/knowledge-base-workspace-page.tsx"),

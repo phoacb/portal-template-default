@@ -39,7 +39,7 @@ export const UserCreate = () => {
         description={translate(
           "users.drawer.create.description",
           { ns: "app" },
-          "Add a user who can sign in to this NocoBase application."
+          "Add a user who can sign in to this Digiforce application."
         )}
         closeLabel={translate("buttons.close", "Close")}
         closeTo={userRoutes.list}

@@ -7,7 +7,7 @@ import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 const SmsSignInForm = lazy(() => import("./sms-sign-in-form"));
 
 const smsAuthExtension: AppExtension = {
-  id: "nocobase-auth-sms",
+  id: "digiforce-auth-sms",
   dev: {
     resources: [
       {

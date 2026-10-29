@@ -269,7 +269,7 @@ function AIChatPageContent() {
             <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
               {t(
                 "demo.chat.description",
-                "A position-independent NocoBase AI employee conversation component. Explore message interactions independently, place the same chat in different containers, then generate an implementation prompt for a target page."
+                "A position-independent Digiforce AI employee conversation component. Explore message interactions independently, place the same chat in different containers, then generate an implementation prompt for a target page."
               )}
             </p>
           </div>

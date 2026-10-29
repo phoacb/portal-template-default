@@ -8,7 +8,7 @@ export interface MailSenderCandidate {
   label: string;
 }
 
-export const DEFAULT_MAIL_SENDER_KEY = "nocobase-mail:default-sender";
+export const DEFAULT_MAIL_SENDER_KEY = "digiforce-mail:default-sender";
 
 export function getMailSenderCandidates(
   accounts: MailAccount[]

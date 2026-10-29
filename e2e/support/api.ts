@@ -123,7 +123,7 @@ export async function portalAction<T>(
     throw new DigiforceHttpError({
       message: getDigiforceErrorMessage(
         payload,
-        `NocoBase request failed (${response.status()})`
+        `Digiforce request failed (${response.status()})`
       ),
       status: response.status(),
       payload,
@@ -154,7 +154,7 @@ export async function signInPortal(
   });
 
   if (!result?.token) {
-    throw new Error("NocoBase did not return an access token after sign-in.");
+    throw new Error("Digiforce did not return an access token after sign-in.");
   }
 
   return {

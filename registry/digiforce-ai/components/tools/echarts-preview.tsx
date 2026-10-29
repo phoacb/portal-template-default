@@ -51,7 +51,7 @@ export default function EChartsPreview({
           },
         },
       }}
-      theme={resolvedTheme === "dark" ? "nocobase-dark" : undefined}
+      theme={resolvedTheme === "dark" ? "digiforce-dark" : undefined}
       notMerge
       style={{ height: 280, width: "100%" }}
     />

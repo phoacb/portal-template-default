@@ -16,7 +16,7 @@ import { AIConfigurationGate } from "./configuration-gate";
 import { useState, type CSSProperties } from "react";
 import { useAITranslate } from "../locales/use-ai-translate";
 
-const floatingPrompt = `Add the standard NocoBase AI floating chat entry to the application layout.
+const floatingPrompt = `Add the standard Digiforce AI floating chat entry to the application layout.
 
 Requirements:
 - Render AIChatFloatingTrigger at the lower-right edge of the application.

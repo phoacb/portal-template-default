@@ -40,7 +40,7 @@ const showcaseMessages = [
       },
       {
         type: "text",
-        text: "Start with open workload, ownership gaps, SLA risk, and the created-versus-resolved trend. That gives the team one clear operational view without duplicating the underlying NocoBase rules.",
+        text: "Start with open workload, ownership gaps, SLA risk, and the created-versus-resolved trend. That gives the team one clear operational view without duplicating the underlying Digiforce rules.",
       },
     ],
   },

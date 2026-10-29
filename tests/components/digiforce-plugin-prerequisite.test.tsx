@@ -13,22 +13,22 @@ vi.mock("@digiforce/portal-sdk/client", () => ({
 }));
 
 import {
-  clearNocoBasePluginPrerequisiteCache,
-  evaluateNocoBasePluginRequirements,
-  normalizeEnabledNocoBasePlugins,
-  type NocoBasePluginRequirement,
-} from "@/components/prerequisites/nocobase-plugin-prerequisite";
-import { NocoBasePluginPrerequisiteGate } from "@/components/prerequisites/nocobase-plugin-prerequisite-gate";
+  clearDigiforcePluginPrerequisiteCache,
+  evaluateDigiforcePluginRequirements,
+  normalizeEnabledDigiforcePlugins,
+  type DigiforcePluginRequirement,
+} from "@/components/prerequisites/digiforce-plugin-prerequisite";
+import { DigiforcePluginPrerequisiteGate } from "@/components/prerequisites/digiforce-plugin-prerequisite-gate";
 
-const knowledgeBaseRequirement: NocoBasePluginRequirement = {
+const knowledgeBaseRequirement: DigiforcePluginRequirement = {
   name: "ai-knowledge-base",
-  packageName: "@nocobase/plugin-ai-knowledge-base",
+  packageName: "@digiforce/plugin-ai-knowledge-base",
   label: "AI Knowledge Base",
 };
 
 const messages = {
   unavailableTitle: "Plugin unavailable",
-  unavailableDescription: (missing: NocoBasePluginRequirement[]) =>
+  unavailableDescription: (missing: DigiforcePluginRequirement[]) =>
     `Missing: ${missing.map((plugin) => plugin.label).join(", ")}`,
   errorTitle: "Plugin check failed",
   errorDescription: "Try the plugin check again.",
@@ -36,27 +36,27 @@ const messages = {
 };
 
 function renderGate(
-  requirements: NocoBasePluginRequirement[] = [knowledgeBaseRequirement],
+  requirements: DigiforcePluginRequirement[] = [knowledgeBaseRequirement],
 ) {
   return render(
-    <NocoBasePluginPrerequisiteGate
+    <DigiforcePluginPrerequisiteGate
       requirements={requirements}
       messages={messages}
     >
       <div>Protected workspace</div>
-    </NocoBasePluginPrerequisiteGate>,
+    </DigiforcePluginPrerequisiteGate>,
   );
 }
 
-describe("NocoBase plugin prerequisite helpers", () => {
+describe("Digiforce plugin prerequisite helpers", () => {
   it("normalizes supported enabled-plugin response envelopes", () => {
     expect(
-      normalizeEnabledNocoBasePlugins({
+      normalizeEnabledDigiforcePlugins({
         data: {
           data: [
             {
               name: "ai-knowledge-base",
-              packageName: "@nocobase/plugin-ai-knowledge-base",
+              packageName: "@digiforce/plugin-ai-knowledge-base",
               url: "/static/plugin.js",
             },
             { ignored: true },
@@ -66,7 +66,7 @@ describe("NocoBase plugin prerequisite helpers", () => {
     ).toEqual([
       {
         name: "ai-knowledge-base",
-        packageName: "@nocobase/plugin-ai-knowledge-base",
+        packageName: "@digiforce/plugin-ai-knowledge-base",
       },
     ]);
   });
@@ -75,24 +75,24 @@ describe("NocoBase plugin prerequisite helpers", () => {
     const enabled = [
       {
         name: "ai-knowledge-base",
-        packageName: "@nocobase/plugin-ai-knowledge-base",
+        packageName: "@digiforce/plugin-ai-knowledge-base",
       },
     ];
-    const mail: NocoBasePluginRequirement = {
+    const mail: DigiforcePluginRequirement = {
       name: "mail",
-      packageName: "@nocobase/plugin-mail",
+      packageName: "@digiforce/plugin-mail",
       label: "Mail",
     };
 
     expect(
-      evaluateNocoBasePluginRequirements(
+      evaluateDigiforcePluginRequirements(
         enabled,
         [knowledgeBaseRequirement, mail],
         "all",
       ),
     ).toEqual({ available: false, missingPlugins: [mail] });
     expect(
-      evaluateNocoBasePluginRequirements(
+      evaluateDigiforcePluginRequirements(
         enabled,
         [knowledgeBaseRequirement, mail],
         "any",
@@ -101,17 +101,17 @@ describe("NocoBase plugin prerequisite helpers", () => {
   });
 });
 
-describe("NocoBasePluginPrerequisiteGate", () => {
+describe("DigiforcePluginPrerequisiteGate", () => {
   beforeEach(() => {
     action.mockReset();
-    clearNocoBasePluginPrerequisiteCache();
+    clearDigiforcePluginPrerequisiteCache();
   });
 
   it("renders children when every required plugin is enabled", async () => {
     action.mockResolvedValue([
       {
         name: "ai-knowledge-base",
-        packageName: "@nocobase/plugin-ai-knowledge-base",
+        packageName: "@digiforce/plugin-ai-knowledge-base",
       },
     ]);
 
@@ -189,7 +189,7 @@ describe("NocoBasePluginPrerequisiteGate", () => {
       .mockResolvedValueOnce([
         {
           name: "ai-knowledge-base",
-          packageName: "@nocobase/plugin-ai-knowledge-base",
+          packageName: "@digiforce/plugin-ai-knowledge-base",
         },
       ]);
 
@@ -213,18 +213,18 @@ describe("NocoBasePluginPrerequisiteGate", () => {
 
     render(
       <>
-        <NocoBasePluginPrerequisiteGate
+        <DigiforcePluginPrerequisiteGate
           requirements={[knowledgeBaseRequirement]}
           messages={messages}
         >
           <div>First workspace</div>
-        </NocoBasePluginPrerequisiteGate>
-        <NocoBasePluginPrerequisiteGate
+        </DigiforcePluginPrerequisiteGate>
+        <DigiforcePluginPrerequisiteGate
           requirements={[knowledgeBaseRequirement]}
           messages={messages}
         >
           <div>Second workspace</div>
-        </NocoBasePluginPrerequisiteGate>
+        </DigiforcePluginPrerequisiteGate>
       </>,
     );
 
@@ -232,7 +232,7 @@ describe("NocoBasePluginPrerequisiteGate", () => {
     resolveRequest?.([
       {
         name: "ai-knowledge-base",
-        packageName: "@nocobase/plugin-ai-knowledge-base",
+        packageName: "@digiforce/plugin-ai-knowledge-base",
       },
     ]);
 

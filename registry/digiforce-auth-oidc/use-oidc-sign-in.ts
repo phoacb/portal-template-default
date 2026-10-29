@@ -38,7 +38,7 @@ export function useOidcSignIn(authenticator: Authenticator) {
       );
 
       if (!authUrl) {
-        throw new Error("NocoBase did not return an OIDC authorization URL.");
+        throw new Error("Digiforce did not return an OIDC authorization URL.");
       }
 
       window.location.replace(digiforceClient.resolveUrl(authUrl));

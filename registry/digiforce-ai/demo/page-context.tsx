@@ -116,7 +116,7 @@ function PageContextPageContent() {
       <ContextSection
         eyebrow="Custom frontend tool"
         title="Expose a page-specific action to the AI employee"
-        description="A registered page element can advertise custom Tools through the NocoBase loadFrontendTool and executeFrontendTool protocol. The example uses ASK permission and updates only the local quote preview."
+        description="A registered page element can advertise custom Tools through the Digiforce loadFrontendTool and executeFrontendTool protocol. The example uses ASK permission and updates only the local quote preview."
       >
         <CustomFrontendToolShowcase />
       </ContextSection>

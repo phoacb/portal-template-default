@@ -4,7 +4,7 @@ import { getDataSourceHeaders } from "./storage";
 import type {
   FileUploadMessages,
   FileUploadOptions,
-  NocoBaseFileRecord,
+  DigiforceFileRecord,
 } from "./types";
 
 export type PresignedFileInfo = {
@@ -65,7 +65,7 @@ export async function uploadDirect(
 
   const { fileInfo } = initialized;
 
-  return digiforceClient.action<NocoBaseFileRecord>(
+  return digiforceClient.action<DigiforceFileRecord>(
     descriptor.fileCollection,
     "create",
     {

@@ -5,7 +5,7 @@ const zhCN = {
   "navigation.tasks": "员工任务",
   "navigation.context": "页面上下文",
   "navigation.tools": "工具卡片",
-  "navigation.chat.description": "自由使用 AI 构建，由 NocoBase 保障应用可靠运行。",
+  "navigation.chat.description": "自由使用 AI 构建，由 Digiforce 保障应用可靠运行。",
 
   "actions.close": "关闭",
   "actions.cancel": "取消",
@@ -85,7 +85,7 @@ const zhCN = {
   "surface.expand": "展开面板",
   "surface.collapse": "收起到侧边栏",
   "surface.closeChat": "关闭 AI 对话",
-  "surface.title": "NocoBase AI 员工",
+  "surface.title": "Digiforce AI 员工",
   "surface.dialogDescription": "展开的 AI 对话窗口。",
   "surface.panelDescription": "AI 对话侧边栏。",
   "surface.closePanel": "关闭侧边栏",
@@ -149,10 +149,10 @@ const zhCN = {
   "demo.badge.toolRenderers": "工具渲染器",
   "demo.configuration.previewTitle": "预览模式",
   "demo.configuration.previewDescription":
-    "仍可查看组件示例。发送消息需要在所连接的 NocoBase 应用中启用 AI 模型。",
+    "仍可查看组件示例。发送消息需要在所连接的 Digiforce 应用中启用 AI 模型。",
   "demo.chat.title": "AI 聊天窗口",
   "demo.chat.description":
-    "与位置无关的 NocoBase AI 员工对话组件。你可以独立体验消息交互，将同一个聊天窗口放入不同容器，并为目标页面生成实现提示词。",
+    "与位置无关的 Digiforce AI 员工对话组件。你可以独立体验消息交互，将同一个聊天窗口放入不同容器，并为目标页面生成实现提示词。",
   "demo.floating.title": "AI 悬浮聊天",
   "demo.floating.description":
     "共享 AI 对话的全局右下角入口。它以推入式侧边栏打开，并可展开为聚焦对话框，过程中不会重新挂载聊天窗口。",

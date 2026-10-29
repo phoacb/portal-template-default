@@ -3,13 +3,13 @@ import { useCallback, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import {
-  NocoBaseErrorFallback,
+  DigiforceErrorFallback,
   type ErrorBoundaryVariant,
 } from "./error-fallback";
 import type { PortalErrorDiagnosticContext } from "./error-diagnostics";
 import type { ErrorBoundaryLabels } from "./labels";
 
-export type NocoBaseErrorBoundaryProps = PropsWithChildren<{
+export type DigiforceErrorBoundaryProps = PropsWithChildren<{
   context?: Omit<PortalErrorDiagnosticContext, "componentStack" | "occurredAt">;
   labels?: Partial<ErrorBoundaryLabels>;
   locale?: string;
@@ -21,7 +21,7 @@ export type NocoBaseErrorBoundaryProps = PropsWithChildren<{
   variant?: ErrorBoundaryVariant;
 }>;
 
-export function NocoBaseErrorBoundary({
+export function DigiforceErrorBoundary({
   children,
   context,
   labels,
@@ -32,7 +32,7 @@ export function NocoBaseErrorBoundary({
   onReset,
   resetKeys,
   variant = "page",
-}: NocoBaseErrorBoundaryProps) {
+}: DigiforceErrorBoundaryProps) {
   const [componentStack, setComponentStack] = useState<string | null>();
   const handleError = useCallback(
     (error: unknown, info: ErrorInfo) => {
@@ -55,7 +55,7 @@ export function NocoBaseErrorBoundary({
         onReset?.();
       }}
       fallbackRender={({ error, resetErrorBoundary }) => (
-        <NocoBaseErrorFallback
+        <DigiforceErrorFallback
           variant={variant}
           error={error}
           componentStack={componentStack}

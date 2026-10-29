@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { getNocoBaseToolCallMetadata } from "../chat/tool-call-card";
+import { getDigiforceToolCallMetadata } from "../chat/tool-call-card";
 import type { AIToolRendererProps } from "./tool-renderer-provider";
 import { asRecord, parseArray } from "./tool-renderer-utils";
 import { useAITranslate } from "../../locales/use-ai-translate";
@@ -13,7 +13,7 @@ export function SuggestionsRenderer({
 }: AIToolRendererProps) {
   const t = useAITranslate();
   const input = asRecord(part.input);
-  const metadata = getNocoBaseToolCallMetadata(part);
+  const metadata = getDigiforceToolCallMetadata(part);
   const options = parseArray(input.options).filter(
     (option): option is string => typeof option === "string"
   );

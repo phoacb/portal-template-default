@@ -1,6 +1,6 @@
 import type { Chat } from "@ai-sdk/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { NocoBaseChatTransport } from "./chat-transport";
+import type { DigiforceChatTransport } from "./chat-transport";
 import { reconcileRefreshedMessages } from "./chat-message-utils";
 import { AI_DRAFT_CONVERSATION_ID, type AIChatMessage } from "./types";
 
@@ -22,7 +22,7 @@ export function useConversationHistory({
   activeConversationId: string;
   getActiveConversationId: () => string;
   getChat: (conversationId: string) => Chat<AIChatMessage>;
-  getTransport: (conversationId: string) => NocoBaseChatTransport | undefined;
+  getTransport: (conversationId: string) => DigiforceChatTransport | undefined;
   getConversationMessages: (
     conversationId: string,
     options?: { updateRead?: boolean }

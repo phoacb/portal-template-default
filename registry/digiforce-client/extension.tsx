@@ -2,8 +2,8 @@ import type { AppExtension } from "@digiforce/portal-sdk/extensions";
 import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { Blocks, ListFilter } from "lucide-react";
 
-const nocobaseClientExtension: AppExtension = {
-  id: "nocobase-client",
+const digiforceClientExtension: AppExtension = {
+  id: "digiforce-client",
   dev: {
     resources: [
       {
@@ -36,4 +36,4 @@ const nocobaseClientExtension: AppExtension = {
   },
 };
 
-export default nocobaseClientExtension;
+export default digiforceClientExtension;

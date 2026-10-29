@@ -20,7 +20,7 @@ export function I18nPromptGenerator() {
   const [languages, setLanguages] = useState("English and Simplified Chinese");
 
   const prompt = useMemo(
-    () => `Build a complete multilingual scene in the NocoBase Admin Starter.
+    () => `Build a complete multilingual scene in the Digiforce Admin Starter.
 
 Application scene
 - Product or page: ${scene}
@@ -34,8 +34,8 @@ Implementation contract
 - Do not place application messages inside src/extensions/digiforce-i18n/locales because installed Registry files may be refreshed independently.
 - Use the reusable LanguageSwitcher when the page needs an explicit language control; the signed-in user menu already includes one.
 - Reuse useSystemSettings from @digiforce/portal-sdk/system-settings instead of requesting systemSettings:get again.
-- Keep Starter and Registry UI resources local. Use app:getLang only for registered dynamic server namespaces such as lm-collections when the NocoBase i18n Registry is installed.
-- Let the shared NocoBase client send the selected locale through X-Locale.
+- Keep Starter and Registry UI resources local. Use app:getLang only for registered dynamic server namespaces such as lm-collections when the Digiforce i18n Registry is installed.
+- Let the shared Digiforce client send the selected locale through X-Locale.
 - Preserve compatibility when server metadata contains exact {{t("...")}} expressions.
 - Provide complete React components, locale resource files, route/resource integration, and realistic visible content.`,
     [languages, scene]
@@ -45,7 +45,7 @@ Implementation contract
     <details open className="group rounded-xl border bg-muted/15">
       <summary className="flex cursor-pointer list-none items-center gap-2 px-4 py-3 text-sm font-medium marker:hidden">
         <Sparkles className="size-4 text-primary" />
-        {t("demo.prompt.title", { ns: "nocobase-i18n" }, "Prompt generator")}
+        {t("demo.prompt.title", { ns: "digiforce-i18n" }, "Prompt generator")}
         <ChevronDown className="ml-auto size-4 text-muted-foreground transition-transform group-open:rotate-180" />
       </summary>
       <div className="grid items-start gap-5 border-t p-4 xl:grid-cols-[360px_minmax(0,1fr)]">
@@ -54,14 +54,14 @@ Implementation contract
             <CardTitle className="text-base">
               {t(
                 "demo.prompt.settings",
-                { ns: "nocobase-i18n" },
+                { ns: "digiforce-i18n" },
                 "Scene settings"
               )}
             </CardTitle>
             <CardDescription>
               {t(
                 "demo.prompt.description",
-                { ns: "nocobase-i18n" },
+                { ns: "digiforce-i18n" },
                 "Describe a complete multilingual application scene and generate an implementation prompt."
               )}
             </CardDescription>
@@ -71,7 +71,7 @@ Implementation contract
               <Label htmlFor="i18n-prompt-scene">
                 {t(
                   "demo.prompt.scene",
-                  { ns: "nocobase-i18n" },
+                  { ns: "digiforce-i18n" },
                   "Application scene"
                 )}
               </Label>
@@ -85,7 +85,7 @@ Implementation contract
               <Label htmlFor="i18n-prompt-languages">
                 {t(
                   "demo.prompt.languages",
-                  { ns: "nocobase-i18n" },
+                  { ns: "digiforce-i18n" },
                   "Languages"
                 )}
               </Label>
@@ -101,28 +101,28 @@ Implementation contract
         <PromptOutput
           title={t(
             "demo.prompt.output",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "Generated prompt"
           )}
           description={t(
             "demo.prompt.outputDescription",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "Updates as you change the scene and language requirements."
           )}
           prompt={prompt}
           copyLabel={t(
             "demo.prompt.copy",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "Copy prompt"
           )}
           copiedLabel={t(
             "demo.prompt.copied",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "Copied"
           )}
           copyErrorLabel={t(
             "demo.prompt.copyError",
-            { ns: "nocobase-i18n" },
+            { ns: "digiforce-i18n" },
             "Clipboard access failed. Select the prompt and copy it manually."
           )}
         />

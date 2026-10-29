@@ -3,11 +3,11 @@ import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 import { Languages } from "lucide-react";
 import { LanguageUserMenuItems } from "./components";
 import "./locales";
-import { NocoBaseI18nBootstrap } from "./provider";
+import { DigiforceI18nBootstrap } from "./provider";
 
-const nocobaseI18nExtension: AppExtension = {
-  id: "nocobase-i18n",
-  Provider: NocoBaseI18nBootstrap,
+const digiforceI18nExtension: AppExtension = {
+  id: "digiforce-i18n",
+  Provider: DigiforceI18nBootstrap,
   UserMenuItems: LanguageUserMenuItems,
   dev: {
     resources: [
@@ -17,7 +17,7 @@ const nocobaseI18nExtension: AppExtension = {
         meta: {
           label: "Internationalization",
           i18nKey: "navigation.demo",
-          i18nOptions: { ns: "nocobase-i18n" },
+          i18nOptions: { ns: "digiforce-i18n" },
           icon: <Languages />,
           description:
             "Optional frontend internationalization for the Starter.",
@@ -38,4 +38,4 @@ const nocobaseI18nExtension: AppExtension = {
   },
 };
 
-export default nocobaseI18nExtension;
+export default digiforceI18nExtension;

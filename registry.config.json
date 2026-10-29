@@ -1,12 +1,12 @@
 {
   "name": "digiforce-ai",
-  "homepage": "https://www.nocobase.com",
+  "homepage": "https://digiforce.io",
   "items": [
     {
       "name": "error-boundary",
       "type": "registry:lib",
-      "title": "NocoBase Error Boundary",
-      "description": "Reusable render boundaries and NocoBase runtime status views with copyable redacted diagnostics and recovery actions.",
+      "title": "Digiforce Error Boundary",
+      "description": "Reusable render boundaries and Digiforce runtime status views with copyable redacted diagnostics and recovery actions.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
@@ -14,7 +14,7 @@
         "react-router@^7.0.2"
       ],
       "registryDependencies": ["badge", "button", "card"],
-      "docs": "Uses react-error-boundary for render containment and provides runtime status UI for original NocoBase gateway and account error codes. It contributes only a development showcase at /dev/error-boundary, with no production routes, providers, or menu entries.",
+      "docs": "Uses react-error-boundary for render containment and provides runtime status UI for original Digiforce gateway and account error codes. It contributes only a development showcase at /dev/error-boundary, with no production routes, providers, or menu entries.",
       "source": {
         "root": "registry/digiforce-error-boundary",
         "target": "src/extensions/digiforce-error-boundary",
@@ -24,7 +24,7 @@
     {
       "name": "route-surfaces",
       "type": "registry:lib",
-      "title": "NocoBase Route Surfaces",
+      "title": "Digiforce Route Surfaces",
       "description": "URL-backed drawer, dialog, and page containers with nested drawer stacking and a shared close lifecycle.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
@@ -53,7 +53,7 @@
     {
       "name": "client",
       "type": "registry:lib",
-      "title": "NocoBase Client Components",
+      "title": "Digiforce Client Components",
       "description": "Small reusable Portal client components with transport-agnostic APIs and shadcn UI composition.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
@@ -61,7 +61,7 @@
         "lucide-react@^0.487.0"
       ],
       "registryDependencies": ["badge", "button", "card", "command", "popover"],
-      "docs": "Provides dependency-light client components without NocoBase resource or Refine coupling. RemoteSelect delegates data access to a caller-provided loadOptions function and contributes only a development showcase under /dev/client/remote-select.",
+      "docs": "Provides dependency-light client components without Digiforce resource or Refine coupling. RemoteSelect delegates data access to a caller-provided loadOptions function and contributes only a development showcase under /dev/client/remote-select.",
       "source": {
         "root": "registry/digiforce-client",
         "target": "src/extensions/digiforce-client",
@@ -79,7 +79,7 @@
     {
       "name": "users-example",
       "type": "registry:block",
-      "title": "NocoBase Users Example",
+      "title": "Digiforce Users Example",
       "description": "Complete Users resource example with ACL-aware list, filters, route-backed drawers, nested role details, and optional AI page context.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
@@ -102,7 +102,7 @@
         "separator",
         "skeleton"
       ],
-      "docs": "Requires the compatible Portal Starter resource components, data table, NocoBase data provider, and ACL provider. AI page-element and form registration is enabled automatically when @digiforce/ai is also installed.",
+      "docs": "Requires the compatible Portal Starter resource components, data table, Digiforce data provider, and ACL provider. AI page-element and form registration is enabled automatically when @digiforce/ai is also installed.",
       "source": {
         "root": "registry/digiforce-users-example",
         "target": "src/extensions/digiforce-users-example",
@@ -112,8 +112,8 @@
     {
       "name": "i18n",
       "type": "registry:block",
-      "title": "NocoBase i18n",
-      "description": "Optional NocoBase server-language resources, user preference persistence, reusable language controls, and an integrated showcase for the Portal SDK i18n runtime.",
+      "title": "Digiforce i18n",
+      "description": "Optional Digiforce server-language resources, user preference persistence, reusable language controls, and an integrated showcase for the Portal SDK i18n runtime.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
@@ -140,14 +140,14 @@
     {
       "name": "auth-oidc",
       "type": "registry:block",
-      "title": "NocoBase OIDC Authentication",
+      "title": "Digiforce OIDC Authentication",
       "description": "Dynamic OIDC sign-in adapter, headless sign-in hook, and integrated component demo.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
-      "docs": "Requires the Starter authentication runtime and an enabled OIDC authenticator in NocoBase. The default UI is discovered automatically and can be replaced per authentication type or authenticator instance from the application login page.",
+      "docs": "Requires the Starter authentication runtime and an enabled OIDC authenticator in Digiforce. The default UI is discovered automatically and can be replaced per authentication type or authenticator instance from the application login page.",
       "source": {
         "root": "registry/digiforce-auth-oidc",
         "target": "src/extensions/digiforce-auth-oidc",
@@ -157,14 +157,14 @@
     {
       "name": "auth-saml",
       "type": "registry:block",
-      "title": "NocoBase SAML Authentication",
+      "title": "Digiforce SAML Authentication",
       "description": "Dynamic SAML sign-in adapter, automatic redirect provider, headless hook, and integrated demo.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
-      "docs": "Requires the Starter authentication runtime and an enabled SAML authenticator in NocoBase.",
+      "docs": "Requires the Starter authentication runtime and an enabled SAML authenticator in Digiforce.",
       "source": {
         "root": "registry/digiforce-auth-saml",
         "target": "src/extensions/digiforce-auth-saml",
@@ -174,14 +174,14 @@
     {
       "name": "auth-cas",
       "type": "registry:block",
-      "title": "NocoBase CAS Authentication",
+      "title": "Digiforce CAS Authentication",
       "description": "Dynamic CAS sign-in adapter, headless sign-in hook, and integrated component demo.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
-      "docs": "Requires the Starter authentication runtime and an enabled CAS authenticator in NocoBase.",
+      "docs": "Requires the Starter authentication runtime and an enabled CAS authenticator in Digiforce.",
       "source": {
         "root": "registry/digiforce-auth-cas",
         "target": "src/extensions/digiforce-auth-cas",
@@ -191,10 +191,10 @@
     {
       "name": "auth-ldap",
       "type": "registry:block",
-      "title": "NocoBase LDAP Authentication",
+      "title": "Digiforce LDAP Authentication",
       "description": "Dynamic LDAP account/password form, headless sign-in hook, and integrated component demo.",
       "dependencies": ["@digiforce/portal-sdk@^2.1.0"],
-      "docs": "Requires the Starter authentication runtime and an enabled LDAP authenticator in NocoBase.",
+      "docs": "Requires the Starter authentication runtime and an enabled LDAP authenticator in Digiforce.",
       "source": {
         "root": "registry/digiforce-auth-ldap",
         "target": "src/extensions/digiforce-auth-ldap",
@@ -204,10 +204,10 @@
     {
       "name": "auth-sms",
       "type": "registry:block",
-      "title": "NocoBase SMS Authentication",
+      "title": "Digiforce SMS Authentication",
       "description": "Dynamic SMS verification-code form, delivery countdown, headless hook, and integrated demo.",
       "dependencies": ["@digiforce/portal-sdk@^2.1.0"],
-      "docs": "Requires the Starter authentication runtime, an enabled SMS authenticator, and a configured public SMS verifier in NocoBase.",
+      "docs": "Requires the Starter authentication runtime, an enabled SMS authenticator, and a configured public SMS verifier in Digiforce.",
       "source": {
         "root": "registry/digiforce-auth-sms",
         "target": "src/extensions/digiforce-auth-sms",
@@ -217,14 +217,14 @@
     {
       "name": "auth-wecom",
       "type": "registry:block",
-      "title": "NocoBase WeCom Authentication",
+      "title": "Digiforce WeCom Authentication",
       "description": "Dynamic WeCom sign-in adapter, browser automatic login, headless hook, and integrated demo.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
-      "docs": "Requires the Starter authentication runtime and an enabled WeCom authenticator in NocoBase.",
+      "docs": "Requires the Starter authentication runtime and an enabled WeCom authenticator in Digiforce.",
       "source": {
         "root": "registry/digiforce-auth-wecom",
         "target": "src/extensions/digiforce-auth-wecom",
@@ -234,7 +234,7 @@
     {
       "name": "auth-dingtalk",
       "type": "registry:block",
-      "title": "NocoBase DingTalk Authentication",
+      "title": "Digiforce DingTalk Authentication",
       "description": "Dynamic DingTalk sign-in adapter, automatic login, headless hook, and integrated demo.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
@@ -242,7 +242,7 @@
         "lucide-react@^0.487.0",
         "react-router@^7.0.2"
       ],
-      "docs": "Requires the Starter authentication runtime and an enabled DingTalk authenticator in NocoBase. DingTalk JSAPI is loaded lazily for internal micro-app login.",
+      "docs": "Requires the Starter authentication runtime and an enabled DingTalk authenticator in Digiforce. DingTalk JSAPI is loaded lazily for internal micro-app login.",
       "source": {
         "root": "registry/digiforce-auth-dingtalk",
         "target": "src/extensions/digiforce-auth-dingtalk",
@@ -252,14 +252,14 @@
     {
       "name": "ai-runtime",
       "type": "registry:lib",
-      "title": "NocoBase AI Runtime",
-      "description": "NocoBase AI services, providers, transports, controllers, and avatars.",
+      "title": "Digiforce AI Runtime",
+      "description": "Digiforce AI services, providers, transports, controllers, and avatars.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "@ai-sdk/react@2.0.0",
         "ai@5.0.0",
         "@dicebear/core@^9.4.3",
-        "@nocobase/ai-employee-avatars@^1.0.2",
+        "@digiforce/ai-employee-avatars@^1.0.2",
         "eventsource-parser@3.1.0"
       ],
       "source": {
@@ -271,8 +271,8 @@
     {
       "name": "ai-chat",
       "type": "registry:block",
-      "title": "NocoBase AI Chat Components",
-      "description": "Reusable NocoBase AI chat window, containers, floating trigger, and employee shortcut.",
+      "title": "Digiforce AI Chat Components",
+      "description": "Reusable Digiforce AI chat window, containers, floating trigger, and employee shortcut.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
@@ -310,7 +310,7 @@
     {
       "name": "ai-react-hook-form",
       "type": "registry:lib",
-      "title": "NocoBase AI React Hook Form Adapter",
+      "title": "Digiforce AI React Hook Form Adapter",
       "description": "Optional React Hook Form adapter for the built-in AI Form filler.",
       "dependencies": ["react-hook-form@^7.57.0"],
       "registryDependencies": ["@digiforce/ai-chat"],
@@ -323,8 +323,8 @@
     {
       "name": "ai",
       "type": "registry:block",
-      "title": "NocoBase AI Components and Demo",
-      "description": "Complete NocoBase AI component runtime with application resources, routes, and component showcase pages.",
+      "title": "Digiforce AI Components and Demo",
+      "description": "Complete Digiforce AI component runtime with application resources, routes, and component showcase pages.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
@@ -353,8 +353,8 @@
     {
       "name": "file-upload",
       "type": "registry:block",
-      "title": "NocoBase File Upload",
-      "description": "Controlled shadcn/ui file upload field for NocoBase file collections.",
+      "title": "Digiforce File Upload",
+      "description": "Controlled shadcn/ui file upload field for Digiforce file collections.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "@tanstack/react-query@^5.81.5",
@@ -380,8 +380,8 @@
     {
       "name": "mail",
       "type": "registry:block",
-      "title": "NocoBase Mail",
-      "description": "Mail inbox, compose, detail, and label components backed by the NocoBase mail API.",
+      "title": "Digiforce Mail",
+      "description": "Mail inbox, compose, detail, and label components backed by the Digiforce mail API.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
@@ -415,7 +415,7 @@
         "textarea",
         "toggle"
       ],
-      "docs": "Requires a compatible Portal SDK and a NocoBase server with the mail plugin enabled. The mail API adapter uses the authenticated SDK client.",
+      "docs": "Requires a compatible Portal SDK and a Digiforce server with the mail plugin enabled. The mail API adapter uses the authenticated SDK client.",
       "source": {
         "root": "registry/digiforce-mail",
         "target": "src/extensions/digiforce-mail",
@@ -425,15 +425,15 @@
     {
       "name": "acl-ui",
       "type": "registry:block",
-      "title": "NocoBase ACL UI",
-      "description": "Page, region, field, and role-switching components backed by the Starter's NocoBase accessControlProvider.",
+      "title": "Digiforce ACL UI",
+      "description": "Page, region, field, and role-switching components backed by the Starter's Digiforce accessControlProvider.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
         "@refinedev/core@^5.0.8",
         "lucide-react@^0.487.0"
       ],
       "registryDependencies": ["badge", "select"],
-      "docs": "Requires a compatible NocoBase Starter with the built-in accessControlProvider and ACL store.",
+      "docs": "Requires a compatible Digiforce Starter with the built-in accessControlProvider and ACL store.",
       "source": {
         "root": "registry/digiforce-acl",
         "target": "src/extensions/digiforce-acl",
@@ -443,7 +443,7 @@
     {
       "name": "acl",
       "type": "registry:block",
-      "title": "NocoBase ACL Components and Demo",
+      "title": "Digiforce ACL Components and Demo",
       "description": "Complete ACL composition demo with live role switching, action matrix, multi-collection regions, and field permissions.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
@@ -469,7 +469,7 @@
     {
       "name": "ai-knowledge-base-providers",
       "type": "registry:lib",
-      "title": "NocoBase AI Knowledge Base Providers",
+      "title": "Digiforce AI Knowledge Base Providers",
       "description": "User-side DTOs, injected Portal-safe service contract, response normalization, and stale-safe data hooks.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0"
@@ -487,7 +487,7 @@
     {
       "name": "ai-knowledge-base-components",
       "type": "registry:block",
-      "title": "NocoBase AI Knowledge Base Components",
+      "title": "Digiforce AI Knowledge Base Components",
       "description": "Controlled knowledge-base, document, retrieval, segment, and upload components for composition in Portal pages.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",
@@ -526,7 +526,7 @@
     {
       "name": "ai-knowledge-base",
       "type": "registry:block",
-      "title": "NocoBase AI Knowledge Base Components and Knowledge Base Workspace",
+      "title": "Digiforce AI Knowledge Base Components and Knowledge Base Workspace",
       "description": "Complete AI Knowledge Base Registry integration with five deterministic development workflows, a Portal-safe Knowledge base workspace, URL-backed result and segment drawers, resource hooks, and consolidated documentation.",
       "dependencies": [
         "@digiforce/portal-sdk@^2.1.0",

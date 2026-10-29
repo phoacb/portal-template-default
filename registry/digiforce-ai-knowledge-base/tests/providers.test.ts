@@ -15,7 +15,7 @@ import { getKnowledgeBaseServiceKey } from "../hooks/shared.ts";
 import fs from "node:fs";
 import path from "node:path";
 
-test("normalizes every supported NocoBase paged envelope", () => {
+test("normalizes every supported Digiforce paged envelope", () => {
   const cases: Array<[unknown, string[]]> = [
     [{ data: [{ id: "a" }], meta: { count: 3, page: 2, pageSize: 5 } }, ["a"]],
     [{ data: { rows: [{ id: "b" }], count: 4, page: 3, pageSize: 6 } }, ["b"]],

@@ -78,7 +78,7 @@ export function AclComponentsPage() {
           Role switcher
         </h1>
         <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
-          A reusable role selector backed by the Starter&apos;s NocoBase ACL
+          A reusable role selector backed by the Starter&apos;s Digiforce ACL
           store and signed-in identity.
         </p>
       </header>
@@ -87,14 +87,14 @@ export function AclComponentsPage() {
         <SectionTitle
           eyebrow="Role selection"
           title="RoleSwitcher"
-          description="The component resolves the signed-in user's roles and NocoBase role mode automatically. Business pages only decide its placement and presentation."
+          description="The component resolves the signed-in user's roles and Digiforce role mode automatically. Business pages only decide its placement and presentation."
         />
         <div className="grid items-start gap-5 xl:grid-cols-2">
           <Card>
             <CardHeader>
               <CardTitle>Live component</CardTitle>
               <CardDescription>
-                Uses the current identity and active NocoBase ACL response.
+                Uses the current identity and active Digiforce ACL response.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -145,7 +145,7 @@ export function AclComponentsPage() {
       <section className="space-y-5 border-t pt-8">
         <SectionTitle
           eyebrow="Automatic behavior"
-          title="Role options follow NocoBase configuration"
+          title="Role options follow Digiforce configuration"
           description="These states are derived from the identity and roles:check response, so applications do not maintain a second role list."
         />
         <Card className="gap-0 overflow-hidden py-0">

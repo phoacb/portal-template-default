@@ -7,7 +7,7 @@ import { defineAppRoutes } from "@digiforce/portal-sdk/routing";
 const CasSignInButton = lazy(() => import("./cas-sign-in-button"));
 
 const casAuthExtension: AppExtension = {
-  id: "nocobase-auth-cas",
+  id: "digiforce-auth-cas",
   dev: {
     resources: [
       {

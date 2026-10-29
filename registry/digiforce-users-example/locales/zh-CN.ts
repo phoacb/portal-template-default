@@ -1,7 +1,7 @@
 export const usersExample = {
   "resources.users": "用户",
   "resources.user": "用户",
-  "resources.users.description": "管理可以登录并使用此 NocoBase 应用的用户。",
+  "resources.users.description": "管理可以登录并使用此 Digiforce 应用的用户。",
   "users.fields.id": "ID",
   "users.fields.nickname": "昵称",
   "users.fields.username": "用户名",
@@ -18,7 +18,7 @@ export const usersExample = {
   "users.actions.edit": "编辑用户",
   "users.actions.delete": "删除用户",
   "users.drawer.create.title": "新建用户",
-  "users.drawer.create.description": "添加可以登录此 NocoBase 应用的用户。",
+  "users.drawer.create.description": "添加可以登录此 Digiforce 应用的用户。",
   "users.drawer.edit.title": "编辑用户",
   "users.drawer.edit.description": "更新用户的身份和联系方式。",
   "users.drawer.show.description": "查看用户的身份、联系方式和关联角色。",

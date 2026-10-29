@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { digiforceClient } from "@digiforce/portal-sdk/client";
 
-export type NocoBasePluginLane = "client" | "client-v2";
+export type DigiforcePluginLane = "client" | "client-v2";
 
-export type EnabledNocoBasePlugin = {
+export type EnabledDigiforcePlugin = {
   name?: string;
   packageName?: string;
 };
 
-type NocoBasePluginProbeQueryValue =
+type DigiforcePluginProbeQueryValue =
   | string
   | number
   | boolean
@@ -16,25 +16,25 @@ type NocoBasePluginProbeQueryValue =
   | undefined
   | Array<string | number | boolean>;
 
-export type NocoBasePluginProbe = {
+export type DigiforcePluginProbe = {
   resource: string;
   action: string;
-  query?: Record<string, NocoBasePluginProbeQueryValue>;
+  query?: Record<string, DigiforcePluginProbeQueryValue>;
 };
 
-export type NocoBasePluginRequirement = {
+export type DigiforcePluginRequirement = {
   packageName: string;
   name?: string;
   label: string;
   /** Optional read-only fallback when a source/dev plugin is absent from the client manifest. */
-  probe?: NocoBasePluginProbe;
+  probe?: DigiforcePluginProbe;
 };
 
-export type NocoBasePluginRequirementMode = "all" | "any";
+export type DigiforcePluginRequirementMode = "all" | "any";
 type CachedEnabledPlugins = {
   expiresAt: number;
-  plugins?: EnabledNocoBasePlugin[];
-  request?: Promise<EnabledNocoBasePlugin[]>;
+  plugins?: EnabledDigiforcePlugin[];
+  request?: Promise<EnabledDigiforcePlugin[]>;
 };
 
 type CachedPluginProbe = {
@@ -48,7 +48,7 @@ type PluginPrerequisiteState =
   | { status: "available"; missingPlugins: [] }
   | {
       status: "unavailable";
-      missingPlugins: NocoBasePluginRequirement[];
+      missingPlugins: DigiforcePluginRequirement[];
     }
   | { status: "error"; missingPlugins: []; error: unknown };
 
@@ -72,15 +72,15 @@ function enabledPluginRows(payload: unknown): unknown[] {
   return [];
 }
 
-function pluginRequirementsKey(requirements: NocoBasePluginRequirement[]) {
+function pluginRequirementsKey(requirements: DigiforcePluginRequirement[]) {
   return JSON.stringify(
     requirements.map(({ packageName, name, probe }) => ({ packageName, name, probe })),
   );
 }
 
-export function normalizeEnabledNocoBasePlugins(
+export function normalizeEnabledDigiforcePlugins(
   payload: unknown,
-): EnabledNocoBasePlugin[] {
+): EnabledDigiforcePlugin[] {
   return enabledPluginRows(payload).flatMap((value) => {
     if (!isRecord(value)) return [];
     const name = typeof value.name === "string" ? value.name : undefined;
@@ -91,10 +91,10 @@ export function normalizeEnabledNocoBasePlugins(
 }
 
 function matchesRequirement(
-  plugin: EnabledNocoBasePlugin,
-  requirement: NocoBasePluginRequirement,
+  plugin: EnabledDigiforcePlugin,
+  requirement: DigiforcePluginRequirement,
 ) {
-  const normalizePkg = (pkg?: string) => pkg?.replace(/^@(nocobase|digiforce)\//, "");
+  const normalizePkg = (pkg?: string) => pkg?.replace(/^@(digiforce|digiforce)\//, "");
   return Boolean(
     plugin.packageName === requirement.packageName ||
     (plugin.packageName &&
@@ -104,10 +104,10 @@ function matchesRequirement(
   );
 }
 
-export function evaluateNocoBasePluginRequirements(
-  enabledPlugins: EnabledNocoBasePlugin[],
-  requirements: NocoBasePluginRequirement[],
-  mode: NocoBasePluginRequirementMode = "all",
+export function evaluateDigiforcePluginRequirements(
+  enabledPlugins: EnabledDigiforcePlugin[],
+  requirements: DigiforcePluginRequirement[],
+  mode: DigiforcePluginRequirementMode = "all",
 ) {
   if (!requirements.length) {
     return { available: true, missingPlugins: [] };
@@ -128,14 +128,14 @@ export function evaluateNocoBasePluginRequirements(
   };
 }
 
-function enabledPluginCacheKey(lane: NocoBasePluginLane) {
+function enabledPluginCacheKey(lane: DigiforcePluginLane) {
   return [digiforceClient.getApiUrl(), digiforceClient.getAppName(), lane].join(
     "\u0000",
   );
 }
 
-async function loadEnabledNocoBasePlugins(
-  lane: NocoBasePluginLane,
+async function loadEnabledDigiforcePlugins(
+  lane: DigiforcePluginLane,
   force: boolean,
 ) {
   const key = enabledPluginCacheKey(lane);
@@ -152,7 +152,7 @@ async function loadEnabledNocoBasePlugins(
   const action = lane === "client-v2" ? "listEnabledV2" : "listEnabled";
   const request = digiforceClient
     .action<unknown>("pm", action, { method: "GET" })
-    .then(normalizeEnabledNocoBasePlugins)
+    .then(normalizeEnabledDigiforcePlugins)
     .then((plugins) => {
       enabledPluginCache.set(key, {
         plugins,
@@ -175,7 +175,7 @@ async function loadEnabledNocoBasePlugins(
   return request;
 }
 
-function pluginProbeCacheKey(probe: NocoBasePluginProbe) {
+function pluginProbeCacheKey(probe: DigiforcePluginProbe) {
   return [
     digiforceClient.getApiUrl(),
     digiforceClient.getAppName(),
@@ -190,7 +190,7 @@ function isMissingPluginProbeError(error: unknown) {
 }
 
 async function loadPluginProbe(
-  probe: NocoBasePluginProbe,
+  probe: DigiforcePluginProbe,
   force: boolean,
  ) {
   const key = pluginProbeCacheKey(probe);
@@ -239,8 +239,8 @@ async function loadPluginProbe(
 }
 
 async function supplementEnabledPluginsWithProbes(
-  enabledPlugins: EnabledNocoBasePlugin[],
-  missingPlugins: NocoBasePluginRequirement[],
+  enabledPlugins: EnabledDigiforcePlugin[],
+  missingPlugins: DigiforcePluginRequirement[],
   force: boolean,
  ) {
   const probeResults = await Promise.all(
@@ -267,19 +267,19 @@ async function supplementEnabledPluginsWithProbes(
   ];
 }
 
-export function clearNocoBasePluginPrerequisiteCache() {
+export function clearDigiforcePluginPrerequisiteCache() {
   enabledPluginCache.clear();
   pluginProbeCache.clear();
 }
 
-export function useNocoBasePluginPrerequisite({
+export function useDigiforcePluginPrerequisite({
   requirements,
   mode = "all",
   lane = "client-v2",
 }: {
-  requirements: NocoBasePluginRequirement[];
-  mode?: NocoBasePluginRequirementMode;
-  lane?: NocoBasePluginLane;
+  requirements: DigiforcePluginRequirement[];
+  mode?: DigiforcePluginRequirementMode;
+  lane?: DigiforcePluginLane;
 }) {
   const requirementsRef = useRef(requirements);
   requirementsRef.current = requirements;
@@ -295,11 +295,11 @@ export function useNocoBasePluginPrerequisite({
       const sequence = ++requestSequence.current;
       setState({ status: "checking", missingPlugins: [] });
       try {
-        const enabledPlugins = await loadEnabledNocoBasePlugins(lane, force);
+        const enabledPlugins = await loadEnabledDigiforcePlugins(lane, force);
         if (sequence !== requestSequence.current) return;
         const currentRequirements = requirementsRef.current;
         if (pluginRequirementsKey(currentRequirements) !== requirementsKey) return;
-        let result = evaluateNocoBasePluginRequirements(
+        let result = evaluateDigiforcePluginRequirements(
           enabledPlugins,
           currentRequirements,
           mode,
@@ -315,7 +315,7 @@ export function useNocoBasePluginPrerequisite({
           );
           if (sequence !== requestSequence.current) return;
           if (pluginRequirementsKey(requirementsRef.current) !== requirementsKey) return;
-          result = evaluateNocoBasePluginRequirements(
+          result = evaluateDigiforcePluginRequirements(
             supplementedPlugins,
             currentRequirements,
             mode,
