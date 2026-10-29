@@ -58,7 +58,7 @@ export const EditViewHeader = ({
   const description = translate(
     "views.edit.description",
     { resource: resourceTitle.toLocaleLowerCase() },
-    `Update this ${resourceTitle.toLocaleLowerCase()} while NocoBase keeps the data consistent.`
+    `Update this ${resourceTitle.toLocaleLowerCase()} while Digiforce keeps the data consistent.`
   );
 
   return (

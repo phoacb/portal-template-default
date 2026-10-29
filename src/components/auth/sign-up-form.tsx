@@ -278,7 +278,7 @@ export const SignUpForm = () => {
   return (
     <AuthLayout
       title="Create your account"
-      description="Create your NocoBase account."
+      description="Create your Digiforce account."
     >
       {isPending ? (
         <div className="flex min-h-64 items-center justify-center">

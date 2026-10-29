@@ -38,11 +38,11 @@ export function AuthLayout({
             AI-native application platform
           </div>
           <h2 className="mt-3 max-w-lg text-5xl font-semibold leading-[1.08] tracking-[-0.04em]">
-            Let AI build freely. NocoBase keeps it reliable.
+            Let AI build freely. Digiforce keeps it reliable.
           </h2>
           <p className="mt-5 max-w-lg text-base leading-7 text-white/60">
             Give AI a flexible frontend framework to shape each experience,
-            while NocoBase secures the data, permissions, workflows and
+            while Digiforce secures the data, permissions, workflows and
             governance underneath.
           </p>
 
@@ -64,7 +64,7 @@ export function AuthLayout({
                 <ShieldCheck className="size-4" />
               </div>
               <div>
-                <div className="font-semibold">NocoBase foundation</div>
+                <div className="font-semibold">Digiforce foundation</div>
                 <div className="text-sm text-neutral-500">
                   Reliable data, access control, workflows and governance.
                 </div>

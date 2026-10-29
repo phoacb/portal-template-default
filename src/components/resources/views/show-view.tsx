@@ -58,7 +58,7 @@ export const ShowViewHeader = ({
   const title = titleFromProps ?? resourceTitle;
   const description = translate(
     "views.show.description",
-    "Review the record and its NocoBase-managed data."
+    "Review the record and its Digiforce-managed data."
   );
 
   return (

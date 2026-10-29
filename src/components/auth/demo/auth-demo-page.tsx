@@ -27,7 +27,7 @@ const scenarioCopy: Record<
   dynamic: {
     title: "Default dynamic login",
     description:
-      "Enabled authenticators are discovered from NocoBase and arranged exactly as forms and buttons on the login page.",
+      "Enabled authenticators are discovered from Digiforce and arranged exactly as forms and buttons on the login page.",
   },
   method: {
     title: "Replace one method",
@@ -105,7 +105,7 @@ function DynamicLoginPreview({ replaceOidc = false }: { replaceOidc?: boolean })
       <div className="space-y-1 text-center">
         <h2 className="font-heading text-xl font-semibold">Welcome back</h2>
         <p className="text-sm text-muted-foreground">
-          Choose a sign-in method configured in NocoBase.
+          Choose a sign-in method configured in Digiforce.
         </p>
       </div>
 
@@ -133,7 +133,7 @@ function DynamicLoginPreview({ replaceOidc = false }: { replaceOidc?: boolean })
           <div className="space-y-2 rounded-xl border border-primary/25 bg-primary/5 p-3">
             <Button className="w-full">
               <ShieldCheck />
-              Continue with NocoBase SSO
+              Continue with Digiforce SSO
             </Button>
             <p className="text-center text-xs text-muted-foreground">
               Custom UI for the company-oidc authenticator only
@@ -163,7 +163,7 @@ function CustomLoginPagePreview() {
             <BrandLogo className="size-7" />
           </div>
           <span className="font-heading text-lg font-semibold">
-            NocoBase
+            Digiforce
           </span>
         </div>
         <div className="space-y-3">
@@ -182,7 +182,7 @@ function CustomLoginPagePreview() {
         <div className="space-y-1">
           <h2 className="font-heading text-2xl font-semibold">Sign in</h2>
           <p className="text-sm text-muted-foreground">
-            Continue to your NocoBase application.
+            Continue to your Digiforce application.
           </p>
         </div>
         <PasswordFields />
@@ -193,7 +193,7 @@ function CustomLoginPagePreview() {
         </div>
         <Button variant="outline" className="w-full">
           <ShieldCheck />
-          NocoBase SSO
+          Digiforce SSO
         </Button>
         <p className="text-center text-xs text-muted-foreground">
           By continuing, you agree to your organization's access policy.

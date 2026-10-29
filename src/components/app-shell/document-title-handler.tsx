@@ -72,7 +72,7 @@ const resolveActionPrefix = (
 
 export function DocumentTitleHandler({
   actionPrefixes,
-  appName = "NocoBase",
+  appName = "Digiforce",
   defaultTitle = appName,
   formatTitle,
   separator = " | ",

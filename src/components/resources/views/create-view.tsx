@@ -52,7 +52,7 @@ export const CreateViewHeader = ({
   const description = translate(
     "views.create.description",
     { resource: resourceTitle.toLocaleLowerCase() },
-    `Add a new ${resourceTitle.toLocaleLowerCase()} to your NocoBase workspace.`
+    `Add a new ${resourceTitle.toLocaleLowerCase()} to your Digiforce workspace.`
   );
 
   return (

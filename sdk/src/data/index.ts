@@ -274,7 +274,7 @@ export const dataProvider: DataProvider = {
     return {
       data: await request<TData>(resource, 'update', {
         method: 'POST',
-        query: { filterByTk: id },
+        query: { filterByTk: id, filterByTargetKey: id },
         body: variables,
         meta,
       }),
@@ -291,7 +291,7 @@ export const dataProvider: DataProvider = {
       ids.map((id) =>
         request<TData>(resource, 'update', {
           method: 'POST',
-          query: { filterByTk: id },
+          query: { filterByTk: id, filterByTargetKey: id },
           body: variables,
           meta,
         }),
@@ -308,7 +308,7 @@ export const dataProvider: DataProvider = {
     return {
       data: await request<TData>(resource, 'destroy', {
         method: 'POST',
-        query: { filterByTk: id },
+        query: { filterByTk: id, filterByTargetKey: id },
         meta,
       }),
     };
@@ -323,7 +323,7 @@ export const dataProvider: DataProvider = {
       ids.map((id) =>
         request<TData>(resource, 'destroy', {
           method: 'POST',
-          query: { filterByTk: id },
+          query: { filterByTk: id, filterByTargetKey: id },
           meta,
         }),
       ),

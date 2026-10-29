@@ -64,7 +64,7 @@ function App() {
                       warnWhenUnsavedChanges: true,
                       disableTelemetry: true,
                       title: {
-                        text: "NocoBase",
+                        text: "Digiforce",
                         icon: <BrandLogo className="size-14 rounded-2xl" />,
                       },
                     }}
@@ -73,7 +73,7 @@ function App() {
 
                     <Toaster />
                     <UnsavedChangesNotifier />
-                    <DocumentTitleHandler appName="NocoBase" />
+                    <DocumentTitleHandler appName="Digiforce" />
                   </Refine>
                 </AclStoreProvider>
               </SystemSettingsProvider>

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { MemoryRouter } from "react-router";
 
 import { RouteOverlayViewportContext } from "@digiforce/portal-sdk/routing";
-import { RouteDialog } from "@/extensions/nocobase-route-surfaces";
+import { RouteDialog } from "@/extensions/digiforce-route-surfaces";
 
 describe("Route overlay viewport", () => {
   it("applies the reserved side region to the rendered route surface portal", async () => {

@@ -1,4 +1,4 @@
-import { NocoBaseErrorBoundary } from "@/extensions/nocobase-error-boundary";
+import { NocoBaseErrorBoundary } from "@/extensions/digiforce-error-boundary";
 import { useTranslate } from "@refinedev/core";
 import type { PropsWithChildren } from "react";
 import { useLocation, useNavigate } from "react-router";

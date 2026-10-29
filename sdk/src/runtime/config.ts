@@ -13,14 +13,10 @@ export const normalizePortalBase = (base?: string) => {
 
 export const getPortalBase = () =>
   normalizePortalBase(
-    getWindowValue('DIGIFORCE_PORTAL_BASE') ??
-      import.meta.env?.DIGIFORCE_PORTAL_BASE ??
-      import.meta.env?.BASE_URL
+    getWindowValue('DIGIFORCE_PORTAL_BASE') ?? import.meta.env?.DIGIFORCE_PORTAL_BASE ?? import.meta.env?.BASE_URL,
   );
 
-export const getRuntimeApiUrl = () =>
-  getWindowValue('DIGIFORCE_API_URL') ??
-  import.meta.env?.DIGIFORCE_API_URL;
+export const getRuntimeApiUrl = () => getWindowValue('DIGIFORCE_API_URL') ?? import.meta.env?.DIGIFORCE_API_URL;
 
 export const resolveDigiforcePortalName = (portalBase: string) =>
   portalBase.match(/\/x\/(?:apps\/[^/]+\/)?([^/?#]+)(?:[/?#]|$)/)?.[1];

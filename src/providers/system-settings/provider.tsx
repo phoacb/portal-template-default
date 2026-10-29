@@ -34,7 +34,7 @@ export function SystemSettingsProvider({ children }: PropsWithChildren) {
         reason instanceof Error
           ? reason
           : new Error("Unable to load system settings");
-      console.warn("Unable to load NocoBase system settings", reason);
+      console.warn("Unable to load Digiforce system settings", reason);
       setError(nextError);
       await applySystemLocale();
       return undefined;

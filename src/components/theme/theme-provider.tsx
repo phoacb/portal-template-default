@@ -11,7 +11,7 @@ export function ThemeProvider({
   attribute = "class",
   defaultTheme = "light",
   enableSystem = true,
-  storageKey = "nocobase-theme",
+  storageKey = "digiforce-theme",
   ...props
 }: ThemeProviderProps) {
   return (

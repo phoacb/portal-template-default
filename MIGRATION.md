@@ -1,8 +1,8 @@
 # Default Template migrations
 
 This guide describes source changes that derived Portal applications must merge
-from new releases of `@nocobase/portal-template-default`. Updating
-`nocobase.defaultTemplateVersion` records a completed source upgrade; changing
+from new releases of `@digiforce/portal-template-default`. Updating
+`digiforce.defaultTemplateVersion` records a completed source upgrade; changing
 the value alone does not apply template changes.
 
 ## Upgrade checklist
@@ -12,9 +12,9 @@ the value alone does not apply template changes.
    fit the application.
 3. Merge template runtime and composition changes without overwriting business
    pages, translations, or customized installed extensions.
-4. Update `nocobase.defaultTemplateVersion` only after the corresponding source
+4. Update `digiforce.defaultTemplateVersion` only after the corresponding source
    changes have been incorporated.
-5. Update `@nocobase/portal-sdk` when the release requires a new compatible SDK.
+5. Update `@digiforce/portal-sdk` when the release requires a new compatible SDK.
 6. Run `pnpm sdk:check`, install dependencies, build, and verify direct URLs,
    nested route surfaces, authentication, ACL, and locale switching.
 

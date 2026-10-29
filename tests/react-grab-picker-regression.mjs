@@ -74,7 +74,7 @@ try {
       _debugStack: {
         stack: [
           "Error: react-stack-top-frame",
-          "    at NocoBaseRuntimeStatus (http://localhost:5173/x/admin/registry/nocobase-error-boundary/runtime-status.tsx?t=1:501:7)",
+          "    at NocoBaseRuntimeStatus (http://localhost:5173/x/admin/registry/digiforce-error-boundary/runtime-status.tsx?t=1:501:7)",
         ].join("\n"),
       },
       _debugOwner: {
@@ -103,7 +103,7 @@ try {
       sourceRoot,
       "/x/admin/"
     ),
-    `[<div /> in NocoBaseRuntimeStatus (at ${sourceRoot}/registry/nocobase-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx:101:9) in App (at ${sourceRoot}/src/App.tsx:42:5)]`
+    `[<div /> in NocoBaseRuntimeStatus (at ${sourceRoot}/registry/digiforce-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx:101:9) in App (at ${sourceRoot}/src/App.tsx:42:5)]`
   );
 
   const ambiguousContext = {
@@ -153,7 +153,7 @@ try {
       sourceRoot,
       "/x/admin/"
     ),
-    `[<div /> in NocoBaseRuntimeStatus (at ${sourceRoot}/registry/nocobase-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx) in App (at ${sourceRoot}/src/App.tsx)]`
+    `[<div /> in NocoBaseRuntimeStatus (at ${sourceRoot}/registry/digiforce-error-boundary/runtime-status.tsx:501:7) in PortalRuntimeGate (at ${sourceRoot}/src/components/app-shell/portal-runtime-gate.tsx) in App (at ${sourceRoot}/src/App.tsx)]`
   );
 
   const sharedFileFiber = {

@@ -307,14 +307,9 @@ function SidebarFooter() {
               {translate("shell.footer.freedom", "AI builds freely.")}
             </div>
             <div className="text-muted-foreground">
-              <a
-                href="https://nocobase.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-sidebar-foreground hover:underline"
-              >
-                NocoBase
-              </a>{" "}
+              <span className="font-medium text-sidebar-foreground">
+                Digiforce
+              </span>{" "}
               {translate(
                 "shell.footer.reliabilitySuffix",
                 "keeps it reliable."
