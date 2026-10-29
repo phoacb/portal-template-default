@@ -39,3 +39,4 @@ _.njsproj
 _.sln
 \*.sw?
 sdk/lib/
+sdk
